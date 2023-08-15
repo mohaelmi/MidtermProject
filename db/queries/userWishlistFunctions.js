@@ -1,13 +1,13 @@
 
-//1// Connecting to db
+//0// Connecting to db
 const db = require('../connection');
 
 
-//2// Getting a user wishlist:
+//1// Getting a user wishlist: 
 
 const getUserWishlist = (userId) => {
   return db.query(`
-      SELECT * FROM items 
+      SELECT id FROM items 
       WHERE id IN 
         (SELECT item_id FROM wishlisted_items
         WHERE wishlist_id IN 
@@ -20,18 +20,74 @@ const getUserWishlist = (userId) => {
 };
 
 //testing
-getUserWishlist(3)
-  .then(users => {
-    console.log('Users:', users);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+//getUserWishlist(3)
+//.then(wishlist => {
+//  console.log('wishlist:', wishlist);
+//})
+//.catch(error => {
+//  console.error('Error:', error);
+//});
 //
-// Add an item to a user's wishlist
-const addToWishlist = (user_id, item_id) => {
-  // ... (your code here)
+
+
+//2// Adding an item to  wishlist
+const addToWishlist = (userId, itemId) => {
+  let wishlist_id;
+  return db.query(`
+    INSERT INTO wishlist (user_id)
+    VALUES ($1) RETURNING id;
+    `,[userId])
+  .then(res => {
+    wishlist_id = res.rows[0].id;
+    return db.query(`
+    INSERT INTO wishlisted_items (wishlist_id, item_id)
+    VALUES ($1,$2) RETURNING id;`
+    ,[wishlist_id, itemId]);
+  });
+};
+//testing 
+//addToWishlist(3, 10)
+//  .then(() => {
+//    return getUserWishlist(3)
+//      .then(wishlist => {
+//        console.log('wishlist:', wishlist);
+//      })
+//      .catch(error => {
+//        console.error('Error:', error);
+//      });
+//  })
+//  .catch(error => {
+//    console.error('Error:', error);
+//  });
+
+
+
+//3// removing an item from  wishlist
+const removeFromWishlist = (userId, itemId) => {
+  return db.query(`
+      DELETE FROM wishlisted_items
+      WHERE wishlist_id IN (
+      SELECT id FROM wishlist
+      WHERE user_id = $1) AND item_id = $2
+      `, [userId, itemId])
+    .then(() => {
+      console.log('Item removed from wishlist');
+    });
 };
 
+//testing
+//removeFromWishlist(3, 10)
+//  .then(() => {
+//    return getUserWishlist(3)
+//      .then(users => {
+//        console.log('Users:', users);
+//      })
+//      .catch(error => {
+//        console.error('Error:', error);
+//      });
+//  })
+//  .catch(error => {
+//    console.error('Error:', error);
+//  });
 
-module.exports = { getUserWishlist };
+module.exports = { getUserWishlist,addToWishlist, removeFromWishlist };
