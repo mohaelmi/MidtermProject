@@ -19,4 +19,4 @@ const getAdminListingItems = (sellerId) => {
 
 
 //2. Editting an item's values posted by the seller_id(admin)
-const editAdminListingItem = (itemId, newItemValues) => {
+
