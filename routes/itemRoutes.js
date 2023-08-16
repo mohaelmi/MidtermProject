@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
   if (!userId) {
     return res.send({ error: "error" });
   }
-
+  //add new line
   const newBike = req.body;
   newBike.seller_id = userId;
   itemsQueries
