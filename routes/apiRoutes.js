@@ -36,11 +36,11 @@ router.post("/bikes", (req, res) => {
     });
 });
 
-// rouute for displaying specfic bikes related for a user
+// route for displaying specfic bikes related for a user
 router.get("/bikes/:id", (req, res) => {
   const userId = req.params.id;
   bikesQueries
-    .getMyBikes(req.query, userId)
+    .getMyBikes(userId)
     .then((bikes) => {
       res.json({ bikes });
     })
