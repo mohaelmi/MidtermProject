@@ -7,3 +7,7 @@
 
 #### JANAY + SOFIA
 - typefaces Playfair serif, DM sans serif
+
+#### AS GROUP with Gary AUG16
+- use sms and tilio for messaging
+- by saturday: have API routes, ejs views and scripts for front-end
