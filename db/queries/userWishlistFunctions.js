@@ -30,7 +30,7 @@ const getUserWishlist = (userId) => {
 //
 
 
-//2// Adding an item to  wishlist
+//2// Adding an item to user wishlist
 const addToWishlist = (userId, itemId) => {
   let wishlist_id;
   return db.query(`
@@ -46,10 +46,10 @@ const addToWishlist = (userId, itemId) => {
   });
 };
 //testing 
-//addToWishlist(3, 10)
+//addToWishlist(3, 12)
 //  .then(() => {
-//    return getUserWishlist(3)
-//      .then(wishlist => {
+//    getUserWishlist(3)
+//      .then((wishlist) => {
 //        console.log('wishlist:', wishlist);
 //      })
 //      .catch(error => {
@@ -78,7 +78,7 @@ const removeFromWishlist = (userId, itemId) => {
 //testing
 //removeFromWishlist(3, 10)
 //  .then(() => {
-//    return getUserWishlist(3)
+//    getUserWishlist(3)
 //      .then(users => {
 //        console.log('Users:', users);
 //      })
