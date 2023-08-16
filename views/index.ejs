@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/nav.css"/>
   <link rel="stylesheet" href="/styles/header.css"/>
+  <link rel="stylesheet" href="/styles/listing-container.css"/>
 
   <!-- import external fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,26 +45,70 @@
   </span>
 </nav>
 
-<header>
+<header class="page-header">
 
   Browse All Bikes
 </header>
 
 <!-- <img src="/public/test_images/bike_header.jpg" alt="grainy film photo of a bike loaded up for bikecamping"> -->
+<main>
+  <!-- show featured and most recent containers -->
+  <div class="listing-container">
+    <article class="listing">
+      <span class="image">
+        url img goes here
+      </span>
+      <span class="listing-overview">
+        <header>
+          $1234 - Bike Listing Title
+        </header>
 
-<div class="listing-containers">
-  <div class="listing">
-    <span class="image">
-      url img goes here
-    </span>
-    <span>
-      <h3>$123 - Bike lisiting title</h3>
-      <p>Location - time created </p>
-      <p>Description of the bike goes here. Set width</p>
-    </span>
+        <p> description of bike </p>
+
+        <footer>
+          <span>Item location - N days ago</span>
+          <span></span>
+        </footer>
+      </span>
+    </article>
+
+    <article class="listing">
+      <span class="image">
+        url img goes here
+      </span>
+      <span class="listing-overview">
+        <header>
+          $1234 - Bike Listing Title
+        </header>
+
+        <p> description of bike </p>
+
+        <footer>
+          <span>Item location - N days ago</span>
+          <span></span>
+        </footer>
+      </span>
+    </article>
+
+    <article class="listing">
+      <span class="image">
+        url img goes here
+      </span>
+      <span class="listing-overview">
+        <header>
+          $1234 - Bike Listing Title
+        </header>
+
+        <p> description of bike </p>
+
+        <footer>
+          <span>Item location - N days ago</span>
+          <span></span>
+        </footer>
+      </span>
+    </article>
   </div>
-
-</div>
+</main>
 
 </body>
 

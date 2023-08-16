@@ -1,5 +1,6 @@
 $base-colour: rgb(255, 251, 243);
-$highlight-colour:rgb(229, 252, 110);
+$hightlight-color-1:rgb(229, 252, 110);
+$highlight-color-2: rgb(147, 126, 196);
 
 nav {
 
@@ -18,7 +19,7 @@ nav {
 
 
   #logo {
-    background-color: $highlight-colour;
+    background-color: $hightlight-color-1;
     padding: 5px 10px;
     border: 2px solid black;
     border-radius: 20px;
@@ -43,8 +44,8 @@ nav {
 
 
   button {
-    background-color: $highlight-colour;
-    border: 1px solid $highlight-colour;
+    background-color: $hightlight-color-1;
+    border: 1px solid $hightlight-color-1;
     border-radius: 5px;
     border: none;
 
