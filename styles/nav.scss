@@ -1,13 +1,52 @@
-$base-colour: rgb(250, 236, 217);
+$base-colour: rgb(255, 251, 243);
+$highlight-colour:rgb(229, 252, 110);
 
 nav {
-  height: 80px;
-  width: 100%;
-  background-color: base-colour;
-  display: fixed
 
-  div {
-    display:
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  background-color: transparent;
+  color: black;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  border-bottom: 2px solid black;
+
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  #logo {
+    background-color: $highlight-colour;
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 15px;
+
+    font-weight: 600;
+    font-size: larger;
+  }
+
+  span {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+
+
+
+  button {
+    background-color: $highlight-colour;
+    border: 1px solid $highlight-colour;
+    border-radius: 5px;
+    border: none;
 
   }
+  button:hover {
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+
 }

@@ -1,16 +1,7 @@
-$base-colour: rgb(250, 236, 217);
-
+$base-colour: rgb(255, 251, 243);
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-
-  background: $base-color;
+  background-color: $base-colour;
   font-family: 'DM Sans', sans-serif;
-
+  font-weight: 300;
 }
-
-
