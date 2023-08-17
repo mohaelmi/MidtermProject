@@ -32,7 +32,6 @@ router.post("/", (req, res) => {
   itemsQueries
     .addItem(newBike)
     .then((bike) => {
-      res.render("new_listing", { bike });
       res.send(bike);
       console.log("new bike has been added!");
     })
@@ -42,7 +41,7 @@ router.post("/", (req, res) => {
     });
 });
 
-// Get specific item with seller details
+// Get specific item 
 router.get("/:id", (req, res) => {
   const itemId = req.params.id;
   itemsQueries
@@ -68,10 +67,52 @@ router.get("/status/:id", (req, res) => {
     .markedSoldByAdmin(itemId)
     .then((data) => {
       res.json(data);
-      res.render("index");
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
+    });
+});
+
+// delete item
+router.get("/delete/:id", (req, res) => {
+  const itemId = req.params.id;
+  const userId = req.session.user_id;
+
+  if (!userId) {
+    return res.send({ error: "error" });
+  }
+
+  itemsQueries
+    .deleteItem(itemId, userId)
+    .then((data) => {
+      res.end(data);
+      console.log("item deleted deleted..");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// //CLICK update button / send updated bike
+router.post("/:id", (req, res) => {
+  const userId = req.session.user_id;
+  const itemId = req.params.id;
+  const updatedItem = req.body;
+
+  if (!userId) {
+    console.log('session null');
+    return res.send({ error: "please login in first" });
+  }
+
+  adminQueries
+    .editAdminListingItem(itemId, updatedItem)
+    .then((updatedItem) => {
+      res.send({ updatedItem });
+      console.log(updatedItem, "new bike has been added!");
+    })
+    .catch((e) => {
+      console.error(e.message);
+      res.send(e.message);
     });
 });
 

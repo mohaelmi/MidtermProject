@@ -6,13 +6,24 @@ const getAllItems = () => {
   });
 };
 
-// query item details and seller details
+// query item details with seller details for user viewing
 const getItem = (itemId) => {
-  const query =
-    "SELECT * FROM items JOIN users ON seller_id = users.id WHERE items.id = $1";
+  const query = "SELECT * FROM items WHERE id = $1";
   return db.query(query, [itemId]).then((data) => {
     return data.rows[0];
   });
+};
+
+// delete items as a seller
+const deleteItem = (itemId, seller_id) => {
+  return db
+    .query("DELETE FROM items WHERE id = $1 AND seller_id = $2", [
+      itemId,
+      seller_id,
+    ])
+    .then(() => {
+      return "item deleted successfully";
+    });
 };
 
 const addItem = (bike) => {
@@ -37,4 +48,4 @@ const addItem = (bike) => {
     });
 };
 
-module.exports = { getAllItems, addItem, getItem };
+module.exports = { getAllItems, addItem, getItem, deleteItem };
