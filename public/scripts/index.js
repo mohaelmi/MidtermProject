@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+  /* stretch */
+  //implement header collapsing into nav bar upon scroll
+//   $(window).scroll(function(){
+//     if($(document).scrollTop() > 0) {
+//         $('nav').removeClass('big');
+//         console.log('scrolling!')
+//     } else {
+//         $('nav').addClass('big');
+//         console.log('back to top!')
+//     }
+// });
+
   console.log('working')
   loadItems()
 
@@ -38,7 +50,7 @@ const createItemElement = function(data) {
 
 const renderItems = function(items) {
   const container = $('.listing-container');
-
+  console.log(items[1])
   for (const item of items) {
     const element = createItemElement(item);
     container.append(element);
