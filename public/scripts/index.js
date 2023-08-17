@@ -17,6 +17,10 @@ $(document).ready(function() {
 
 });
 
+/**
+ * Load All Items/Bikes
+ */
+
 const loadItems = function() {
   console.log('in loadItems')
   $.get('/api/items')
@@ -25,6 +29,10 @@ const loadItems = function() {
       renderItems(data.items)
     })
 }
+
+/**
+ * Post New Bike
+ */
 
 const createItemElement = function(data) {
 
@@ -62,6 +70,8 @@ const createItemElement = function(data) {
   return element;
 };
 
+
+
 const renderItems = function(items) {
   const container = $('.listing-container');
   console.log(items[1])
@@ -71,4 +81,50 @@ const renderItems = function(items) {
 
   }
 }
+
+  /**
+ * Load WishList
+ */
+
+  const loadWishlist = function(items) {
+    const element = document.getElementById("");
+    element.addEventListener("click", function() {
+
+      console.log('in loadItems');
+      $.get('/api/items')
+        .then(data => {
+          // if (data.items) belongs user cookie
+          renderItems(data.items);
+        });
+
+    });
+
+  };
+
+  /**
+* Load User Listings
+*/
+
+  const loadMyListings = function(items) {
+    const element = document.getElementById("");
+    element.addEventListener("click", function() {
+
+      console.log('in loadItems');
+      $.get('/api/items')
+        .then(data => {
+          // if (data.items) belongs user cookie
+          renderItems(data.items);
+        });
+
+    });
+  };
+
+  /**
+   * Delete Bike
+   */
+
+  const deleteBike = function(item) {
+    //if bike item belongs to user cookie delete
+  };
+
 
