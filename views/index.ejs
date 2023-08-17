@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
   <!-- external js -->
-  <script src="jquery.timeago.js" type="text/javascript"></script>
+
 
   <!-- stylesheets -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
@@ -32,7 +32,26 @@
 </head>
 
 <body>
-  <%- include('partials/_header') %>
+<!-- nav bar fixed at top -->
+<header class="page-header">
+  <nav>
+    <span>
+      <span id="logo">
+        BIKE + SELL
+      </span>
+      <form>
+        <input type="search" id="main-search" name="main-search" placeholder="n+1 awaits">
+        <button>go!</button>
+      </form>
+    </span>
+
+    <span>
+      <span>Hello, user!</span>
+      <button>Post Bike</button>
+    </span>
+  </nav>
+
+</header>
 
 <!-- <img src="/public/test_images/bike_header.jpg" alt="grainy film photo of a bike loaded up for bikecamping"> -->
 <main>
