@@ -4,7 +4,7 @@ $(document).ready(function() {
    * Render Item Info
    */
 
-  const productItem = function(data) {
+  const renderItem = function(data) {
 
   };
 

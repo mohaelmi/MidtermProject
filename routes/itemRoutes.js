@@ -2,14 +2,16 @@
 
 const express = require("express");
 const router = express.Router();
-const bikesQueries = require("../db/queries/bikes");
+const itemsQueries = require("../db/queries/items");
 
-//show all bikes in the main page
-router.get("/bikes", (req, res) => {
-  bikesQueries
-    .getAllBikes()
-    .then((bikes) => {
-      res.json({ bikes });
+//show all items
+router.get("/", (req, res) => {
+  const userId = req.session.user_id;
+  console.log(userId);
+  itemsQueries
+    .getAllItems()
+    .then((items) => {
+      res.json({ items });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -17,32 +19,32 @@ router.get("/bikes", (req, res) => {
 });
 
 // add a new bike as authenticate user. taking userId fro session. we can also do it manually by passing it as an id
-router.post("/bikes", (req, res) => {
-  const userId = req.session.userId;
+router.post("/", (req, res) => {
+  const userId = req.session.user_id;
   if (!userId) {
     return res.send({ error: "error" });
   }
-
+  //add new line
   const newBike = req.body;
   newBike.seller_id = userId;
-  bikesQueries
-    .addBike(newBike)
+  itemsQueries
+    .addItem(newBike)
     .then((bike) => {
       res.send(bike);
     })
     .catch((e) => {
-      console.error(e);
-      res.send(e);
+      console.error(e.message);
+      res.send(e.message);
     });
 });
 
-// route for displaying specfic bikes related for a user
-router.get("/bikes/:id", (req, res) => {
+// route for displaying specfic items related for a user
+router.get("/:id", (req, res) => {
   const userId = req.params.id;
-  bikesQueries
-    .getMyBikes(userId)
-    .then((bikes) => {
-      res.json({ bikes });
+  itemsQueries
+    .getMyItems(userId)
+    .then((items) => {
+      res.json({ items });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

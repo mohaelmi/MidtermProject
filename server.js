@@ -33,19 +33,36 @@ app.use(
   })
 );
 
-const apiRoutes = require("./routes/apiRoutes");
+const itemRoutes = require("./routes/itemRoutes");
 const userRoutes = require("./routes/userRoutes");
 
-//bikes endpoint
-app.use("/api", apiRoutes);
-//users endpoint
-app.use("/users", userRoutes);
+// /api/items endpoint
+app.use("/api/items", itemRoutes);
+
+// /api/users/ endpoint
+app.use("/api/users", userRoutes);
 
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/login/:id", (req, res) => {
+  const userId = req.params.id;
+  req.session.user_id = userId;
+  res.redirect("/");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+// Get all Items - done
+// Get items related to User - done
+// Post items -> havinf test yet
+
+// --------------------------------------
+
+// Get all Users - done
+// Get user  by id - done
+// Add newUser -> have an issue with it
