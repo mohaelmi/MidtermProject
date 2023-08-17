@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+  /* stretch */
+  //implement header collapsing into nav bar upon scroll
+//   $(window).scroll(function(){
+//     if($(document).scrollTop() > 0) {
+//         $('nav').removeClass('big');
+//         console.log('scrolling!')
+//     } else {
+//         $('nav').addClass('big');
+//         console.log('back to top!')
+//     }
+// });
+
   console.log('working')
   loadItems()
 
@@ -15,19 +27,33 @@ const loadItems = function() {
 }
 
 const createItemElement = function(data) {
+
+  //extract item info from data
+  const itemTitle = data.title;
+  const itemPrice = data.price;
+  const itemLocation = data.city;
+  const itemCondition = data.condition;
+  const itemDescription = data.description;
+  const itemSize = data.size;
+  const postDate = data.created_at;
+
+  // to do: figure out timeAgo
+  // const postDate = data.created_at;
+  // const timeAgo = timeago.format(postDate);
+
   const element = `<article class="listing">
   <span class="image">
     url img goes here
   </span>
   <span class="listing-overview">
     <header>
-      $1234 - Bike Listing Title
+      $${itemPrice} - ${itemTitle}
     </header>
-
-    <p> description of bike </p>
+    <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
+    <p> ${itemDescription} </p>
 
     <footer>
-      <span>Item location - N days ago</span>
+      <span>${itemLocation} - ${postDate}</span>
       <span></span>
     </footer>
   </span>
@@ -38,7 +64,7 @@ const createItemElement = function(data) {
 
 const renderItems = function(items) {
   const container = $('.listing-container');
-
+  console.log(items[1])
   for (const item of items) {
     const element = createItemElement(item);
     container.append(element);
