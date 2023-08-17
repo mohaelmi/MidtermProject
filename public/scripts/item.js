@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
   /**
-   * Render Product Info
+   * Render Item Info
    */
 
-  const loadProduct = function(bikeData) {
+  const renderItem = function(data) {
 
   };
 
