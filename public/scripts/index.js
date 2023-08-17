@@ -83,11 +83,11 @@ const renderItems = function(items) {
 }
 
   /**
- * Load WishList
+ * Load Favourites
  */
 
-  const loadWishlist = function(items) {
-    const element = document.getElementById("");
+  const loadFavourites = function(items) {
+    const element = document.getElementByClassName("favourites");
     element.addEventListener("click", function() {
 
       console.log('in loadItems');
@@ -106,7 +106,7 @@ const renderItems = function(items) {
 */
 
   const loadMyListings = function(items) {
-    const element = document.getElementById("");
+    const element = document.getElementByClassName("my-listings");
     element.addEventListener("click", function() {
 
       console.log('in loadItems');
