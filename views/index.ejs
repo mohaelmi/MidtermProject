@@ -8,6 +8,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
+  <!-- external js -->
+
+
+  <!-- stylesheets -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
@@ -15,6 +19,8 @@
   <link rel="stylesheet" href="/styles/nav.css"/>
   <link rel="stylesheet" href="/styles/header.css"/>
   <link rel="stylesheet" href="/styles/listing-container.css"/>
+  <link rel="stylesheet" href="/styles/toggle-bar.css"/>
+
 
   <!-- import external fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,34 +32,40 @@
 </head>
 
 <body>
-  <%- include('partials/_header') %>
+<!-- nav bar fixed at top -->
+<header class="page-header">
+  <nav>
+    <span>
+      <span id="logo">
+        BIKE + SELL
+      </span>
+      <form>
+        <input type="search" id="main-search" name="main-search" placeholder="n+1 awaits">
+        <button>go!</button>
+      </form>
+    </span>
+
+    <span>
+      <span>Hello, user!</span>
+      <button>Post Bike</button>
+    </span>
+  </nav>
+
+</header>
 
 <!-- <img src="/public/test_images/bike_header.jpg" alt="grainy film photo of a bike loaded up for bikecamping"> -->
 <main>
 
-  <!-- show featured and most recent containers -->
-  <div class="listing-container">
-    <article class="listing">
-      <span class="image">
-        url img goes here
-      </span>
-      <span class="listing-overview">
-        <header>
-          $1234 - Bike Listing Title
-        </header>
-
-        <p> description of bike </p>
-
-        <footer>
-          <span>Item location - N days ago</span>
-          <span></span>
-        </footer>
-      </span>
-    </article>
-
-
-
+  <!-- toggle for all bikes / favourites / my lisitngs-->
+  <div class="toggle-bar">
+    <button class="all-listings">All Bikes</button>
+    <button class="my-listings">My Listings</button>
+    <button class="favourites">favourites</button>
   </div>
+
+
+  <!-- container for listings-->
+  <div class="listing-container"></div>
 </main>
 
 </body>

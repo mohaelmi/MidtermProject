@@ -1,8 +1,9 @@
-const db = require('../connection');
+const db = require("../connection");
 
 //1.// Getting all items listed by a seller_id(admin)
 const getAdminListingItems = (sellerId) => {
-  return db.query('SELECT * FROM items WHERE seller_id = $1', [sellerId])
+  return db
+    .query("SELECT * FROM items WHERE seller_id = $1", [sellerId])
     .then((items) => {
       return items.rows;
     });
@@ -17,19 +18,22 @@ const getAdminListingItems = (sellerId) => {
 //  console.error('Error:', error);
 //});
 
-
 //2.//Adding(listing) a new item.
 
 const addAdminListingItem = (sellerId, newItem) => {
-    const { title, description, price, type, size, status, condition, city } = newItem;
-  
-    return db.query(`INSERT INTO items (seller_id, title, description, price, type, size, status, condition, city)
+  const { title, description, price, type, size, status, condition, city } =
+    newItem;
+
+  return db
+    .query(
+      `INSERT INTO items (seller_id, title, description, price, type, size, status, condition, city)
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-                    [sellerId, title, description, price, type, size, status, condition, city])
-      .then(result => {
-        console.log('Item created successfully:', result.rows[0]);
-        return result.rows[0];
-      });
+      [sellerId, title, description, price, type, size, status, condition, city]
+    )
+    .then((result) => {
+      console.log("Item created successfully:", result.rows[0]);
+      return result.rows[0];
+    });
 };
 //testing
 //const newItem = {
@@ -55,21 +59,22 @@ const addAdminListingItem = (sellerId, newItem) => {
 //  });
 //
 //
-//  
+//
 //
 
 //3. Editting an item's values posted by the seller_id(admin)
 
 const editAdminListingItem = (itemId, newItem) => {
-  const { title, description, price, type, size, status, condition, city } = newItem;
+  const { title, description, price, type, size, status, condition, city } =
+    newItem;
 
-  return db.query(`UPDATE items
-                   SET title = $1, description = $2, price = $3, type = $4, size = $5, status = $6, condition = $7, city = $8
-                   WHERE id = $9
-                   RETURNING *`,
-                   [title, description, price, type, size, status, condition, city, itemId])
-    .then(result => {
-      console.log('Item updated successfully:', result.rows[0]);
+  return db
+    .query(
+      `UPDATE items SET title = $1, description = $2, price = $3, type = $4, size = $5, status = $6, condition = $7, city = $8 WHERE id = $9 RETURNING *`,
+      [title, description, price, type, size, status, condition, city, itemId]
+    )
+    .then((result) => {
+      console.log("Item updated successfully:", result.rows[0]);
       return result.rows[0];
     });
 };
@@ -101,11 +106,12 @@ const editAdminListingItem = (itemId, newItem) => {
 //4.// Changing the status of an item to SOLD! by the seller_id(admin)
 
 const markedSoldByAdmin = (itemId) => {
-    return db.query('UPDATE items SET status = $1 WHERE id = $2', ['SOLD', itemId])
-      .then(() => {
-        console.log('Item marked as SOLD!');
-      });
-}
+  return db
+    .query("UPDATE items SET status = $1 WHERE id = $2", ["SOLD", itemId])
+    .then(() => {
+      return "Item marked as SOLD!";
+    });
+};
 
 //testing
 //markedSoldByAdmin(4)
@@ -119,20 +125,20 @@ const markedSoldByAdmin = (itemId) => {
 //    console.error('Error:', error);
 //  });
 
-
 //5.// Deleting an item posted by the seller_id(admin) and related wishlisted_items and photos
 
 const deleteAdminListingItem = (itemId) => {
-    return db.query('DELETE FROM wishlisted_items WHERE item_id = $1', [itemId])
-      .then(() => {
-        return db.query('DELETE FROM photos WHERE item_id = $1', [itemId]);
-      })
-      .then(() => {
-        return db.query('DELETE FROM items WHERE id = $1', [itemId]);
-      })
-      .then(() => {
-        console.log('Item deleted successfully');
-      });
+  return db
+    .query("DELETE FROM wishlisted_items WHERE item_id = $1", [itemId])
+    .then(() => {
+      return db.query("DELETE FROM photos WHERE item_id = $1", [itemId]);
+    })
+    .then(() => {
+      return db.query("DELETE FROM items WHERE id = $1", [itemId]);
+    })
+    .then(() => {
+      console.log("Item deleted successfully");
+    });
 };
 
 // testing
@@ -146,4 +152,10 @@ const deleteAdminListingItem = (itemId) => {
 //  .catch(error => {
 //    console.error('Error:', error);
 //  });
-module.exports = { getAdminListingItems, addAdminListingItem, editAdminListingItem, markedSoldByAdmin, deleteAdminListingItem};
+module.exports = {
+  getAdminListingItems,
+  addAdminListingItem,
+  editAdminListingItem,
+  markedSoldByAdmin,
+  deleteAdminListingItem,
+};

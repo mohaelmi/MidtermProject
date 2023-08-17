@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const itemsQueries = require("../db/queries/items");
+const adminQueries = require("../db/queries/adminListingFunctions");
 
 //show all items
 router.get("/", (req, res) => {
@@ -11,6 +12,7 @@ router.get("/", (req, res) => {
   itemsQueries
     .getAllItems()
     .then((items) => {
+      //res.render("index", { items });
       res.json({ items });
     })
     .catch((err) => {
@@ -24,13 +26,15 @@ router.post("/", (req, res) => {
   if (!userId) {
     return res.send({ error: "error" });
   }
-  //add new line
+  //add new bike
   const newBike = req.body;
   newBike.seller_id = userId;
   itemsQueries
     .addItem(newBike)
     .then((bike) => {
+      res.render("new_listing", { bike });
       res.send(bike);
+      console.log("new bike has been added!");
     })
     .catch((e) => {
       console.error(e.message);
@@ -38,13 +42,33 @@ router.post("/", (req, res) => {
     });
 });
 
-// route for displaying specfic items related for a user
+// Get specific item with seller details
 router.get("/:id", (req, res) => {
-  const userId = req.params.id;
+  const itemId = req.params.id;
   itemsQueries
-    .getMyItems(userId)
-    .then((items) => {
-      res.json({ items });
+    .getItem(itemId)
+    .then((item) => {
+      res.json({ item });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// mark as sold
+router.get("/status/:id", (req, res) => {
+  const itemId = req.params.id;
+
+  // const userId = req.session.user_id;
+  // if (!userId) {
+  //   return res.send({ error: "error" });
+  // }
+
+  adminQueries
+    .markedSoldByAdmin(itemId)
+    .then((data) => {
+      res.json(data);
+      res.render("index");
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

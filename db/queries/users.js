@@ -20,6 +20,13 @@ const getUserById = (userId) => {
     });
 };
 
+const getMyItems = (sellerId) => {
+  const query = "SELECT * FROM items WHERE seller_id = $1";
+  return db.query(query, [sellerId]).then((data) => {
+    return data.rows;
+  });
+};
+
 const addNewUser = (user) => {
   db.query(
     `INSERT INTO users (name, email) 
@@ -30,4 +37,4 @@ const addNewUser = (user) => {
   });
 };
 
-module.exports = { getUsers, getUserById, addNewUser };
+module.exports = { getUsers, getUserById, addNewUser, getMyItems };
