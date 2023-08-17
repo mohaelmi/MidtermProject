@@ -29,7 +29,20 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// Create New User
+// Get items belong to a user
+router.get("/items/:id", (req, res) => {
+  const userId = req.params.id;
+  usersQueries
+    .getMyItems(userId)
+    .then((items) => {
+      res.json({ items });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// Create New User // we may not need that
 router.post("/new", (req, res) => {
   const user = JSON.parse(req.body);
   // const user = req.body;

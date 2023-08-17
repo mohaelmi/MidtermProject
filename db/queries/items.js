@@ -6,10 +6,12 @@ const getAllItems = () => {
   });
 };
 
-const getMyItems = (sellerId) => {
-  const query = "SELECT * FROM items WHERE seller_id = $1";
-  return db.query(query, [sellerId]).then((data) => {
-    return data.rows;
+// query item details and seller details
+const getItem = (itemId) => {
+  const query =
+    "SELECT * FROM items JOIN users ON seller_id = users.id WHERE items.id = $1";
+  return db.query(query, [itemId]).then((data) => {
+    return data.rows[0];
   });
 };
 
@@ -35,4 +37,4 @@ const addItem = (bike) => {
     });
 };
 
-module.exports = { getAllItems, addItem, getMyItems };
+module.exports = { getAllItems, addItem, getItem };

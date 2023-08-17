@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
   itemsQueries
     .getAllItems()
     .then((items) => {
+      res.render("index", { items });
       res.json({ items });
     })
     .catch((err) => {
@@ -30,7 +31,9 @@ router.post("/", (req, res) => {
   itemsQueries
     .addItem(newBike)
     .then((bike) => {
+      res.render("new_listing", { bike });
       res.send(bike);
+      console.log("new bike has been added!");
     })
     .catch((e) => {
       console.error(e.message);
@@ -40,11 +43,11 @@ router.post("/", (req, res) => {
 
 // route for displaying specfic items related for a user
 router.get("/:id", (req, res) => {
-  const userId = req.params.id;
+  const itemId = req.params.id;
   itemsQueries
-    .getMyItems(userId)
-    .then((items) => {
-      res.json({ items });
+    .getItem(itemId)
+    .then((item) => {
+      res.json({ item });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
