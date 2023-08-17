@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/nav.css"/>
   <link rel="stylesheet" href="/styles/header.css"/>
+  <link rel="stylesheet" href="/styles/listing-container.scss"/>
   <link rel="stylesheet" href="/styles/results.css"/>
 
   <script src="/vendor/jquery-3.0.0.js"></script>
@@ -24,32 +25,60 @@
 
   <%- include('partials/_header') %>
 
-  <aside class="side-nav_filters">
-    <input placeholder="Price" type="text" name="Price" id="price-filter">
+    <aside class="side-nav_filters">
+      <h2>Filter</h2>
 
-    <select class="size-filter">
-      <option value>Size</option>
-      <option value="xs">XS</option>
-      <option value="s">S</option>
-      <option value="m">M</option>
-      <option value="l">L</option>
-      <option value="xl">XL</option>
-    </select>
-    <select class="type-filter">
-      <option value>Type</option>
-      <option value="road">Road</option>
-      <option value="mountain">Mountain</option>
-      <option value="Hybrid/Commuter">M</option>
-      <option value="Gravel">Gravel</option>
-      <option value="ebike">E-Bike</option>
-    </select>
+      <div class="price-filter">
+      <input placeholder="Price" type="text" name="Price">
+      </div>
+      <div class="size-filter">
+        <select>
+          <option value>Size</option>
+          <option value="xs">XS</option>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
+          <option value="xl">XL</option>
+        </select>
+      </div>
 
-    <div id="city-filter">
-  <input placeholder="City" type="text" name="City">
-  </div>
-  </aside>
+      <div class="type-filter">
+      <select>
+        <option value>Type</option>
+        <option value="road">Road</option>
+        <option value="mountain">Mountain</option>
+        <option value="Hybrid/Commuter">M</option>
+        <option value="Gravel">Gravel</option>
+        <option value="ebike">E-Bike</option>
+      </select>
+      </div>
 
-  <section class="results-feed">
-  </section>
+      <div class="city-filter">
+        <input placeholder="City" type="text" name="City">
+      </div>
+
+      <button type="submit" class="apply-filters">Apply Filters</button>
+    </aside>
+
+    <div class="listing-container">
+      <article class="listing">
+        <span class="image">
+          url img goes here
+        </span>
+        <span class="listing-overview">
+          <header>
+              $1234 - Bike Listing Title
+          </header>
+
+          <p> description of bike </p>
+
+          <footer>
+            <span>Item location - N days ago</span>
+            <span></span>
+          </footer>
+        </span>
+      </article>
+
+    </div>
 
 </body>

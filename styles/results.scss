@@ -1,0 +1,33 @@
+$base-colour: rgb(255, 251, 243);
+$hightlight-color-1:rgb(229, 252, 110);
+$highlight-color-2: rgb(147, 126, 196);
+
+.side-nav_filters {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 3rem;
+}
+
+.price-filter, .size-filter, .type-filter, .city{
+  padding-bottom: 1rem;
+}
+
+.apply-filters {
+  background-color: $hightlight-color-1;
+  border: 1px solid $hightlight-color-1;
+  border-radius: 5px;
+  border: none;
+  width: 75%;
+  margin-top: 3rem;
+  padding: 0.5rem;
+
+}
+.apply-filters:hover {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+
+
+

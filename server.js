@@ -47,6 +47,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Results page
+app.get('/results', (req,res) => {
+  res.render("results")
+});
+
 app.get("/login/:id", (req, res) => {
   const userId = req.params.id;
   req.session.user_id = userId;
