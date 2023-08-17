@@ -1,6 +1,12 @@
 // See: https://sass-lang.com/
+$base-colour: rgb(255, 251, 243);;
+
 
 body,
 html {
-  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: $base-colour ;
+
 }
