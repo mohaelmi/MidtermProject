@@ -14,6 +14,8 @@ $(document).ready(function() {
 
   console.log('working')
   loadItems()
+  postBikeForm()
+  loadFavourites()
 
 });
 
@@ -22,12 +24,30 @@ $(document).ready(function() {
  */
 
 const loadItems = function() {
+
   console.log('in loadItems')
   $.get('/api/items')
     .then( data => {
       console.log('it worked!')
       renderItems(data.items)
     })
+}
+
+/**
+ * Show Post Bike Form
+ */
+
+const postBikeForm = function() {
+  const button = document.querySelector(".post-bike");
+  const dropdownForm = document.querySelector(".dropdown-form");
+
+  button.addEventListener("click", function() {
+    if (dropdownForm.style.display === "none") {
+      dropdownForm.style.display = "flex"
+    } else {
+      dropdownForm.style.display = "none"
+    }
+  });
 }
 
 /**
@@ -87,10 +107,9 @@ const renderItems = function(items) {
  */
 
   const loadFavourites = function(items) {
-    const element = document.getElementByClassName("favourites");
-    element.addEventListener("click", function() {
+    const favouritesButton = document.querySelect(".favourites");
+    favouritesButton.addEventListener("click", function() {
 
-      console.log('in loadItems');
       $.get('/api/items')
         .then(data => {
           // if (data.items) belongs user cookie
