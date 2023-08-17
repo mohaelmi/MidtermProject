@@ -4,3 +4,6 @@ public/styles
 *.log
 *.sqlite3
 test_images
+views/results.ejs
+views/item.ejs
+views/new_listing.ejs

@@ -1,16 +1,20 @@
 $(document).ready(function() {
 
   /**
-   * Load Results
+   * Render Results
    */
 
-  const loadResults = function(listings) {
+  const renderResults = function(items) {
+    const container = $('.results-feed');
 
-  };
+    for (const item of items) {
+     //filter options
+    }
+  }
 
   /**
    * Filter results
    */
 
-  
+
 })

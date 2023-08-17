@@ -14,10 +14,17 @@ $(document).ready(function() {
 
   console.log('working')
   loadItems()
+  postBikeForm()
+  loadFavourites()
 
 });
 
+/**
+ * Load All Items/Bikes
+ */
+
 const loadItems = function() {
+
   console.log('in loadItems')
   $.get('/api/items')
     .then( data => {
@@ -25,6 +32,27 @@ const loadItems = function() {
       renderItems(data.items)
     })
 }
+
+/**
+ * Show Post Bike Form
+ */
+
+const postBikeForm = function() {
+  const button = document.querySelector(".post-bike");
+  const dropdownForm = document.querySelector(".dropdown-form");
+
+  button.addEventListener("click", function() {
+    if (dropdownForm.style.display === "none") {
+      dropdownForm.style.display = "flex"
+    } else {
+      dropdownForm.style.display = "none"
+    }
+  });
+}
+
+/**
+ * Post New Bike
+ */
 
 const createItemElement = function(data) {
 
@@ -62,6 +90,8 @@ const createItemElement = function(data) {
   return element;
 };
 
+
+
 const renderItems = function(items) {
   const container = $('.listing-container');
   console.log(items[1])
@@ -71,4 +101,49 @@ const renderItems = function(items) {
 
   }
 }
+
+  /**
+ * Load Favourites
+ */
+
+  const loadFavourites = function(items) {
+    const favouritesButton = document.querySelect(".favourites");
+    favouritesButton.addEventListener("click", function() {
+
+      $.get('/api/items')
+        .then(data => {
+          // if (data.items) belongs user cookie
+          renderItems(data.items);
+        });
+
+    });
+
+  };
+
+  /**
+* Load User Listings
+*/
+
+  const loadMyListings = function(items) {
+    const element = document.getElementByClassName("my-listings");
+    element.addEventListener("click", function() {
+
+      console.log('in loadItems');
+      $.get('/api/items')
+        .then(data => {
+          // if (data.items) belongs user cookie
+          renderItems(data.items);
+        });
+
+    });
+  };
+
+  /**
+   * Delete Bike
+   */
+
+  const deleteBike = function(item) {
+    //if bike item belongs to user cookie delete
+  };
+
 

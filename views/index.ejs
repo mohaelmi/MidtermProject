@@ -56,11 +56,55 @@
 <!-- <img src="/public/test_images/bike_header.jpg" alt="grainy film photo of a bike loaded up for bikecamping"> -->
 <main>
 
+      <div class="dropdown-form" style= "display: none;">
+
+      <input placeholder="Title" type=>
+
+      <section class="new-listing_filters">
+        <input placeholder="Price" type="text" name="Price" id="new-listing_price">
+        <select class="new-listing_size">
+          <option value>Size</option>
+          <option value="xs">XS</option>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
+          <option value="xl">XL</option>
+        </select>
+        <select class="new-listing_type">
+          <option value>Type</option>
+          <option value="road">Road</option>
+          <option value="mountain">Mountain</option>
+          <option value="Hybrid/Commuter">Hybrid/Commuter</option>
+          <option value="Gravel">Gravel</option>
+          <option value="ebike">E-Bike</option>
+        </select>
+      </section>
+
+      <div id="new-listing_description">
+        <input placeholder="Description" type="text" name="Description">
+      </div>
+
+      <div id="new-listing_city">
+      <input placeholder="City" type="text" name="City">
+      </div>
+
+      <div id="new-listing_addImage">
+        <button>Add image</button>
+      </div>
+
+      <div id="new-listing_submitPost">
+        <button>Post</button>
+      </div>
+
+    </div>
+  </form>
+
+  </div>
   <!-- toggle for all bikes / favourites / my lisitngs-->
   <div class="toggle-bar">
     <button class="all-listings">All Bikes</button>
     <button class="my-listings">My Listings</button>
-    <button class="favourites">favourites</button>
+    <button class="favourites">Favourites</button>
   </div>
 
 
