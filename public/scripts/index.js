@@ -27,19 +27,33 @@ const loadItems = function() {
 }
 
 const createItemElement = function(data) {
+
+  //extract item info from data
+  const itemTitle = data.title;
+  const itemPrice = data.price;
+  const itemLocation = data.city;
+  const itemCondition = data.condition;
+  const itemDescription = data.description;
+  const itemSize = data.size;
+  const postDate = data.created_at;
+
+  // to do: figure out timeAgo
+  // const postDate = data.created_at;
+  // const timeAgo = timeago.format(postDate);
+
   const element = `<article class="listing">
   <span class="image">
     url img goes here
   </span>
   <span class="listing-overview">
     <header>
-      $1234 - Bike Listing Title
+      $${itemPrice} - ${itemTitle}
     </header>
-
-    <p> description of bike </p>
+    <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
+    <p> ${itemDescription} </p>
 
     <footer>
-      <span>Item location - N days ago</span>
+      <span>${itemLocation} - ${postDate}</span>
       <span></span>
     </footer>
   </span>
