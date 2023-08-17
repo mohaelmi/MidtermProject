@@ -1,11 +1,15 @@
 $(document).ready(function() {
 
+  console.log('working')
+  loadItems()
 
 });
 
 const loadItems = function() {
+  console.log('in loadItems')
   $.get('/api/items')
     .then( data => {
+      console.log('it worked!')
       renderItems(data.items)
     })
 }
