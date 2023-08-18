@@ -1,13 +1,19 @@
 $base-colour: rgb(255, 251, 243);
 $hightlight-color-1:rgb(229, 252, 110);
 $highlight-color-2: rgb(147, 126, 196);
+$background-color: #725E54;
 
 main {
+  //positioning
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border: 1px solid black;
   width: 60%;
+
+
+
 
   .dropdown-form {
     flex-direction: column;
@@ -15,7 +21,15 @@ main {
     align-items: center;
     width: 100%;
 
+    //form inputs
+    input {
+
+
+      background-color: $base-colour;
+    }
+
     .bike-details{
+      width: 90%;
       margin: 2rem;
 
 
@@ -36,7 +50,7 @@ main {
     #new-listing_description {
       justify-content: flex-start;
       align-items: flex-start;
-      width: 59rem;
+      width: 90%;
       height: 10rem;
     }
 

@@ -65,6 +65,8 @@ const createItemElement = function(data) {
   const itemSize = data.size;
   const postDate = data.created_at;
 
+
+
   // to do: figure out timeAgo
   // const postDate = data.created_at;
   // const timeAgo = timeago.format(postDate);
@@ -82,7 +84,11 @@ const createItemElement = function(data) {
 
     <footer>
       <span>${itemLocation} - ${postDate}</span>
-      <span></span>
+
+      <div class='icon-bar'>
+        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
     </footer>
   </span>
 </article>`;

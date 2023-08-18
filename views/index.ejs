@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
   <!-- external js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
   <!-- stylesheets -->
@@ -41,7 +42,7 @@
       </span>
       <form>
         <input type="search" id="main-search" name="main-search" placeholder="n+1 awaits">
-        <button>go!</button>
+        <button><i class="fa-solid fa-arrow-right"></i></button>
       </form>
     </span>
 
@@ -50,6 +51,13 @@
       <button class="post-bike">Post Bike</button>
     </span>
   </nav>
+
+    <!-- toggle for all bikes / favourites / my lisitngs-->
+  <div class="toggle-bar">
+    <button class="all-listings">All Bikes</button>
+    <button class="my-listings">My Listings</button>
+    <button class="favourites">Favourites</button>
+  </div>
 
 </header>
 
@@ -100,12 +108,7 @@
   </form>
 
   </div>
-  <!-- toggle for all bikes / favourites / my lisitngs-->
-  <div class="toggle-bar">
-    <button class="all-listings">All Bikes</button>
-    <button class="my-listings">My Listings</button>
-    <button class="favourites">Favourites</button>
-  </div>
+
 
 
   <!-- container for listings-->
