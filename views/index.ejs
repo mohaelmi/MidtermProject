@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/header.css"/>
   <link rel="stylesheet" href="/styles/listing-container.css"/>
-  <link rel="stylesheet" href="/styles/dropdown-listing.scss"/>
+  <link rel="stylesheet" href="/styles/dropdown-listing.css" />
 
 
   <!-- import external fonts -->
@@ -65,37 +65,38 @@
 
       <div class="dropdown-form" style= "display: none;">
 
+      <!-- bike title, price, city, size and type -->
       <section class="bike-details">
 
-        <input placeholder="Title" type="text" id="new-listing_title">
+        <div class="form-inputs">
+          <input placeholder="Title" type="text" id="new-listing_title">
+          <input placeholder="Price" type="text" name="Price" id="new-listing_price">
+          <input placeholder="City" type="text" name="City" id="new-listing_city">
+        </div>
 
-        <input placeholder="Price" type="text" name="Price" id="new-listing_price">
+        <div class="form-selects">
+          <select id="new-listing_size">
+            <option value>Size</option>
+            <option value="xs">XS</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
 
-        <select id="new-listing_size">
-          <option value>Size</option>
-          <option value="xs">XS</option>
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-          <option value="xl">XL</option>
-        </select>
-
-        <select id="new-listing_type">
-          <option value>Type</option>
-          <option value="road">Road</option>
-          <option value="mountain">Mountain</option>
-          <option value="Hybrid/Commuter">Hybrid/Commuter</option>
-          <option value="Gravel">Gravel</option>
-          <option value="ebike">E-Bike</option>
-        </select>
-
-        <input placeholder="City" type="text" name="City" id="new-listing_city">
-
-
+          <select id="new-listing_type">
+            <option value>Type</option>
+            <option value="road">Road</option>
+            <option value="mountain">Mountain</option>
+            <option value="Hybrid/Commuter">Hybrid/Commuter</option>
+            <option value="Gravel">Gravel</option>
+            <option value="ebike">E-Bike</option>
+          </select>
+        </div>
       </section>
 
-      <input placeholder="Description" type="text" name="Description" id="new-listing_description">
-
+      <!-- bike description -->
+      <textarea id="new-listing_description" name="Description" placeholder="Description"></textarea>
       <div id="buttons">
         <button type="submit">Add image</button>
         <button type="submit">Post</button>

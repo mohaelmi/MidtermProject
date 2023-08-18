@@ -58,11 +58,6 @@ const postBikeForm = function() {
 }
 
 
-
-/**
- * Post New Bike
- */
-
 const createItemElement = function(data) {
 
   //extract item info from data
@@ -105,6 +100,10 @@ const createItemElement = function(data) {
   return element;
 };
 
+/**
+ * addimage listener
+ */
+const
 
 //takes in a list of database items and renders each with createItemElement
 const renderItems = function(items) {

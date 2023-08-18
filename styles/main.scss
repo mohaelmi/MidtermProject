@@ -1,7 +1,9 @@
 $base-colour: rgb(255, 251, 243);
 $hightlight-color-1:rgb(229, 252, 110);
 $highlight-color-2: rgb(147, 126, 196);
-$background-color: #725E54;
+$background-color: #DDD7C1;
+
+
 
 main {
   //positioning
@@ -9,28 +11,78 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border: 1px solid black;
+  width: 60%;
 
-  width: 70%;
+
+  .dropdown-form {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 2rem;
+
+    //style bike properties form
+    .bike-details{
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .form-inputs {
+        display: flex;
+        justify-content: space-around;
+        gap: 5px;
+        input {
+          background-color: $background-color;
+          padding: 4px 2px;
+        }
+      }
+
+      .form-selects {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        select {
+          padding: 4px 2px;
+          border-radius: 5px;
+          border: none;
+          background-color: $background-color;
+        }
+      }
+
+      // #new-listing_title {
+      //   margin-right: 1rem;
+      // }
+
+      // #new-listing_price, #new-listing_size, #new-listing_type {
+      //   margin-right: 1rem;
+      //   margin-left: 1rem;
+      // }
+
+      // #new-listing_city {
+      //   margin-left: 1rem;
+      // }
+    }
+
+    #new-listing_description {
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 90%;
+      height: 10rem;
+    }
+
+    // #buttons{
+    //   justify-content: flex-end;
+    //   margin: 1rem;
+    //   margin-bottom: 5rem;
+    // }
+
+
+  }
+
+
+
 }
 
-
-
-
-
-// main {
-//   padding-top: 100px;
-// }
-
-
-// button {
-//   background-color: $hightlight-color-1;
-//   border: 1px solid $hightlight-color-1;
-//   border-radius: 5px;
-//   border: none;
-
-// }
-
-// button:hover {
-//   border: 1px solid black;
-//   border-radius: 5px;
-// }
