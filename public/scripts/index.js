@@ -107,12 +107,13 @@ const renderItems = function(items) {
  */
 
   const loadFavourites = function(items) {
-    const favouritesButton = document.querySelect(".favourites");
+    const favouritesButton = document.querySelector(".favourites");
     favouritesButton.addEventListener("click", function() {
 
       $.get('/api/items')
         .then(data => {
           // if (data.items) belongs user cookie
+          console.log(data.items)
           renderItems(data.items);
         });
 
