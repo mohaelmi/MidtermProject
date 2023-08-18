@@ -12,10 +12,15 @@ $(document).ready(function() {
 //     }
 // });
 
-  console.log('working')
+
+
+
   loadItems()
   postBikeForm()
   loadFavourites()
+
+
+
 
 });
 
@@ -33,6 +38,7 @@ const loadItems = function() {
     })
 }
 
+
 /**
  * Show Post Bike Form
  */
@@ -40,6 +46,7 @@ const loadItems = function() {
 const postBikeForm = function() {
   const button = document.querySelector(".post-bike");
   const dropdownForm = document.querySelector(".dropdown-form");
+  console.log('button', button)
 
   button.addEventListener("click", function() {
     if (dropdownForm.style.display === "none") {
@@ -49,6 +56,8 @@ const postBikeForm = function() {
     }
   });
 }
+
+
 
 /**
  * Post New Bike
@@ -97,7 +106,7 @@ const createItemElement = function(data) {
 };
 
 
-
+//takes in a list of database items and renders each with createItemElement
 const renderItems = function(items) {
   const container = $('.listing-container');
   console.log(items[1])
@@ -110,17 +119,19 @@ const renderItems = function(items) {
 
   /**
  * Load Favourites
+ * (how to add event listeners for things that don't exist yet??)
  */
 
   const loadFavourites = function(items) {
-    const favouritesButton = document.querySelect(".favourites");
+    const favouritesButton = document.querySelector(".fa-star");
+    console.log(favouritesButton)
     favouritesButton.addEventListener("click", function() {
+      console.log('in loadFavourites')
 
-      $.get('/api/items')
-        .then(data => {
-          // if (data.items) belongs user cookie
-          renderItems(data.items);
-        });
+      //   .then(data => {
+      //     // if (data.items) belongs user cookie
+      //     renderItems(data.items);
+      //   });
 
     });
 
