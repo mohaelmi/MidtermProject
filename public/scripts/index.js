@@ -5,6 +5,7 @@ $(document).ready(function() {
   addImageButton();
   postBikeButton();
   toggleBarButtons();
+  searchBarButton();
   //loadFavourites() uncomment when we figure out adding
 
 });
@@ -112,6 +113,13 @@ const postBikeButton = function () {
 const toggleBarButtons = function() {
   $('.toggle-bar').on('click', '*', () => {
     alert('toggle bar option clicked!')
+  })
+}
+
+//searchbar listener
+const searchBarButton = function () {
+  $('.search-button').click(() => {
+    alert('Seach bar clicked!')
   })
 }
 
