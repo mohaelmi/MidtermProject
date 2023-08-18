@@ -12,4 +12,5 @@
 - use sms and tilio for messaging
 - by saturday: have API routes, ejs views and scripts for front-end
 
-#### 
+####  JANAY + SOFIA AUG17
+- redesigned wireframe to 1 page, with a dropdown form + message popup

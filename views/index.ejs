@@ -58,11 +58,13 @@
 
       <div class="dropdown-form" style= "display: none;">
 
-      <input placeholder="Title" type=>
+      <section class="bike-details">
 
-      <section class="new-listing_filters">
+        <input placeholder="Title" type="text" id="new-listing_title">
+
         <input placeholder="Price" type="text" name="Price" id="new-listing_price">
-        <select class="new-listing_size">
+
+        <select id="new-listing_size">
           <option value>Size</option>
           <option value="xs">XS</option>
           <option value="s">S</option>
@@ -70,7 +72,8 @@
           <option value="l">L</option>
           <option value="xl">XL</option>
         </select>
-        <select class="new-listing_type">
+
+        <select id="new-listing_type">
           <option value>Type</option>
           <option value="road">Road</option>
           <option value="mountain">Mountain</option>
@@ -78,22 +81,19 @@
           <option value="Gravel">Gravel</option>
           <option value="ebike">E-Bike</option>
         </select>
+
+        <input placeholder="City" type="text" name="City" id="new-listing_city">
+
+
       </section>
 
-      <div id="new-listing_description">
-        <input placeholder="Description" type="text" name="Description">
-      </div>
+      <input placeholder="Description" type="text" name="Description" id="new-listing_description">
 
-      <div id="new-listing_city">
-      <input placeholder="City" type="text" name="City">
-      </div>
 
-      <div id="new-listing_addImage">
-        <button>Add image</button>
-      </div>
 
-      <div id="new-listing_submitPost">
-        <button>Post</button>
+      <div id="buttons">
+        <button type="submit">Add image</button>
+        <button type="submit">Post</button>
       </div>
 
     </div>

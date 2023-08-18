@@ -1,4 +1,57 @@
 $base-colour: rgb(255, 251, 243);
+$hightlight-color-1:rgb(229, 252, 110);
+$highlight-color-2: rgb(147, 126, 196);
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  width: 60%;
+
+  .dropdown-form {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .bike-details{
+      margin: 2rem;
+
+
+      #new-listing_title {
+        margin-right: 1rem;
+      }
+
+      #new-listing_price, #new-listing_size, #new-listing_type {
+        margin-right: 1rem;
+        margin-left: 1rem;
+      }
+
+      #new-listing_city {
+        margin-left: 1rem;
+      }
+    }
+
+    #new-listing_description {
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 59rem;
+      height: 10rem;
+    }
+
+    #buttons{
+      justify-content: flex-end;
+      margin: 1rem;
+      margin-bottom: 5rem;
+    }
+
+
+  }
+
+
+
+}
 
 // main {
 //   padding-top: 100px;
