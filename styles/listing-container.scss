@@ -45,18 +45,21 @@ $background-color: #725E54;
       }
 
       footer {
-        font-size: 14px;
-        color: grey;
+        display: flex;
+        flex-direction: column;
 
         span {
-          position: relative;
-          left: auto;
-          margin-left: auto;
+          font-size: 14px;
+          color: grey;
+          align-self: flex-start;
         }
 
         .icon-bar {
-          margin-right: auto;
+          align-self: flex-end;
+          font-size: 20px;
+          color: $highlight-color-2;
         }
+
       }
 
     }
