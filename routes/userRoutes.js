@@ -40,4 +40,23 @@ router.post("/add-favorite/:id", (req, res) => {
     });
 });
 
+// Remove item from Wishlist // click favorite button
+router.get("/delete/:id", (req, res) => {
+  const userId = req.session.user_id;
+  const itemsId = req.params.id;
+
+  if (!userId) {
+    return res.send({ error: "Please Login" });
+  }
+
+  userQueries
+    .removeFromWishlist(userId, itemsId)
+    .then(() => {
+      res.json("Item has been removed from wishlist");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;
