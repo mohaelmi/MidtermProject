@@ -124,6 +124,16 @@ const searchBarButton = function () {
   })
 }
 
+//send Message listener
+
+const sendMessage = function () {
+
+  $("fa-solid fa-envelope").click(function() {
+     alert("message seller")
+  })
+
+}
+
   /**
  * Load Favourites
  * (how to add event listeners for things that don't exist yet??)
