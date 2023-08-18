@@ -7,6 +7,7 @@ $(document).ready(function() {
   toggleBarButtons();
   searchBarButton();
   //loadFavourites() uncomment when we figure out adding
+  loadMyListings();
 
 });
 
@@ -128,32 +129,36 @@ const searchBarButton = function () {
  * (how to add event listeners for things that don't exist yet??)
  */
 const loadFavourites = function(items) {
-  const favouritesButton = document.querySelector(".fa-star");
+  const favouritesButton = document.querySelector(".favourites");
 
   favouritesButton.addEventListener("click", function() {
-    console.log('in loadFavourites')
+    console.log(items)
 
-    //   .then(data => {
-    //     // if (data.items) belongs user cookie
-    //     renderItems(data.items);
-    //   });
+    $.get('/api/items')
+    .then( data => {
+
+        renderItems(data.items)
+    })
 
   });
 
   };
 
   /**
-* Load User Listings
+* Load User Listings / NOT YET WORKING
 */
-  const loadMyListings = function(items) {
-    const element = document.getElementByClassName("my-listings");
-    element.addEventListener("click", function() {
+  const loadMyListings = function() {
+    const myListings = document.getElementsByClassName("my-listings");
+    myListings.addEventListener("click", function() {
 
       console.log('in loadItems');
       $.get('/api/items')
         .then(data => {
-          // if (data.items) belongs user cookie
-          renderItems(data.items);
+          data.items.forEach(item => {
+            if(data.items[seller_id] === "2") {
+              renderItems(data.items);
+            }
+          })
         });
 
     });
