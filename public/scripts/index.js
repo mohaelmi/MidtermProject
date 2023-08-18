@@ -1,33 +1,17 @@
 $(document).ready(function() {
 
-  /* stretch */
-  //implement header collapsing into nav bar upon scroll
-//   $(window).scroll(function(){
-//     if($(document).scrollTop() > 0) {
-//         $('nav').removeClass('big');
-//         console.log('scrolling!')
-//     } else {
-//         $('nav').addClass('big');
-//         console.log('back to top!')
-//     }
-// });
-
-
-
-
   loadItems()
   postBikeForm()
-  loadFavourites()
-
-
-
+  addImageButton();
+  postBikeButton();
+  toggleBarButtons();
+  //loadFavourites() uncomment when we figure out adding
 
 });
 
 /**
- * Load All Items/Bikes
+ * Load All Items/Bikes onto landing page
  */
-
 const loadItems = function() {
 
   console.log('in loadItems')
@@ -37,26 +21,6 @@ const loadItems = function() {
       renderItems(data.items)
     })
 }
-
-
-/**
- * Show Post Bike Form
- */
-
-const postBikeForm = function() {
-  const button = document.querySelector(".post-bike");
-  const dropdownForm = document.querySelector(".dropdown-form");
-  console.log('button', button)
-
-  button.addEventListener("click", function() {
-    if (dropdownForm.style.display === "none") {
-      dropdownForm.style.display = "flex"
-    } else {
-      dropdownForm.style.display = "none"
-    }
-  });
-}
-
 
 const createItemElement = function(data) {
 
@@ -100,11 +64,6 @@ const createItemElement = function(data) {
   return element;
 };
 
-/**
- * addimage listener
- */
-const
-
 //takes in a list of database items and renders each with createItemElement
 const renderItems = function(items) {
   const container = $('.listing-container');
@@ -116,30 +75,68 @@ const renderItems = function(items) {
   }
 }
 
+
+/* --------------- EVENT LISTENERS ----------------------*/
+
+/**
+ * Show Post Bike Form
+ */
+const postBikeForm = function() {
+  const button = document.querySelector(".post-bike");
+  const dropdownForm = document.querySelector(".dropdown-form");
+
+  button.addEventListener("click", function() {
+    if (dropdownForm.style.display === "none") {
+      dropdownForm.style.display = "flex"
+    } else {
+      dropdownForm.style.display = "none"
+    }
+  });
+}
+
+//add image button listener
+const addImageButton = function() {
+  $('.image-button').click(() => {
+    alert('image button clicked!');
+  })
+}
+
+//post new bike button listener
+const postBikeButton = function () {
+  $('.post-button').click(() => {
+    alert('post form button clicked!');
+  })
+}
+
+//togglebar listener
+const toggleBarButtons = function() {
+  $('.toggle-bar').on('click', '*', () => {
+    alert('toggle bar option clicked!')
+  })
+}
+
   /**
  * Load Favourites
  * (how to add event listeners for things that don't exist yet??)
  */
+const loadFavourites = function(items) {
+  const favouritesButton = document.querySelector(".fa-star");
 
-  const loadFavourites = function(items) {
-    const favouritesButton = document.querySelector(".fa-star");
-    console.log(favouritesButton)
-    favouritesButton.addEventListener("click", function() {
-      console.log('in loadFavourites')
+  favouritesButton.addEventListener("click", function() {
+    console.log('in loadFavourites')
 
-      //   .then(data => {
-      //     // if (data.items) belongs user cookie
-      //     renderItems(data.items);
-      //   });
+    //   .then(data => {
+    //     // if (data.items) belongs user cookie
+    //     renderItems(data.items);
+    //   });
 
-    });
+  });
 
   };
 
   /**
 * Load User Listings
 */
-
   const loadMyListings = function(items) {
     const element = document.getElementByClassName("my-listings");
     element.addEventListener("click", function() {
