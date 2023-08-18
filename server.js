@@ -35,12 +35,16 @@ app.use(
 
 const itemRoutes = require("./routes/itemRoutes");
 const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 // /api/items endpoint
 app.use("/api/items", itemRoutes);
 
-// /api/users/ endpoint
+// /api/user/ endpoint
 app.use("/api/users", userRoutes);
+
+// /api/users endpoint
+app.use("/users", adminRoutes);
 
 // Home page
 app.get("/", (req, res) => {
@@ -61,13 +65,3 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-// Get all Items - done
-// Get items related to User - done
-// Post items -> havinf test yet
-
-// --------------------------------------
-
-// Get all Users - done
-// Get user  by id - done
-// Add newUser -> have an issue with it

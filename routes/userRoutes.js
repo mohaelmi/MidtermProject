@@ -2,38 +2,17 @@
 
 const express = require("express");
 const router = express.Router();
-const usersQueries = require("../db/queries/users");
+const userQueries = require("../db/queries/userWishlistFunctions");
 
-// Getting all users
-router.get("/", (req, res) => {
-  usersQueries
-    .getUsers()
-    .then((users) => {
-      res.json({ users });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-// Get user by its id
-router.get("/:id", (req, res) => {
-  const userId = req.params.id;
-  usersQueries
-    .getUserById(userId)
-    .then((users) => {
-      res.json({ users });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-// Get items belong to a user
-router.get("/items/:id", (req, res) => {
-  const userId = req.params.id;
-  usersQueries
-    .getMyItems(userId)
+// Get user wishLists
+router.get("/wishlist", (req, res) => {
+  const userId = req.session.user_id;
+  console.log("inside");
+  if (!userId) {
+    return res.send({ error: "Please Login" });
+  }
+  userQueries
+    .getUserWishlist(userId)
     .then((items) => {
       res.json({ items });
     })
@@ -42,18 +21,23 @@ router.get("/items/:id", (req, res) => {
     });
 });
 
-// Create New User // we may not need that
-router.post("/new", (req, res) => {
-  const user = JSON.parse(req.body);
-  // const user = req.body;
-  console.log("user: ", user);
-  usersQueries
-    .addNewUser(user)
-    .then((user) => {
-      res.json({ user });
+// Add Wishlist // click favorite button
+router.post("/add-favorite/:id", (req, res) => {
+  const userId = req.session.user_id;
+  const itemsId = req.params.id;
+
+  if (!userId) {
+    return res.send({ error: "Please Login" });
+  }
+
+  userQueries
+    .addToWishlist(userId, itemsId)
+    .then((data) => {
+      res.json({ data });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });
 });
+
 module.exports = router;

@@ -14,3 +14,19 @@
 
 ####  JANAY + SOFIA AUG17
 - redesigned wireframe to 1 page, with a dropdown form + message popup
+
+
+
+### Routes
+
+- Get All Items
+- Add New Item
+- Add Item into wishList (Like an item)
+- Get favorite/wishlist items
+- Update specific item By Id
+- Get specific item By Id
+
+- Get User By Id 
+- Get all Users
+- Logout / Loging for adding wishlist propuse
+
