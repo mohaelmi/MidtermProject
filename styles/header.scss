@@ -7,7 +7,9 @@ $highlight-color-2: rgb(147, 126, 196);
 .page-header {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 100px;
+
+
+  //navbar
   nav {
     padding-top: 20px;
     height: 80px;
@@ -39,22 +41,22 @@ $highlight-color-2: rgb(147, 126, 196);
       gap: 10px;
       align-items: center;
 
-      input {
-        border:none;
-        border-radius: 5px;
-        background-color: $base-colour;
-      }
+
     }
   }
+
+  //toggle bar
+    //style toggle bar
+    .toggle-bar {
+      margin-top: 80px;
+      display: flex;
+      gap: 5px;
+      padding: 10px
+    }
+
 }
 
 
-//page header that appears on page load
-.page-header.big {
-  nav {
-    height: 400px;
 
-    align-items: flex-start;
-  }
-}
+
 

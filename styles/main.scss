@@ -1,72 +1,66 @@
-$base-colour: rgb(255, 251, 243);
-$hightlight-color-1:rgb(229, 252, 110);
+//$base-colour: ;
+$base-colour: #FCF7FF;
+$hightlight-color-1: rgb(229, 252, 110);
 $highlight-color-2: rgb(147, 126, 196);
+$background-color: rgb(255, 251, 243);
+
+
 
 main {
+  //positioning
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
-  width: 60%;
+  width: 80%;
 
   .dropdown-form {
+    margin: 0 auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    gap: 10px;
+    width: 75%;
+    padding: 2rem;
+    background-color: $highlight-color-2;
+    border: 2px solid black;
+    border-radius: 5px;;
 
+    //style bike properties form
     .bike-details{
-      margin: 2rem;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-
-      #new-listing_title {
-        margin-right: 1rem;
+      .form-inputs {
+        display: flex;
+        justify-content: space-around;
+        gap: 5px;
+        input {
+          background-color: #FFFFFF;
+          padding: 4px 2px;
+        }
       }
 
-      #new-listing_price, #new-listing_size, #new-listing_type {
-        margin-right: 1rem;
-        margin-left: 1rem;
-      }
+      .form-selects {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        select {
+          padding: 4px 2px;
+          border-radius: 5px;
 
-      #new-listing_city {
-        margin-left: 1rem;
+        }
       }
     }
-
     #new-listing_description {
       justify-content: flex-start;
       align-items: flex-start;
-      width: 59rem;
+      width: 90%;
       height: 10rem;
     }
-
-    #buttons{
-      justify-content: flex-end;
-      margin: 1rem;
-      margin-bottom: 5rem;
-    }
-
-
   }
-
-
 
 }
 
-// main {
-//   padding-top: 100px;
-// }
-
-
-// button {
-//   background-color: $hightlight-color-1;
-//   border: 1px solid $hightlight-color-1;
-//   border-radius: 5px;
-//   border: none;
-
-// }
-
-// button:hover {
-//   border: 1px solid black;
-//   border-radius: 5px;
-// }

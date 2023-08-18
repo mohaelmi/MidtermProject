@@ -1,28 +1,18 @@
 $(document).ready(function() {
 
-  /* stretch */
-  //implement header collapsing into nav bar upon scroll
-//   $(window).scroll(function(){
-//     if($(document).scrollTop() > 0) {
-//         $('nav').removeClass('big');
-//         console.log('scrolling!')
-//     } else {
-//         $('nav').addClass('big');
-//         console.log('back to top!')
-//     }
-// });
-
-  console.log('working')
   loadItems()
   postBikeForm()
-  loadFavourites()
+  addImageButton();
+  postBikeButton();
+  toggleBarButtons();
+  searchBarButton();
+  //loadFavourites() uncomment when we figure out adding
 
 });
 
 /**
- * Load All Items/Bikes
+ * Load All Items/Bikes onto landing page
  */
-
 const loadItems = function() {
 
   console.log('in loadItems')
@@ -32,27 +22,6 @@ const loadItems = function() {
       renderItems(data.items)
     })
 }
-
-/**
- * Show Post Bike Form
- */
-
-const postBikeForm = function() {
-  const button = document.querySelector(".post-bike");
-  const dropdownForm = document.querySelector(".dropdown-form");
-
-  button.addEventListener("click", function() {
-    if (dropdownForm.style.display === "none") {
-      dropdownForm.style.display = "flex"
-    } else {
-      dropdownForm.style.display = "none"
-    }
-  });
-}
-
-/**
- * Post New Bike
- */
 
 const createItemElement = function(data) {
 
@@ -64,6 +33,8 @@ const createItemElement = function(data) {
   const itemDescription = data.description;
   const itemSize = data.size;
   const postDate = data.created_at;
+
+
 
   // to do: figure out timeAgo
   // const postDate = data.created_at;
@@ -82,7 +53,11 @@ const createItemElement = function(data) {
 
     <footer>
       <span>${itemLocation} - ${postDate}</span>
-      <span></span>
+
+      <div class='icon-bar'>
+        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
     </footer>
   </span>
 </article>`;
@@ -90,8 +65,7 @@ const createItemElement = function(data) {
   return element;
 };
 
-
-
+//takes in a list of database items and renders each with createItemElement
 const renderItems = function(items) {
   const container = $('.listing-container');
   console.log(items[1])
@@ -102,29 +76,75 @@ const renderItems = function(items) {
   }
 }
 
+
+/* --------------- EVENT LISTENERS ----------------------*/
+
+/**
+ * Show Post Bike Form
+ */
+const postBikeForm = function() {
+  const button = document.querySelector(".post-bike");
+  const dropdownForm = document.querySelector(".dropdown-form");
+
+  button.addEventListener("click", function() {
+    if (dropdownForm.style.display === "none") {
+      dropdownForm.style.display = "flex"
+    } else {
+      dropdownForm.style.display = "none"
+    }
+  });
+}
+
+//add image button listener
+const addImageButton = function() {
+  $('.image-button').click(() => {
+    alert('image button clicked!');
+  })
+}
+
+//post new bike button listener
+const postBikeButton = function () {
+  $('.post-button').click(() => {
+    alert('post form button clicked!');
+  })
+}
+
+//togglebar listener
+const toggleBarButtons = function() {
+  $('.toggle-bar').on('click', '*', () => {
+    alert('toggle bar option clicked!')
+  })
+}
+
+//searchbar listener
+const searchBarButton = function () {
+  $('.search-button').click(() => {
+    alert('Seach bar clicked!')
+  })
+}
+
   /**
  * Load Favourites
+ * (how to add event listeners for things that don't exist yet??)
  */
+const loadFavourites = function(items) {
+  const favouritesButton = document.querySelector(".fa-star");
 
-  const loadFavourites = function(items) {
-    const favouritesButton = document.querySelector(".favourites");
-    favouritesButton.addEventListener("click", function() {
+  favouritesButton.addEventListener("click", function() {
+    console.log('in loadFavourites')
 
-      $.get('/api/items')
-        .then(data => {
-          // if (data.items) belongs user cookie
-          console.log(data.items)
-          renderItems(data.items);
-        });
+    //   .then(data => {
+    //     // if (data.items) belongs user cookie
+    //     renderItems(data.items);
+    //   });
 
-    });
+  });
 
   };
 
   /**
 * Load User Listings
 */
-
   const loadMyListings = function(items) {
     const element = document.getElementByClassName("my-listings");
     element.addEventListener("click", function() {

@@ -2,6 +2,7 @@ $base-colour: rgb(255, 251, 243);
 $listing-margin: 15px;
 $highlight-color-1:rgb(229, 252, 110);
 $highlight-color-2: rgb(147, 126, 196);
+$background-color: #725E54;
 
 .listing-container {
   display:flex;
@@ -44,9 +45,21 @@ $highlight-color-2: rgb(147, 126, 196);
       }
 
       footer {
-        font-size: 14px;
-        color: grey;
-        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+
+        span {
+          font-size: 14px;
+          color: grey;
+          align-self: flex-start;
+        }
+
+        .icon-bar {
+          align-self: flex-end;
+          font-size: 20px;
+          color: $highlight-color-2;
+        }
+
       }
 
     }
