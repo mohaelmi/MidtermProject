@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   loadItems()
-  postBikeForm()
+  showBikeForm()
   addImageButton();
   postBikeButton();
   toggleBarButtons();
@@ -82,7 +82,7 @@ const renderItems = function(items) {
 /**
  * Show Post Bike Form
  */
-const postBikeForm = function() {
+const showBikeForm = function() {
   const button = document.querySelector(".post-bike");
   const dropdownForm = document.querySelector(".dropdown-form");
 
