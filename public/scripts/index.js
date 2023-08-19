@@ -1,12 +1,13 @@
 $(document).ready(function() {
 
   loadItems()
-  postBikeForm()
+  showBikeForm()
   addImageButton();
   postBikeButton();
   toggleBarButtons();
   searchBarButton();
   //loadFavourites() uncomment when we figure out adding
+  loadMyListings();
 
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
@@ -90,7 +91,7 @@ const renderItems = function(items) {
 /**
  * Show Post Bike Form
  */
-const postBikeForm = function() {
+const showBikeForm = function() {
   const button = document.querySelector(".post-bike");
   const dropdownForm = document.querySelector(".dropdown-form");
 
@@ -131,37 +132,51 @@ const searchBarButton = function () {
   })
 }
 
+//send Message listener
+
+const sendMessage = function () {
+
+  $("fa-solid fa-envelope").click(function() {
+     alert("message seller")
+  })
+
+}
+
   /**
  * Load Favourites
  * (how to add event listeners for things that don't exist yet??)
  */
 const loadFavourites = function(items) {
-  const favouritesButton = document.querySelector(".fa-star");
+  const favouritesButton = document.querySelector(".favourites");
 
   favouritesButton.addEventListener("click", function() {
-    console.log('in loadFavourites')
+    console.log(items)
 
-    //   .then(data => {
-    //     // if (data.items) belongs user cookie
-    //     renderItems(data.items);
-    //   });
+    $.get('/api/items')
+    .then( data => {
+
+        renderItems(data.items)
+    })
 
   });
 
   };
 
   /**
-* Load User Listings
+* Load User Listings / NOT YET WORKING
 */
-  const loadMyListings = function(items) {
-    const element = document.getElementByClassName("my-listings");
-    element.addEventListener("click", function() {
+  const loadMyListings = function() {
+    const myListings = document.getElementsByClassName("my-listings");
+    myListings.addEventListener("click", function() {
 
       console.log('in loadItems');
       $.get('/api/items')
         .then(data => {
-          // if (data.items) belongs user cookie
-          renderItems(data.items);
+          data.items.forEach(item => {
+            if(data.items[seller_id] === "2") {
+              renderItems(data.items);
+            }
+          })
         });
 
     });

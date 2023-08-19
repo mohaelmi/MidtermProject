@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
       res.json({ items });
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).json({ error: err.message });
     });
 });
@@ -41,7 +42,7 @@ router.post("/", (req, res) => {
     });
 });
 
-// Get specific item 
+// Get specific item
 router.get("/:id", (req, res) => {
   const itemId = req.params.id;
   itemsQueries

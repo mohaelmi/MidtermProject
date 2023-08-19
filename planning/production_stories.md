@@ -25,6 +25,7 @@
 - Get favorite/wishlist items
 - Update specific item By Id
 - Get specific item By Id
+- delete item from wishlist
 
 - Get User By Id 
 - Get all Users
