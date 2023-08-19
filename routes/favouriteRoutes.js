@@ -5,7 +5,7 @@ const router = express.Router();
 const userQueries = require("../db/queries/userWishlistFunctions");
 
 // Get user wishLists
-router.get("/wishlist", (req, res) => {
+router.get("/", (req, res) => {
   const userId = req.session.user_id;
   console.log("inside");
   if (!userId) {
@@ -22,7 +22,8 @@ router.get("/wishlist", (req, res) => {
 });
 
 // Add Wishlist // click favorite button
-router.post("/add-favorite/:id", (req, res) => {
+router.post("/:id", (req, res) => {
+  console.log("post addFav");
   const userId = req.session.user_id;
   const itemsId = req.params.id;
 
@@ -33,7 +34,7 @@ router.post("/add-favorite/:id", (req, res) => {
   userQueries
     .addToWishlist(userId, itemsId)
     .then((data) => {
-      res.json({ data });
+      res.json(data);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -41,7 +42,7 @@ router.post("/add-favorite/:id", (req, res) => {
 });
 
 // Remove item from Wishlist // click favorite button
-router.get("/delete/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const userId = req.session.user_id;
   const itemsId = req.params.id;
 

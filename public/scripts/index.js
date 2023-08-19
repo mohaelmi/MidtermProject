@@ -18,7 +18,10 @@ const toggleFavourite = function() {
   const item = article.data('item');
   item.favourite = !item.favourite;
 
-  $(this).toggleClass('red', item.favourite);
+  $.post(`/api/favourites/${item.id}`)
+  .then(res => {
+    $(this).toggleClass('red', item.favourite);
+  })
 }
 
 /**

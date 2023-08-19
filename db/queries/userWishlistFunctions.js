@@ -3,15 +3,15 @@
 const db = require('../connection');
 
 
-//1// Getting a user wishlist: 
+//1// Getting a user wishlist:
 
 const getUserWishlist = (userId) => {
   return db.query(`
-      SELECT id FROM items 
-      WHERE id IN 
+      SELECT id FROM items
+      WHERE id IN
         (SELECT item_id FROM wishlisted_items
-        WHERE wishlist_id IN 
-          (SELECT id FROM wishlist 
+        WHERE wishlist_id IN
+          (SELECT id FROM wishlist
           WHERE user_id = $1))
               `, [userId])
     .then(res => {
@@ -42,10 +42,13 @@ const addToWishlist = (userId, itemId) => {
     return db.query(`
     INSERT INTO wishlisted_items (wishlist_id, item_id)
     VALUES ($1,$2) RETURNING id;`
-    ,[wishlist_id, itemId]);
+    ,[wishlist_id, itemId])
+    .then(res => {
+      return res.rows[0];
+    })
   });
 };
-//testing 
+//testing
 //addToWishlist(3, 12)
 //  .then(() => {
 //    getUserWishlist(3)
