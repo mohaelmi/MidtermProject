@@ -56,8 +56,8 @@ const createItemElement = function(data) {
       <span>${itemLocation} - ${postDate}</span>
 
       <div class='icon-bar'>
-        <i class="fa-solid fa-envelope"></i>
-        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-envelope" id="envelope"></i>
+        <i class="fa-solid fa-star" id="star"></i>
       </div>
     </footer>
   </span>
