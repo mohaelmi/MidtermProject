@@ -8,7 +8,17 @@ $(document).ready(function() {
   searchBarButton();
   //loadFavourites() uncomment when we figure out adding
 
+  $('.listing-container').on('click', '.item-favourite', toggleFavourite);
+
 });
+
+const toggleFavourite = function() {
+  const article = $(this).closest('article.listing');
+  const item = article.data('item');
+  item.favourite = !item.favourite;
+
+  $(this).toggleClass('red', item.favourite);
+}
 
 /**
  * Load All Items/Bikes onto landing page
@@ -34,13 +44,11 @@ const createItemElement = function(data) {
   const itemSize = data.size;
   const postDate = data.created_at;
 
-
-
   // to do: figure out timeAgo
   // const postDate = data.created_at;
   // const timeAgo = timeago.format(postDate);
 
-  const element = `<article class="listing">
+  const element = $(`<article class="listing">
   <span class="image">
     url img goes here
   </span>
@@ -56,12 +64,12 @@ const createItemElement = function(data) {
 
       <div class='icon-bar'>
         <i class="fa-solid fa-envelope"></i>
-        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star item-favourite"></i>
       </div>
     </footer>
   </span>
-</article>`;
-
+</article>`);
+  element.data('item', data);
   return element;
 };
 
