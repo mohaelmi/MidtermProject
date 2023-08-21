@@ -81,11 +81,10 @@ const createItemElement = function(data) {
 const renderItems = function(items) {
   const container = $('.listing-container');
   console.log(items[1])
-  for (const item of items) {
+  items.reverse().forEach((item, i) => {
     const element = createItemElement(item);
     container.prepend(element);
-
-  }
+  })
 }
 
 
@@ -126,15 +125,25 @@ const postBikeButton = function () {
     const size = $('#new-listing_size option:checked').val();
     const type = $('#new-listing_type option:checked').val();
     const description = $('#new-listing_description').val();
-    const bike = {
+    const item = {
       title, 
       price, 
       city, 
       size, 
       type, 
-      description 
+      description,
+      condition: 'New',
+      status: 'Available'
     }
-    console.log(bike);
+    $.post("/api/items", item, (data) => {
+      $('.listing-container').empty();
+      loadItems()
+      const dropdownForm = document.querySelector(".dropdown-form");
+      dropdownForm.style.display = "none"
+      console.log(data);
+
+    })
+    .catch(err => err.message)
   })
 
   

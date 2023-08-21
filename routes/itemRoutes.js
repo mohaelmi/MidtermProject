@@ -25,15 +25,15 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
-    return res.send({ error: "error" });
+    return res.send({ error: "Please Login" });
   }
   //add new bike
   const newBike = req.body;
   newBike.seller_id = userId;
   itemsQueries
     .addItem(newBike)
-    .then((bike) => {
-      res.send(bike);
+    .then((item) => {
+      res.send({ item });
       console.log("new bike has been added!");
     })
     .catch((e) => {

@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// search route
+// search route // will take into appropriate file later
 app.post("/search", (req, res) => {
   const minPrice = req.body.minPrice;
   const maxPrice = req.body.maxPrice;
