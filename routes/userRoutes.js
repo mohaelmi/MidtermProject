@@ -5,7 +5,7 @@ const router = express.Router();
 const userQueries = require("../db/queries/userWishlistFunctions");
 
 // Get user wishLists
-router.get("/wishlist", (req, res) => {
+router.get("/", (req, res) => {
   const userId = req.session.user_id;
   console.log("inside");
   if (!userId) {
@@ -22,7 +22,7 @@ router.get("/wishlist", (req, res) => {
 });
 
 // Add Wishlist // click favorite button
-router.post("/add-favorite/:id", (req, res) => {
+router.post("/:id", (req, res) => {
   const userId = req.session.user_id;
   const itemsId = req.params.id;
 
@@ -41,7 +41,7 @@ router.post("/add-favorite/:id", (req, res) => {
 });
 
 // Remove item from Wishlist // click favorite button
-router.get("/delete/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const userId = req.session.user_id;
   const itemsId = req.params.id;
 
@@ -52,7 +52,9 @@ router.get("/delete/:id", (req, res) => {
   userQueries
     .removeFromWishlist(userId, itemsId)
     .then(() => {
-      res.json("Item has been removed from wishlist");
+      res.status(204);
+      res.end()
+     // res.json( "Item has been removed from wishlist" );
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
