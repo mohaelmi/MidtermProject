@@ -1,5 +1,6 @@
 // See: https://sass-lang.com/
-$base-colour: rgb(255, 251, 243);
+
+$base-colour:rgb(255, 251, 243);
 $hightlight-color-1:rgb(229, 252, 110);
 $highlight-color-2: rgb(147, 126, 196);
 
@@ -9,8 +10,10 @@ html {
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
-  background-color: $base-colour ;
+  background-color: $base-colour;
 
+
+  //global button styling
   button {
     background-color: $hightlight-color-1;
     border: 1px solid $hightlight-color-1;
@@ -23,6 +26,15 @@ html {
     border: 1px solid black;
     border-radius: 5px;
   }
+
+  //global input styling
+  input {
+    border:none;
+    border-radius: 5px;
+    background-color: $base-colour;
+  }
+
+  //global drop down select styling
 
 
 }

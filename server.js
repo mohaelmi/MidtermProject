@@ -34,17 +34,16 @@ app.use(
 );
 
 const itemRoutes = require("./routes/itemRoutes");
-const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const favouriteRoutes = require("./routes/favouriteRoutes");
 
 // /api/items endpoint
 app.use("/api/items", itemRoutes);
 
-// /api/user/ endpoint
-app.use("/api/users", userRoutes);
-
 // /api/users endpoint
 app.use("/users", adminRoutes);
+
+app.use("/api/favourites", favouriteRoutes);
 
 // Home page
 app.get("/", (req, res) => {

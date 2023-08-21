@@ -1,28 +1,32 @@
 $(document).ready(function() {
 
-  /* stretch */
-  //implement header collapsing into nav bar upon scroll
-//   $(window).scroll(function(){
-//     if($(document).scrollTop() > 0) {
-//         $('nav').removeClass('big');
-//         console.log('scrolling!')
-//     } else {
-//         $('nav').addClass('big');
-//         console.log('back to top!')
-//     }
-// });
-
-  console.log('working')
   loadItems()
-  postBikeForm()
-  loadFavourites()
+  showBikeForm()
+  addImageButton();
+  postBikeButton();
+  toggleBarButtons();
+  searchBarButton();
+  //loadFavourites() uncomment when we figure out adding
+  loadMyListings();
+
+  $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
 });
 
-/**
- * Load All Items/Bikes
- */
+const toggleFavourite = function() {
+  const article = $(this).closest('article.listing');
+  const item = article.data('item');
+  item.favourite = !item.favourite;
 
+  $.post(`/api/favourites/${item.id}`)
+  .then(res => {
+    $(this).toggleClass('red', item.favourite);
+  })
+}
+
+/**
+ * Load All Items/Bikes onto landing page
+ */
 const loadItems = function() {
 
   console.log('in loadItems')
@@ -32,27 +36,6 @@ const loadItems = function() {
       renderItems(data.items)
     })
 }
-
-/**
- * Show Post Bike Form
- */
-
-const postBikeForm = function() {
-  const button = document.querySelector(".post-bike");
-  const dropdownForm = document.querySelector(".dropdown-form");
-
-  button.addEventListener("click", function() {
-    if (dropdownForm.style.display === "none") {
-      dropdownForm.style.display = "flex"
-    } else {
-      dropdownForm.style.display = "none"
-    }
-  });
-}
-
-/**
- * Post New Bike
- */
 
 const createItemElement = function(data) {
 
@@ -69,7 +52,7 @@ const createItemElement = function(data) {
   // const postDate = data.created_at;
   // const timeAgo = timeago.format(postDate);
 
-  const element = `<article class="listing">
+  const element = $(`<article class="listing">
   <span class="image">
     url img goes here
   </span>
@@ -82,16 +65,19 @@ const createItemElement = function(data) {
 
     <footer>
       <span>${itemLocation} - ${postDate}</span>
-      <span></span>
+
+      <div class='icon-bar'>
+        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-star item-favourite"></i>
+      </div>
     </footer>
   </span>
-</article>`;
-
+</article>`);
+  element.data('item', data);
   return element;
 };
 
-
-
+//takes in a list of database items and renders each with createItemElement
 const renderItems = function(items) {
   const container = $('.listing-container');
   console.log(items[1])
@@ -102,37 +88,98 @@ const renderItems = function(items) {
   }
 }
 
+
+/* --------------- EVENT LISTENERS ----------------------*/
+
+/**
+ * Show Post Bike Form
+ */
+const showBikeForm = function() {
+  const button = document.querySelector(".post-bike");
+  const dropdownForm = document.querySelector(".dropdown-form");
+
+  button.addEventListener("click", function() {
+    if (dropdownForm.style.display === "none") {
+      dropdownForm.style.display = "flex"
+    } else {
+      dropdownForm.style.display = "none"
+    }
+  });
+}
+
+//add image button listener
+const addImageButton = function() {
+  $('.image-button').click(() => {
+    alert('image button clicked!');
+  })
+}
+
+//post new bike button listener
+const postBikeButton = function () {
+  $('.post-button').click(() => {
+    alert('post form button clicked!');
+  })
+}
+
+//togglebar listener
+const toggleBarButtons = function() {
+  $('.toggle-bar').on('click', '*', () => {
+    alert('toggle bar option clicked!')
+  })
+}
+
+//searchbar listener
+const searchBarButton = function () {
+  $('.search-button').click(() => {
+    alert('Seach bar clicked!')
+  })
+}
+
+//send Message listener
+
+const sendMessage = function () {
+
+  $("fa-solid fa-envelope").click(function() {
+     alert("message seller")
+  })
+
+}
+
   /**
  * Load Favourites
+ * (how to add event listeners for things that don't exist yet??)
  */
+const loadFavourites = function(items) {
+  const favouritesButton = document.querySelector(".favourites");
 
-  const loadFavourites = function(items) {
-    const favouritesButton = document.querySelect(".favourites");
-    favouritesButton.addEventListener("click", function() {
+  favouritesButton.addEventListener("click", function() {
+    console.log(items)
 
-      $.get('/api/items')
-        .then(data => {
-          // if (data.items) belongs user cookie
-          renderItems(data.items);
-        });
+    $.get('/api/items')
+    .then( data => {
 
-    });
+        renderItems(data.items)
+    })
+
+  });
 
   };
 
   /**
-* Load User Listings
+* Load User Listings / NOT YET WORKING
 */
-
-  const loadMyListings = function(items) {
-    const element = document.getElementByClassName("my-listings");
-    element.addEventListener("click", function() {
+  const loadMyListings = function() {
+    const myListings = document.getElementsByClassName("my-listings");
+    myListings.addEventListener("click", function() {
 
       console.log('in loadItems');
       $.get('/api/items')
         .then(data => {
-          // if (data.items) belongs user cookie
-          renderItems(data.items);
+          data.items.forEach(item => {
+            if(data.items[seller_id] === "2") {
+              renderItems(data.items);
+            }
+          })
         });
 
     });

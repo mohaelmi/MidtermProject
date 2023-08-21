@@ -23,6 +23,7 @@ router.get("/", (req, res) => {
 
 // Add Wishlist // click favorite button
 router.post("/:id", (req, res) => {
+  console.log("post addFav");
   const userId = req.session.user_id;
   const itemsId = req.params.id;
 
@@ -33,7 +34,7 @@ router.post("/:id", (req, res) => {
   userQueries
     .addToWishlist(userId, itemsId)
     .then((data) => {
-      res.json({ data });
+      res.json(data);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

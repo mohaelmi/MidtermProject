@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
   <!-- external js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
   <!-- stylesheets -->
@@ -16,10 +17,9 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/nav.css"/>
   <link rel="stylesheet" href="/styles/header.css"/>
   <link rel="stylesheet" href="/styles/listing-container.css"/>
-  <link rel="stylesheet" href="/styles/toggle-bar.css"/>
+  <link rel="stylesheet" href="/styles/dropdown-listing.css" />
 
 
   <!-- import external fonts -->
@@ -41,7 +41,7 @@
       </span>
       <form>
         <input type="search" id="main-search" name="main-search" placeholder="n+1 awaits">
-        <button>go!</button>
+        <button class="search-button"><i class="fa-solid fa-arrow-right"></i></button>
       </form>
     </span>
 
@@ -51,6 +51,13 @@
     </span>
   </nav>
 
+    <!-- toggle for all bikes / favourites / my lisitngs-->
+  <div class="toggle-bar">
+    <button class="all-listings">All Bikes</button>
+    <button class="my-listings">My Listings</button>
+    <button class="favourites">Favourites</button>
+  </div>
+
 </header>
 
 <!-- <img src="/public/test_images/bike_header.jpg" alt="grainy film photo of a bike loaded up for bikecamping"> -->
@@ -58,58 +65,60 @@
 
       <div class="dropdown-form" style= "display: none;">
 
+        <h2>SELL YOUR BIKE</h2>
+
+      <!-- bike title, price, city, size and type -->
       <section class="bike-details">
 
-        <input placeholder="Title" type="text" id="new-listing_title">
+        <div class="form-inputs">
+          <input placeholder="Title" type="text" id="new-listing_title">
+          <input placeholder="Price" type="text" name="Price" id="new-listing_price">
+          <input placeholder="City" type="text" name="City" id="new-listing_city">
+        </div>
 
-        <input placeholder="Price" type="text" name="Price" id="new-listing_price">
+        <div class="form-selects">
+          <select id="new-listing_size">
+            <option value>Size</option>
+            <option value="xs">XS</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
 
-        <select id="new-listing_size">
-          <option value>Size</option>
-          <option value="xs">XS</option>
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-          <option value="xl">XL</option>
-        </select>
-
-        <select id="new-listing_type">
-          <option value>Type</option>
-          <option value="road">Road</option>
-          <option value="mountain">Mountain</option>
-          <option value="Hybrid/Commuter">Hybrid/Commuter</option>
-          <option value="Gravel">Gravel</option>
-          <option value="ebike">E-Bike</option>
-        </select>
-
-        <input placeholder="City" type="text" name="City" id="new-listing_city">
-
-
+          <select id="new-listing_type">
+            <option value>Type</option>
+            <option value="road">Road</option>
+            <option value="mountain">Mountain</option>
+            <option value="Hybrid/Commuter">Hybrid/Commuter</option>
+            <option value="Gravel">Gravel</option>
+            <option value="ebike">E-Bike</option>
+          </select>
+        </div>
       </section>
 
-      <input placeholder="Description" type="text" name="Description" id="new-listing_description">
-
-
-
+      <!-- bike description -->
+      <textarea id="new-listing_description" name="Description" placeholder="Description"></textarea>
       <div id="buttons">
-        <button type="submit">Add image</button>
-        <button type="submit">Post</button>
+        <button type="submit" class="image-button">Add image</button>
+        <button type="submit" class="post-button">Post</button>
       </div>
 
     </div>
   </form>
 
   </div>
-  <!-- toggle for all bikes / favourites / my lisitngs-->
-  <div class="toggle-bar">
-    <button class="all-listings">All Bikes</button>
-    <button class="my-listings">My Listings</button>
-    <button class="favourites">Favourites</button>
-  </div>
-
 
   <!-- container for listings-->
   <div class="listing-container"></div>
+
+  <!-- message pop-up-->
+  <div id="pop-up_message" style="display: none;">
+    <input placeholder="Your Phone Number" type="text" id="buyer-phone">
+    <input placeholder="Message" type="text" id="message">
+    <button type="Submit">Send!</button>
+  </div>
+
 </main>
 
 </body>
