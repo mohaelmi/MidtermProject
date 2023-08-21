@@ -83,7 +83,7 @@ const renderItems = function(items) {
   console.log(items[1])
   for (const item of items) {
     const element = createItemElement(item);
-    container.append(element);
+    container.prepend(element);
 
   }
 }
@@ -116,9 +116,31 @@ const addImageButton = function() {
 
 //post new bike button listener
 const postBikeButton = function () {
-  $('.post-button').click(() => {
-    alert('post form button clicked!');
+
+  const $button = $('.post-button');
+  $button.on('click', function(e) {
+    e.preventDefault();
+    const title = $('#new-listing_title').val();
+    const price = $('#new-listing_price').val();
+    const city = $('#new-listing_city').val();
+    const size = $('#new-listing_size option:checked').val();
+    const type = $('#new-listing_type option:checked').val();
+    const description = $('#new-listing_description').val();
+    const bike = {
+      title, 
+      price, 
+      city, 
+      size, 
+      type, 
+      description 
+    }
+    console.log(bike);
   })
+
+  
+  // $('.post-button').click(() => {
+  //   alert('post form button clicked!');
+  // })
 }
 
 //togglebar listener
@@ -130,8 +152,23 @@ const toggleBarButtons = function() {
 
 //searchbar listener
 const searchBarButton = function () {
-  $('.search-button').click(() => {
-    alert('Seach bar clicked!')
+  $('.search-button').on('click', (e) => {
+    e.preventDefault();
+    const minPrice = $('#min-price').val()
+    const maxPrice = $('#max-price').val()
+    const data = {
+      minPrice,
+      maxPrice
+    }
+    //console.log(data);
+    $.post("/search", data, (data) => {
+      $('.listing-container').empty()
+      renderItems(data.data)
+      console.log(data);
+
+    })
+    .catch(err => err.message)
+   // alert('Seach bar clicked!')
   })
 }
 

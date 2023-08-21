@@ -26,6 +26,20 @@ const deleteItem = (itemId, seller_id) => {
     });
 };
 
+
+const filterByPrice = (minPrice, maxPrice) => {
+
+  return db
+    .query("SELECT * FROM items WHERE price >= $1 AND price <= $2;", [
+      minPrice,
+      maxPrice,
+    ])
+    .then((data) => {
+      console.log(data.rows);
+      return data.rows;
+    });
+};
+
 const addItem = (bike) => {
   console.log(bike);
   const query = `INSERT INTO items  (seller_id, title, description, 
@@ -48,4 +62,4 @@ const addItem = (bike) => {
     });
 };
 
-module.exports = { getAllItems, addItem, getItem, deleteItem };
+module.exports = { getAllItems, addItem, getItem, deleteItem, filterByPrice };

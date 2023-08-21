@@ -1,6 +1,6 @@
 // load .env data into process.env
 require("dotenv").config();
-
+const itemsQueries = require("./db/queries/items");
 // Web server config
 const sassMiddleware = require("./lib/sass-middleware");
 const cookieSession = require("cookie-session");
@@ -50,9 +50,28 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// search route
+app.post("/search", (req, res) => {
+  const minPrice = req.body.minPrice;
+  const maxPrice = req.body.maxPrice;
+  console.log(req.body);
+  itemsQueries
+  .filterByPrice(minPrice, maxPrice)
+    .then((data) => {
+      res.send({ data });
+      // res.redirect('/');
+    })
+    .catch((e) => {
+      console.error(e.message);
+      res.send(e.message);
+    });
+});
+
+
 app.get("/login/:id", (req, res) => {
   const userId = req.params.id;
   req.session.user_id = userId;
+  console.log(userId);
   res.redirect("/");
 });
 
