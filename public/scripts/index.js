@@ -26,6 +26,12 @@ $(document).ready(function() {
 
   $('.my-listings').on('click', viewMyListings);
 
+  $('.all-listings').on('click', () => {
+    console.log('all bikes clicked')
+    $('.listing-container').empty();
+    loadItems();
+  } )
+
   /*---------- other listeners -----------*/
   //send message to seller
 
@@ -175,11 +181,9 @@ const loadFavourites = function(items) {
 
 //view only your listings
 const viewMyListings = function() {
-  alert('view my lisitngs!');
   $.get('/users/items/2')
     .then(data => {
-      $('.listing-container').empty();
-      console.log(data.items);
+      $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
     })
     .catch(err => console.log('error', err))
