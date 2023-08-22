@@ -195,7 +195,7 @@ const loadFavourites = function(items) {
 
 //view only your listings
 const viewMyListings = function() {
-  $.get('/users/items/2')
+  $.get('/users/items')
     .then(data => {
       $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
