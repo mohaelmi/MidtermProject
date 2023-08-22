@@ -1,4 +1,5 @@
 
+
 $(document).ready(function() {
   //load all items to landing page
   loadItems();
@@ -23,6 +24,8 @@ $(document).ready(function() {
   //my favourites button listener
   $('.favourites').on('click', viewFavourites);
 
+  $('.my-listings').on('click', viewMyListings);
+
   /*---------- other listeners -----------*/
   //send message to seller
 
@@ -31,7 +34,7 @@ $(document).ready(function() {
   showBikeForm();
   postBikeButton();
   searchBarButton();
-  loadMyListings();
+  //loadMyListings();
 
 
 
@@ -149,26 +152,38 @@ const viewFavourites = function () {
 }
 
 
-  /**
+/**
  * Load Favourites
  * (how to add event listeners for things that don't exist yet??)
  */
-  const loadFavourites = function(items) {
-    const favouritesButton = document.querySelector(".favourites");
+const loadFavourites = function(items) {
+  const favouritesButton = document.querySelector(".favourites");
 
-    favouritesButton.addEventListener("click", function() {
-      console.log(items)
+  favouritesButton.addEventListener("click", function() {
+    console.log(items)
 
-      $.get('/api/items')
-      .then( data => {
+    $.get('/api/items')
+    .then( data => {
 
-          renderItems(data.items)
-      })
+        renderItems(data.items)
+    })
 
-    });
+  });
 
-    };
+  };
 
+
+//view only your listings
+const viewMyListings = function() {
+  alert('view my lisitngs!');
+  $.get('/users/items/2')
+    .then(data => {
+      $('.listing-container').empty();
+      console.log(data.items);
+      renderItems(data.items, true);
+    })
+    .catch(err => console.log('error', err))
+}
 /*---------- listing buttons ----------*/
 
 // adds/deletes item to favourites if the button is clicked.
@@ -222,7 +237,7 @@ const renderUserMessage = function(data) {
 }
 
 //renders a listing for an item for sale
-const createItemElement = function(data) {
+const createItemElement = function(data, isOwner) {
 
   //extract item info from data
   const itemTitle = data.title;
@@ -233,37 +248,70 @@ const createItemElement = function(data) {
   const itemSize = data.size;
   const postDate = data.created_at;
 
-  const element = $(`<article class="listing">
-  <span class="image">
-    url img goes here
-  </span>
-  <span class="listing-overview">
-    <header>
-      $${itemPrice} - ${itemTitle}
-    </header>
-    <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
-    <p> ${itemDescription} </p>
+  let element;
 
-    <footer>
-      <span>${itemLocation} - ${postDate}</span>
+  if (!isOwner) {
+    element = $(`<article class="listing">
+    <span class="image">
+      url img goes here
+    </span>
+    <span class="listing-overview">
+      <header>
+        $${itemPrice} - ${itemTitle}
+      </header>
+      <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
+      <p> ${itemDescription} </p>
 
-      <div class='icon-bar'>
-        <i class="fa-solid fa-envelope message-seller"></i>
-        <i class="fa-solid fa-star item-favourite"></i>
+      <footer>
+        <span>${itemLocation} - ${postDate}</span>
+
+        <div class='icon-bar'>
+          <i class="fa-solid fa-envelope message-seller"></i>
+          <i class="fa-solid fa-star item-favourite"></i>
+        </div>
+      </footer>
+    </span>
+  </article>`);
+  }
+  //add owner permissions
+  else {
+    element = $(`<article class="listing">
+    <span class="image">
+      url img goes here
+    </span>
+    <span class="listing-overview">
+      <header>
+        $${itemPrice} - ${itemTitle}
+      </header>
+      <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
+      <p> ${itemDescription} </p>
+
+      <footer>
+        <span>${itemLocation} - ${postDate}</span>
+
+        <div class='icon-bar'>
+          <i class="fa-solid fa-envelope message-seller"></i>
+          <i class="fa-solid fa-star item-favourite"></i>
+        </div>
+      </footer>
+      <div class='owner'>
+        <button class='sold-button'>Mark Sold</button>
+        <button class='delete-item'>Delete Listing</button>
       </div>
-    </footer>
-  </span>
-</article>`);
+    </span>
+  </article>`);
+  }
   element.data('item', data);
   return element;
 };
 
-//takes in a list of database items and renders each with createItemElement
-const renderItems = function(items) {
+//takes in a list of database items and renders each with createItemElement.
+
+const renderItems = function(items, isOwner) {
   const container = $('.listing-container');
-  //console.log(items[1])
+  // console.log(isOwner)
   items.reverse().forEach((item, i) => {
-    const element = createItemElement(item);
+    const element = createItemElement(item, isOwner);
     container.prepend(element);
   })
 }
