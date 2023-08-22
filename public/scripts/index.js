@@ -190,6 +190,7 @@ const loadFavourites = function(items) {
   });
 
 };
+//include jquery modal 0.9.2
 
 
 //view only your listings
