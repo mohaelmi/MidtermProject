@@ -9,13 +9,11 @@ $(document).ready(function() {
   $('.image-button').on('click', addImageButton);
 
 
-
-
   /*---------- listing-container listeners ----------*/
   //favouriting button listener
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
-  //message seller button listener{
+  //message seller button listener
   $('.listing-container').on('click', '.message-seller', messageSeller);
 
 
@@ -116,6 +114,7 @@ const addImageButton = function() {
 const postBikeButton = function() {
 
   const $button = $('.post-button');
+
   $button.on('click', function(e) {
     e.preventDefault();
     const title = $('#new-listing_title').val();
@@ -135,11 +134,29 @@ const postBikeButton = function() {
       status: 'Available'
     };
     $.post("/api/items", item, (data) => {
+      //empty container
       $('.listing-container').empty();
       loadItems();
-      const dropdownForm = document.querySelector(".dropdown-form");
-      dropdownForm.style.display = "none";
-      console.log(data);
+
+      //collpase dropdownForm
+      const $dropdownForm = $('.dropdown-form');
+      $dropdownForm.css('display', 'none');
+
+      //clear dropdownForm inputs
+      $('#new-listing_title').val('');
+      $('#new-listing_price').val('');
+      $('#new-listing_city').val('');
+
+      //clear selects
+      $('#new-listing_size').val('');
+      $('#new-listing_type').val('');
+
+      //clear description
+      $('#new-listing_description').val('');
+
+
+
+
 
     })
       .catch(err => err.message);
