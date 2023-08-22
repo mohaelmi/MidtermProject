@@ -6,9 +6,7 @@ $(document).ready(function() {
 
   /*---------- new bike form listeners ----------*/
   //add Image button listener
-  $('.image-button').on('click', addImageButton);
-
-
+  $('.post-bike').on('click', showBikeForm);
 
 
   /*---------- listing-container listeners ----------*/
@@ -100,15 +98,6 @@ const searchBarButton = function() {
       .catch(err => err.message);
     // alert('Seach bar clicked!')
   });
-};
-
-
-/*---------- new bike form buttons ----------*/
-
-//needs implementing
-//associate image with bike you are posting
-const addImageButton = function() {
-  alert('you should add an image!');
 };
 
 
