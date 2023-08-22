@@ -65,9 +65,11 @@ main {
 
 }
 
+.message-popup-overlay {
+  visibility: hidden;
+}
 
-
-#message-popup {
+.message-popup-content  {
   visibility: hidden;
   display: flex;
   flex-direction: column;
@@ -98,8 +100,10 @@ main {
     height:10rem;
   }
 
+}
 
-
+.message-popup-content.active, .message-popup-overlay.active {
+  visibility: visible;
 }
 
 
