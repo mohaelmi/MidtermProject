@@ -116,25 +116,6 @@
 
   </div>
 
-  <!-- pop up to message seller -->
-      <div id="message-popup" class="modal">
-    <h3>Interested? Message the seller:</h3>
-    <form id="message-form">
-      <input class="user-cell" type="tel" placeholder="(123) 456-7890" name="user-cell" pattern="/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/" required>
-      <textarea class="user-message" name="user-message" placeholder="Hey! I'm interesed in your sick ride!" required></textarea>
-      <button class='send-message' type="submit">Send message!</button>
-    </form>
-  </div>
-
-  <div id="message-sent" class="modal">
-    <p>SMS sent</p>
-    <button class="popup-close">OK!</button>
-  </div>
-
-  <div id="message-error" class="modal">
-    <p>Something went wrong</p>
-    <button class="popup-close">Go Back!</button>
-  </div>
 
 
 
@@ -145,6 +126,25 @@
 
 </main>
 
+<!-- pop up to message seller -->
+<div id="message-popup" class="modal">
+  <h3>Interested? Message the seller:</h3>
+  <form id="message-form">
+    <input class="user-cell" type="tel" placeholder="(123) 456-7890" name="user-cell" pattern="/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/" required>
+    <textarea class="user-message" name="user-message" placeholder="Hey! I'm interesed in your sick ride!" required></textarea>
+    <button class='send-message' type="submit">Send message!</button>
+  </form>
+</div>
+
+<div id="message-sent" class="modal">
+  <p>Your message has been sent!</p>
+  <button class="popup-close">OK!</button>
+</div>
+
+<div id="message-error" class="modal">
+  <p>Something went wrong</p>
+  <button class="popup-close">Go Back!</button>
+</div>
 </body>
 
 </html>
