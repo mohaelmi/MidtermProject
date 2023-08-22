@@ -185,11 +185,12 @@ const loadFavourites = function(items) {
   });
 
 };
+//include jquery modal 0.9.2
 
 
 //view only your listings
 const viewMyListings = function() {
-  $.get('/users/items/2')
+  $.get('/users/items')
     .then(data => {
       $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
@@ -326,15 +327,13 @@ const createItemElement = function(data, isOwner) {
       <footer>
         <span>${itemLocation} - ${postDate}</span>
 
-        <div class='icon-bar'>
-          <i class="fa-solid fa-envelope message-seller"></i>
-          <i class="fa-solid fa-star item-favourite"></i>
-        </div>
-      </footer>
       <div class='owner'>
         <button class='sold-button'>Mark Sold</button>
         <button class='delete-item'>Delete Listing</button>
       </div>
+
+      </footer>
+
     </span>
   </article>`);
   }
