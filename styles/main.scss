@@ -65,15 +65,15 @@ main {
 
 }
 
-.message-popup  {
-  visibility: hidden;
+#message-popup{
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
   padding: 2.5%;
   border-radius: 5px;
   border: 2px solid black;
-  background-color: $highlight-color-2;
+  background-color: $background-color;
   height: auto;
   width: 50%;
   margin-right: 0 auto;
@@ -86,10 +86,13 @@ main {
   // transform: scale(0.5);
   // transition: 0.1s ease-out;
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 5px
+  #message-form {
+    flex-direction: row-reverse;
+    align-items: center;
+    background-color: $highlight-color-2;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-bottom: 10px;
   }
 
   textarea {
