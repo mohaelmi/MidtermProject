@@ -153,11 +153,6 @@ const postBikeButton = function() {
 
       //clear description
       $('#new-listing_description').val('');
-
-
-
-
-
     })
       .catch(err => err.message);
   });
