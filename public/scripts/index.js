@@ -32,8 +32,9 @@ $(document).ready(function() {
     loadItems();
   } )
 
-  /*---------- other listeners -----------*/
-  //send message to seller
+  /*---------- admin listing listeners -----------*/
+  //must implement
+
 
 
   //these need to be changed to have the listener in the document.ready, as above
