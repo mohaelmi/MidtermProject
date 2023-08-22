@@ -3,7 +3,7 @@ $(document).ready(function() {
   //load all items to landing page
   loadItems();
 
-  /* new bike form listeners */
+  /*---------- new bike form listeners ----------*/
   //add Image button listener
   $('.image-button').on('click', addImageButton);
 
@@ -22,6 +22,9 @@ $(document).ready(function() {
   /*---------- toggle-bar listeners ----------*/
   //my favourites button listener
   $('.favourites').on('click', viewFavourites);
+
+  /*---------- other listeners -----------*/
+  //send message to seller
 
 
   //these need to be changed to have the listener in the document.ready, as above
@@ -198,8 +201,8 @@ const toggleFavourite = function() {
 
 //brings up form to message seller regarding bike. need to implement twilio api call
 const messageSeller = function() {
-  $(this).toggleClass('red')
-  alert('message the seller!')
+ $('#message-popup').popup()
+  alert('message the seller!');
 }
 
 /**
