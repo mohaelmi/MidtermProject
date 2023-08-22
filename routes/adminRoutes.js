@@ -15,8 +15,9 @@ router.get("/", (req, res) => {
 });
 
 // Get items belong to a seller
-router.get("/items/:id", (req, res) => {
-  const userId = req.params.id;
+router.get("/items", (req, res) => {
+  const userId = req.session.user_id;
+  console.log(userId);
   userAdminQueries
     .getMyItems(userId)
     .then((items) => {
