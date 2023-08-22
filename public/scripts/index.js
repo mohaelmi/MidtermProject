@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+
+  $('.listing-container').on('click', '.item-favourite', toggleFavourite);
+
+
+  $('.favourites').on('click', viewFavourites);
+
+
   loadItems()
   showBikeForm()
   addImageButton();
@@ -9,17 +16,42 @@ $(document).ready(function() {
   //loadFavourites() uncomment when we figure out adding
   loadMyListings();
 
-  $('.listing-container').on('click', '.item-favourite', toggleFavourite);
+
+
 
 });
 
+//view all favourite items for certain id:
+const viewFavourites = function () {
+  $.get('api/favourites/')
+    .then(data => {
+      console.log(data.items);
+    })
+}
+
+
 const toggleFavourite = function() {
+  console.log(this)
   const article = $(this).closest('article.listing');
   const item = article.data('item');
   item.favourite = !item.favourite;
 
+  //if removing favourite, delete item:
+  if (!item.favourite) {
+    $.ajax({
+      url: `/api/favourites/${item.id}`,
+      type: 'DELETE',
+      success: () => {
+        console.log('deleting item from favourites!');
+        $(this).toggleClass('red', item.favourite);
+      }
+    })
+    return;
+  }
+  //otherwise, add item to favourites!
   $.post(`/api/favourites/${item.id}`)
   .then(res => {
+    console.log('posting!')
     $(this).toggleClass('red', item.favourite);
   })
 }
@@ -29,10 +61,10 @@ const toggleFavourite = function() {
  */
 const loadItems = function() {
 
-  console.log('in loadItems')
+ //console.log('in loadItems')
   $.get('/api/items')
     .then( data => {
-      console.log('it worked!')
+      //console.log('it worked!')
       renderItems(data.items)
     })
 }
@@ -80,7 +112,7 @@ const createItemElement = function(data) {
 //takes in a list of database items and renders each with createItemElement
 const renderItems = function(items) {
   const container = $('.listing-container');
-  console.log(items[1])
+  //console.log(items[1])
   items.reverse().forEach((item, i) => {
     const element = createItemElement(item);
     container.prepend(element);
@@ -126,11 +158,11 @@ const postBikeButton = function () {
     const type = $('#new-listing_type option:checked').val();
     const description = $('#new-listing_description').val();
     const item = {
-      title, 
-      price, 
-      city, 
-      size, 
-      type, 
+      title,
+      price,
+      city,
+      size,
+      type,
       description,
       condition: 'New',
       status: 'Available'
@@ -146,10 +178,6 @@ const postBikeButton = function () {
     .catch(err => err.message)
   })
 
-  
-  // $('.post-button').click(() => {
-  //   alert('post form button clicked!');
-  // })
 }
 
 //togglebar listener
