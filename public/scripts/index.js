@@ -18,6 +18,7 @@ $(document).ready(function() {
 
   //admin sold-button listener
   $('.listing-container').on('click', '.mark-sold', markSold);
+
   $("#message-form").on('submit', messageSubmit);
 
   $(".popup-close").on("click", $.modal.close);
@@ -278,8 +279,9 @@ const markSold = function() {
       .then(res => {
         console.log('marking sold!');
 
-        //add sold to header
-        $('.listing-overview > header').prepend('SOLD - ');
+        //find header of this article and mark sold
+        const articleHeader = article.children('.listing-overview').children('header');
+        articleHeader.prepend('SOLD - ')
 
       })
       .catch(err => console.log('error: ', err.message));
