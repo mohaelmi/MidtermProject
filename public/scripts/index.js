@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 
   /*------------ toggle-bar listeners ------------------*/
-  //my favourites button listenr
+  //my favourites button listener
   $('.favourites').on('click', viewFavourites);
 
 
@@ -21,7 +21,7 @@ $(document).ready(function() {
   showBikeForm()
   addImageButton();
   postBikeButton();
-  toggleBarButtons();
+
   searchBarButton();
   //loadFavourites() uncomment when we figure out adding
   loadMyListings();
@@ -227,15 +227,6 @@ const searchBarButton = function () {
   })
 }
 
-//send Message listener
-
-const sendMessage = function () {
-
-  $("fa-solid fa-envelope").click(function() {
-     alert("message seller")
-  })
-
-}
 
   /**
  * Load Favourites
