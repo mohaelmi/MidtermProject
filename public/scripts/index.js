@@ -307,15 +307,13 @@ const createItemElement = function(data, isOwner) {
       <footer>
         <span>${itemLocation} - ${postDate}</span>
 
-        <div class='icon-bar'>
-          <i class="fa-solid fa-envelope message-seller"></i>
-          <i class="fa-solid fa-star item-favourite"></i>
-        </div>
-      </footer>
       <div class='owner'>
         <button class='sold-button'>Mark Sold</button>
         <button class='delete-item'>Delete Listing</button>
       </div>
+
+      </footer>
+
     </span>
   </article>`);
   }
