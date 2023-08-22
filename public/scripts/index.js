@@ -16,7 +16,11 @@ $(document).ready(function() {
   //message seller button listener
   $('.listing-container').on('click', '.message-seller', messageSeller);
 
+  //admin sold-button listener
+  $('.listing-container').on('click', '.mark-sold', markSold);
 
+  //admin delete bike button listener
+  $('.listing-container').on('click', 'delete-item', deleteItem)
 
   /*---------- toggle-bar listeners ----------*/
   //my favourites button listener
@@ -30,8 +34,6 @@ $(document).ready(function() {
     loadItems();
   });
 
-  /*---------- admin listing listeners -----------*/
-  //must implement
 
 
 
@@ -190,7 +192,7 @@ const loadFavourites = function(items) {
   });
 
 };
-//include jquery modal 0.9.2
+
 
 
 //view only your listings
@@ -238,12 +240,40 @@ const messageSeller = function() {
   alert('message the seller!');
 };
 
+//
+const markSold = function() {
+  //alert('mark sold pressed!')
+  const article = $(this).closest('article.listing');
+  const item = article.data('item');
+  //console.log(item);
+  const itemId = item.id;
+
+  //only change if item status is 'Available'
+  if(item.status === 'Available') {
+    //mark sold
+    item.status = 'Sold';
+
+    //db route
+    $.get(`api/items/${itemId}`)
+      .then(res => {
+        console.log('marking sold!');
+
+        //add sold to header
+        $('.listing-overview > header').prepend('SOLD - ');
+
+      })
+      .catch(err => console.log('error: ', err.message));
+
+
+  }
+
+}
 /**
  * Delete Bike
  */
 
-const deleteBike = function(item) {
-  //if bike item belongs to user cookie delete
+const deleteItem = function(item) {
+  alert('delete bike pressed!')
 };
 
 
@@ -308,7 +338,7 @@ const createItemElement = function(data, isOwner) {
         <span>${itemLocation} - ${postDate}</span>
 
       <div class='owner'>
-        <button class='sold-button'>Mark Sold</button>
+        <button class='mark-sold'>Mark Sold</button>
         <button class='delete-item'>Delete Listing</button>
       </div>
 
