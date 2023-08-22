@@ -1,13 +1,23 @@
 $(document).ready(function() {
+  //load all items to landing page
+  loadItems();
 
 
+  /* ----------- listing-container listeners -------------- */
+  //favouriting button listener
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
+  //message seller button listener{
+  $('.listing-container').on('click', '.message-seller', messageSeller);
 
+
+
+  /*------------ toggle-bar listeners ------------------*/
+  //my favourites button listenr
   $('.favourites').on('click', viewFavourites);
 
 
-  loadItems()
+
   showBikeForm()
   addImageButton();
   postBikeButton();
@@ -29,9 +39,9 @@ const viewFavourites = function () {
     })
 }
 
-
+//adds/deletes item to favourites if the button is clicked.
 const toggleFavourite = function() {
-  console.log(this)
+  //console.log(this)
   const article = $(this).closest('article.listing');
   const item = article.data('item');
   item.favourite = !item.favourite;
@@ -48,6 +58,7 @@ const toggleFavourite = function() {
     })
     return;
   }
+
   //otherwise, add item to favourites!
   $.post(`/api/favourites/${item.id}`)
   .then(res => {
@@ -56,6 +67,17 @@ const toggleFavourite = function() {
   })
 }
 
+
+//brings up form to message seller regarding bike. need to implement twilio api call
+const messageSeller = function() {
+  $(this).toggleClass('red')
+  alert('message the seller!')
+}
+
+//creates a pop up div to message seller. need to create html to render.
+const renderUserMessage = function(data) {
+  return 'hello world!';
+}
 /**
  * Load All Items/Bikes onto landing page
  */
@@ -67,6 +89,7 @@ const loadItems = function() {
       //console.log('it worked!')
       renderItems(data.items)
     })
+    .catch(err => console.log(err.message));
 }
 
 const createItemElement = function(data) {
@@ -99,7 +122,7 @@ const createItemElement = function(data) {
       <span>${itemLocation} - ${postDate}</span>
 
       <div class='icon-bar'>
-        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-envelope message-seller"></i>
         <i class="fa-solid fa-star item-favourite"></i>
       </div>
     </footer>
@@ -180,12 +203,7 @@ const postBikeButton = function () {
 
 }
 
-//togglebar listener
-const toggleBarButtons = function() {
-  $('.toggle-bar').on('click', '*', () => {
-    alert('toggle bar option clicked!')
-  })
-}
+
 
 //searchbar listener
 const searchBarButton = function () {
