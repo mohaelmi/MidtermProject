@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   /*---------- new bike form listeners ----------*/
   //add Image button listener
-  $('.image-button').on('click', addImageButton);
+  $('.post-bike').on('click', showBikeForm);
 
 
   /*---------- listing-container listeners ----------*/
@@ -18,6 +18,10 @@ $(document).ready(function() {
 
   //admin sold-button listener
   $('.listing-container').on('click', '.mark-sold', markSold);
+  $("#message-form").on('submit', messageSubmit);
+
+  $(".popup-close").on("click", $.modal.close);
+
 
   //admin delete bike button listener
   $('.listing-container').on('click', 'delete-item', deleteItem)
@@ -100,15 +104,6 @@ const searchBarButton = function() {
       .catch(err => err.message);
     // alert('Seach bar clicked!')
   });
-};
-
-
-/*---------- new bike form buttons ----------*/
-
-//needs implementing
-//associate image with bike you are posting
-const addImageButton = function() {
-  alert('you should add an image!');
 };
 
 
@@ -236,9 +231,34 @@ const toggleFavourite = function() {
 
 //brings up form to message seller regarding bike. need to implement twilio api call
 const messageSeller = function() {
-  $('#message-popup').popup();
-  alert('message the seller!');
-};
+
+  $('.message-seller').on('click', function() {
+      console.log('clicked message');
+      $("#message-popup").modal();
+  });
+}
+
+const messageSubmit = function(event) {
+  event.preventDefault();
+  const data = $(this).serialize()
+
+  console.log("sending", data);
+
+  // $.post("/api/sms", data)
+  Promise.resolve()
+  .then(() =>{
+    $.modal.close();
+    //show some pop saying message sent
+    console.log("it worked!!");
+    $("#message-sent").modal();
+
+
+  })
+  .catch(() => {
+    //error modal
+    $("#message-error").modal();
+  })
+}
 
 //
 const markSold = function() {

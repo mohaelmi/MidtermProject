@@ -27,7 +27,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Playfair+Display&display=swap" rel="stylesheet">
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
+      integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script> -->
+
+    <script src="/vendor/jquery-3.0.0.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" />
   <script defer src="/scripts/index.js"></script>
 </head>
 
@@ -95,13 +101,13 @@
             <option value="Gravel">Gravel</option>
             <option value="ebike">E-Bike</option>
           </select>
+          <input placeholder="Image URL" type="text" class="post-image">
         </div>
       </section>
 
       <!-- bike description -->
       <textarea id="new-listing_description" name="Description" placeholder="Description"></textarea>
-      <div id="buttons">
-        <button type="submit" class="image-button">Add image</button>
+      <div>
         <button type="submit" class="post-button">Post</button>
       </div>
 
@@ -111,13 +117,23 @@
   </div>
 
   <!-- pop up to message seller -->
-  <div id="message-popup" display="none">
+      <div id="message-popup" class="modal">
     <h3>Interested? Message the seller:</h3>
-    <form>
+    <form id="message-form">
       <input class="user-cell" type="tel" placeholder="(123) 456-7890" name="user-cell" pattern="/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/" required>
       <textarea class="user-message" name="user-message" placeholder="Hey! I'm interesed in your sick ride!" required></textarea>
       <button class='send-message' type="submit">Send message!</button>
     </form>
+  </div>
+
+  <div id="message-sent" class="modal">
+    <p>SMS sent</p>
+    <button class="popup-close">OK!</button>
+  </div>
+
+  <div id="message-error" class="modal">
+    <p>Something went wrong</p>
+    <button class="popup-close">Go Back!</button>
   </div>
 
 
