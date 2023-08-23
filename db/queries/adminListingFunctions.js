@@ -216,4 +216,4 @@ const deleteAdminListingItem = (itemId) => {
 //  .catch(error => {
 //    console.error('Error:', error);
 //  });
-module.exports = { getAdminListingItems, addAdminListingItem, editAdminListingItem, markedSoldByAdmin, deleteAdminListingItem};
+module.exports = { getAdminListingItems, addAdminListingItem, markedSoldByAdmin, deleteAdminListingItem};
