@@ -8,8 +8,7 @@ $highlight-color-2: rgb(147, 126, 196);
   display: flex;
   align-items: flex-start;
 
-
-  //navbar
+   //navbar
   nav {
     padding-top: 20px;
     height: 80px;
@@ -35,15 +34,18 @@ $highlight-color-2: rgb(147, 126, 196);
       font-size: larger;
     }
 
-    span {
+   span {
       display: flex;
       flex-direction: row;
       gap: 10px;
       align-items: center;
     }
+
   }
 
-     .toggle-bar {
+  //toggle bar
+    //style toggle bar
+    .toggle-bar {
       margin-top: 80px;
       display: flex;
       gap: 5px;
