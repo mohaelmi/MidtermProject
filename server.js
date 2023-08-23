@@ -101,8 +101,8 @@ app.get("/login/:id", (req, res) => {
 
 app.get("/logout", (req, res) => {
   req.session.user_id = null;
-  res.render("index", {user: null});
-  // res.redirect("/");
+  //res.render("index", {user: null});
+  res.redirect("/");
 });
 
 app.listen(PORT, () => {
