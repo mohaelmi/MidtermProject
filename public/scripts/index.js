@@ -136,7 +136,7 @@ const postBikeButton = function() {
       size,
       type,
       description,
-      imgUrl
+      imgUrl,
       condition: 'New',
       status: 'AVAILABLE'
 
