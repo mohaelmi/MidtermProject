@@ -281,7 +281,6 @@ const markSold = function() {
     const $status = document.querySelector('span.status');
     $status.style.color = 'red'
     $('span.status').text('SOLD')
-     alert(data)
     })
     .catch(err => console.log(err.message));
 }
@@ -296,12 +295,7 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-      //  invoke viewListings function
-      // viewMyListings()
-
-      article.remove();
-      location.reload;
-
+      viewMyListings()
     }
 });
 }
@@ -319,6 +313,7 @@ const createItemElement = function(data, isOwner) {
 
   //extract item info from data
   const itemTitle = data.title;
+  const itemURL = data.url
   const itemPrice = data.price;
   const itemLocation = data.city;
   const itemCondition = data.condition;
@@ -326,14 +321,13 @@ const createItemElement = function(data, isOwner) {
   const itemSize = data.size;
   const postDate = timeago.format(data.created_at);
   const status = data.status;
-  const imagUrl = data.url;
 
   let element;
 
   if (!isOwner) {
     element = $(`<article class="listing">
     <span class="image">
-    <img src= ${imagUrl} alt="bike image" width="200" height="200">
+    <img src=${itemURL} alt="Bike Image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>
@@ -358,7 +352,7 @@ const createItemElement = function(data, isOwner) {
   else {
     element = $(`<article class="listing">
     <span class="image">
-    <img src= ${imagUrl} alt="bike image" width="200" height="200">
+      <img src=${itemURL} alt="Bike Image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>

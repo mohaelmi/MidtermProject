@@ -13,6 +13,7 @@ main {
   flex-direction: column;
   justify-content: center;
   width: 80%;
+  padding-bottom: 5rem;
 
   .dropdown-form {
     margin: 0 auto;
@@ -44,7 +45,7 @@ main {
         }
       }
 
-      .post-image {
+      #post-image {
         width: 26.5rem;
         border: solid 2px $hightlight-color-1;
         background-color: $hightlight-color-1;
