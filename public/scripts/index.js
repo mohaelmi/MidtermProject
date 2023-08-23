@@ -3,12 +3,8 @@ $(document).ready(function() {
   //load all items to landing page
   loadItems();
 
-  /*---------- new bike form listeners ----------*/
-  //add Image button listener
-  $('.post-bike').on('click', showBikeForm);
-
-
   /*---------- listing-container listeners ----------*/
+
   //favouriting button listener
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
@@ -45,9 +41,9 @@ $(document).ready(function() {
 
   /*----------- Post Bike listeners -------------*/
 
-  showBikeForm();
+  $('.post-bike').on('click', showBikeForm);
+  // $('.post-button').on('click', postBikeButton);
   postBikeButton();
-
   //these need to be changed to have the listener in the document.ready, as above
   searchBarButton();
 
@@ -67,24 +63,6 @@ const loadItems = function() {
     .catch(err => console.log(err.message));
 };
 
-
-/*-------------------------------- navbar buttons -----------------------------------*/
-
-//shows the post new bike form
-const showBikeForm = function() {
-  const button = document.querySelector(".post-bike");
-  const dropdownForm = document.querySelector(".dropdown-form");
-
-  button.addEventListener("click", function() {
-    if (dropdownForm.style.display === "none") {
-      dropdownForm.style.display = "flex";
-    } else {
-      dropdownForm.style.display = "none";
-    }
-  });
-};
-
-
 //searchbar listener
 const searchBarButton = function() {
   $('.search-button').on('click', (e) => {
@@ -96,16 +74,31 @@ const searchBarButton = function() {
       maxPrice
     };
     //console.log(data);
-    $.post("/search", data, (data) => {
+    $.post("/api/search", data)
+    .then(data => {
       $('.listing-container').empty();
       renderItems(data.data);
       console.log(data);
 
     })
-      .catch(err => err.message);
-    // alert('Seach bar clicked!')
+    .catch(err => err.message);
   });
 };
+
+/*-------------------------------- navbar buttons -----------------------------------*/
+
+//shows the post new bike form
+const showBikeForm = function(e) {
+  e.preventDefault();
+  console.log("showBikeForm is called")
+  const dropdownForm = $(".dropdown-form");
+
+  if (dropdownForm.css("display") === "none") {
+      dropdownForm.css("display", "flex");
+    } else {
+      dropdownForm.css("display", "none");
+    }
+  };
 
 
 /*---------------------------------POST NEW BIKE---------------------------------*/
@@ -113,9 +106,10 @@ const searchBarButton = function() {
 //post new bike button listener
 const postBikeButton = function() {
 
-  const $button = $('.post-button');
+  const button = $('.post-button');
 
-  $button.on('click', function(e) {
+  button.on('click', function(e) {
+    console.log("postBikeButton activated");
     e.preventDefault();
     const title = $('#new-listing_title').val();
     const price = $('#new-listing_price').val();
@@ -141,7 +135,7 @@ const postBikeButton = function() {
       $('.listing-container').empty();
       loadItems();
 
-      //collpase dropdownForm
+      //collapse dropdownForm
       const $dropdownForm = $('.dropdown-form');
       $dropdownForm.css('display', 'none');
 
@@ -183,7 +177,7 @@ const viewMyListings = function() {
       $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
     })
-    .catch(err => console.log('error', err));
+    .catch(err => console.log('error', err.message));
   };
 
 
@@ -213,7 +207,7 @@ const viewMyListings = function() {
 
   //if removing favourite, delete item:
   if (!item.favourite) {
-    $.ajax({
+    $.delete({
       url: `/api/favourites/${item.id}`,
       type: 'DELETE',
       success: () => {
@@ -225,7 +219,7 @@ const viewMyListings = function() {
   }
 
   //otherwise, add item to favourites!
-  $.post(`/api/favourites/${item.id}`)
+  $.post(`/api/favourites/${item.item_id}`)
     .then(res => {
       console.log('posting!');
       $(this).toggleClass('red', item.favourite);
