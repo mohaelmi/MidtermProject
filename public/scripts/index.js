@@ -280,7 +280,7 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-      // Do something with the result
+      // empty container and show a message 
       $('.listing-container').empty();
       alert(result)
     }
