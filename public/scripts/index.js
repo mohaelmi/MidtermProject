@@ -295,16 +295,7 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-<<<<<<< HEAD
-      //  invoke viewListings function
-      // viewMyListings()
-
-      article.remove();
-      location.reload;
-
-=======
       viewMyListings()
->>>>>>> feature/front-end_Sofia
     }
 });
 }
