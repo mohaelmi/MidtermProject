@@ -20,8 +20,9 @@ const getUserById = (userId) => {
     });
 };
 
+// fetch bike belong to a seller
 const getMyItems = (sellerId) => {
-  const query = "SELECT * FROM items WHERE seller_id = $1";
+  const query = "SELECT * FROM items JOIN photos ON items.id = photos.item_id WHERE seller_id = $1";
   return db.query(query, [sellerId]).then((data) => {
     return data.rows;
   });

@@ -1,6 +1,7 @@
 // load .env data into process.env
 require("dotenv").config();
 const itemsQueries = require("./db/queries/items");
+const userAdminQueries = require("./db/queries/users");
 // Web server config
 const sassMiddleware = require("./lib/sass-middleware");
 const cookieSession = require("cookie-session");
@@ -44,13 +45,24 @@ app.use("/api/items", itemRoutes);
 // /api/users endpoint
 app.use("/users", adminRoutes);
 
+// favourite routes
 app.use("/api/favourites", favouriteRoutes);
 
 app.use("/message", smsRoutes);
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  const userId =  req.session.user_id;
+  console.log(userId);
+  if(userId) {
+    userAdminQueries
+    .getUserById(userId)
+    .then((user) => {
+      res.render("index", { user: user });
+    })
+  }else {
+    res.render("index", { user: null });
+  }
 });
 
 // search route // will take into appropriate file later
@@ -75,12 +87,22 @@ app.get("/login/:id", (req, res) => {
   const userId = req.params.id;
   req.session.user_id = userId;
   console.log(userId);
-  res.redirect("/");
+  userAdminQueries
+    .getUserById(userId)
+    .then((user) => {
+      
+      console.log('login', user);
+      res.render("index", { user: user});
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 app.get("/logout", (req, res) => {
   req.session.user_id = null;
-  res.redirect("/");
+  res.render("index", {user: null});
+  // res.redirect("/");
 });
 
 app.listen(PORT, () => {

@@ -9,10 +9,10 @@ const adminQueries = require("../db/queries/adminListingFunctions");
 router.get("/", (req, res) => {
   const userId = req.session.user_id;
   console.log(userId);
+  
   itemsQueries
     .getAllItems()
     .then((items) => {
-      //res.render("index", { items });
       res.json({ items });
     })
     .catch((err) => {
@@ -30,6 +30,7 @@ router.post("/", (req, res) => {
   //add new bike
   const newBike = req.body;
   newBike.seller_id = userId;
+  console.log('from route: ', newBike);
   itemsQueries
     .addItem(newBike)
     .then((item) => {
