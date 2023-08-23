@@ -292,10 +292,12 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-      // show a message and invoke viewListings function
+      //  invoke viewListings function
       viewMyListings()
-      //$('.listing-container').empty();
-      alert(result)
+
+      //article.remove();
+      //location.reload;
+      
     }
 });
 }
