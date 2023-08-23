@@ -295,7 +295,16 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
+<<<<<<< HEAD
+      //  invoke viewListings function
+      // viewMyListings()
+
+      article.remove();
+      location.reload;
+
+=======
       viewMyListings()
+>>>>>>> feature/front-end_Sofia
     }
 });
 }
@@ -322,12 +331,13 @@ const createItemElement = function(data, isOwner) {
   const postDate = timeago.format(data.created_at);
   const status = data.status;
 
+
   let element;
 
   if (!isOwner) {
     element = $(`<article class="listing">
     <span class="image">
-    <img src=${itemURL} alt="Bike Image">
+    <img src=${itemURL} alt="Bike Image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>
@@ -352,7 +362,7 @@ const createItemElement = function(data, isOwner) {
   else {
     element = $(`<article class="listing">
     <span class="image">
-      <img src=${itemURL} alt="Bike Image">
+      <img src=${itemURL} alt="Bike Image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>
