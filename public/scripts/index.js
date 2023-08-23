@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   // Mark as sold
   $('.listing-container').on('click', '.sold-button', markSold);
-  
+
 
 
   //admin delete bike button listener
@@ -128,6 +128,7 @@ const postBikeButton = function() {
     const size = $('#new-listing_size option:checked').val();
     const type = $('#new-listing_type option:checked').val();
     const description = $('#new-listing_description').val();
+    const imgUrl = $('#post-image').val();
     const item = {
       title,
       price,
@@ -135,8 +136,10 @@ const postBikeButton = function() {
       size,
       type,
       description,
+      imgUrl
       condition: 'New',
       status: 'AVAILABLE'
+
     };
     $.post("/api/items", item, (data) => {
       //empty container
@@ -197,7 +200,6 @@ const loadFavourites = function(items) {
   });
 
 };
-
 
 
 //view only your listings
@@ -273,7 +275,7 @@ const messageSubmit = function(event) {
 const markSold = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
-  
+
   $.get(`/api/items/status/${item.id}`)
   .then(data => {
     const $status = document.querySelector('span.status');
@@ -299,7 +301,7 @@ const deleteItem = function() {
 
       //article.remove();
       //location.reload;
-      
+
     }
 });
 }
