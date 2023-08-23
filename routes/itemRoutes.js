@@ -75,7 +75,7 @@ router.get("/status/:id", (req, res) => {
 });
 
 // delete item
-router.get("/delete/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const itemId = req.params.id;
   const userId = req.session.user_id;
 
