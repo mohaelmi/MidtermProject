@@ -9,10 +9,10 @@ const adminQueries = require("../db/queries/adminListingFunctions");
 router.get("/", (req, res) => {
   const userId = req.session.user_id;
   console.log(userId);
+  
   itemsQueries
     .getAllItems()
     .then((items) => {
-      //res.render("index", { items });
       res.json({ items });
     })
     .catch((err) => {

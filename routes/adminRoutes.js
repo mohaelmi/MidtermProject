@@ -29,14 +29,16 @@ router.get("/items", (req, res) => {
 });
 
 
+
+
 // Get user by its id
 router.get("/:id", (req, res) => {
   console.log("ssss");
   const userId = req.params.id;
   userAdminQueries
     .getUserById(userId)
-    .then((users) => {
-      res.json({ users });
+    .then((user) => {
+      res.json({ user });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

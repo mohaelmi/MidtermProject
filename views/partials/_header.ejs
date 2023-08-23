@@ -1,0 +1,32 @@
+<!-- nav bar fixed at top -->
+<header class="page-header">
+  <nav>
+    <span>
+      <span id="logo">
+        BIKE + SELL
+      </span>
+      <form>
+        <input type="search" id="min-price" name="min-price" placeholder="minimum price">
+        <input type="search" id="max-price" name="max-price" placeholder="maximum price">
+        <button class="search-button"><i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+    </span>
+
+    <span>
+      <% if(user){ %>
+        <span><h4><%= user.name %><h4></span>
+          <% } else{ %>  
+            <span>Hello user!</span>
+        <% } %>
+      <button class="post-bike">Post Bike</button>
+    </span>
+  </nav>
+
+    <!-- toggle for all bikes / favourites / my lisitngs-->
+  <div class="toggle-bar">
+    <button class="all-listings">All Bikes</button>
+    <button class="my-listings">My Listings</button>
+    <button class="favourites">Favourites</button>
+  </div>
+
+</header>
