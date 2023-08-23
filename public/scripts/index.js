@@ -297,10 +297,10 @@ const deleteItem = function() {
     type: 'DELETE',
     success: function(result) {
       //  invoke viewListings function
-      viewMyListings()
+      // viewMyListings()
 
-      //article.remove();
-      //location.reload;
+      article.remove();
+      location.reload;
 
     }
 });
@@ -326,13 +326,14 @@ const createItemElement = function(data, isOwner) {
   const itemSize = data.size;
   const postDate = timeago.format(data.created_at);
   const status = data.status;
+  const imagUrl = data.url;
 
   let element;
 
   if (!isOwner) {
     element = $(`<article class="listing">
     <span class="image">
-      url img goes here
+    <img src= ${imagUrl} alt="bike image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>
@@ -357,7 +358,7 @@ const createItemElement = function(data, isOwner) {
   else {
     element = $(`<article class="listing">
     <span class="image">
-      url img goes here
+    <img src= ${imagUrl} alt="bike image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>

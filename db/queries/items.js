@@ -1,12 +1,12 @@
 const db = require("../connection");
 
 const getAllItems = () => {
-  return db.query("SELECT * FROM items;").then((data) => {
+  return db.query("SELECT * FROM items JOIN photos ON items.id = photos.item_id;").then((data) => {
     return data.rows;
   });
 };
 
-// query item details with seller details for user viewing
+// show an item details 
 const getItem = (itemId) => {
   const query = "SELECT * FROM items WHERE id = $1";
   return db.query(query, [itemId]).then((data) => {
@@ -58,8 +58,13 @@ const addItem = (bike) => {
       bike.city,
     ])
     .then((data) => {
+      console.log('id', data.rows[0].id);
+      return db.query("INSERT INTO photos (item_id, url) VALUES ($1, $2)", [data.rows[0].id, bike.imgUrl]);
+    })
+    .then((data) => {
+      console.log('from query: ', data.rows[0]);
       return data.rows[0];
-    });
-};
+    })
+  };
 
 module.exports = { getAllItems, addItem, getItem, deleteItem, filterByPrice };

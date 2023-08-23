@@ -30,6 +30,7 @@ router.post("/", (req, res) => {
   //add new bike
   const newBike = req.body;
   newBike.seller_id = userId;
+  console.log('from route: ', newBike);
   itemsQueries
     .addItem(newBike)
     .then((item) => {
