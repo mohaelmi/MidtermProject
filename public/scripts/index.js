@@ -236,7 +236,6 @@ const toggleFavourite = function() {
 const messageSeller = function() {
 
   $('.message-seller').on('click', function() {
-      console.log('clicked message');
       $("#message-popup").modal();
   });
 }
@@ -280,7 +279,7 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-      // empty container and show a message 
+      // empty container and show a message
       $('.listing-container').empty();
       alert(result)
     }
@@ -305,7 +304,7 @@ const createItemElement = function(data, isOwner) {
   const itemCondition = data.condition;
   const itemDescription = data.description;
   const itemSize = data.size;
-  const postDate = timeago.format(data.created_at);
+  const postDate = data.created_at;
 
   let element;
 
