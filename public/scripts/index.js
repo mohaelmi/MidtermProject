@@ -4,6 +4,7 @@ $(document).ready(function() {
   loadItems();
 
   /*---------- listing-container listeners ----------*/
+
   //favouriting button listener
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
@@ -41,8 +42,8 @@ $(document).ready(function() {
   /*----------- Post Bike listeners -------------*/
 
   $('.post-bike').on('click', showBikeForm);
-  $('.post-button').on('click', postBikeButton)
-
+  // $('.post-button').on('click', postBikeButton);
+  postBikeButton();
   //these need to be changed to have the listener in the document.ready, as above
   searchBarButton();
 
@@ -61,23 +62,6 @@ const loadItems = function() {
     })
     .catch(err => console.log(err.message));
 };
-
-
-/*-------------------------------- navbar buttons -----------------------------------*/
-
-//shows the post new bike form
-const showBikeForm = function(e) {
-  e.preventDefault();
-  console.log("showBikeForm is called")
-  const dropdownForm = $(".dropdown-form");
-
-  if (dropdownForm.css("display") === "none") {
-      dropdownForm.css("display", "flex");
-    } else {
-      dropdownForm.css("display", "none");
-    }
-  };
-
 
 //searchbar listener
 const searchBarButton = function() {
@@ -101,15 +85,31 @@ const searchBarButton = function() {
   });
 };
 
+/*-------------------------------- navbar buttons -----------------------------------*/
+
+//shows the post new bike form
+const showBikeForm = function(e) {
+  e.preventDefault();
+  console.log("showBikeForm is called")
+  const dropdownForm = $(".dropdown-form");
+
+  if (dropdownForm.css("display") === "none") {
+      dropdownForm.css("display", "flex");
+    } else {
+      dropdownForm.css("display", "none");
+    }
+  };
+
 
 /*---------------------------------POST NEW BIKE---------------------------------*/
 
 //post new bike button listener
 const postBikeButton = function() {
 
-  const $button = $('.post-button');
+  const button = $('.post-button');
 
-  $button.on('click', function(e) {
+  button.on('click', function(e) {
+    console.log("postBikeButton activated");
     e.preventDefault();
     const title = $('#new-listing_title').val();
     const price = $('#new-listing_price').val();
@@ -135,7 +135,7 @@ const postBikeButton = function() {
       $('.listing-container').empty();
       loadItems();
 
-      //collpase dropdownForm
+      //collapse dropdownForm
       const $dropdownForm = $('.dropdown-form');
       $dropdownForm.css('display', 'none');
 
