@@ -274,14 +274,14 @@ const soldBike = function(item) {
 const deleteItem = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
-  console.log(item.id);
+
   $.ajax({
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
       // empty container and show a message
-      $('.listing-container').empty();
-      alert(result)
+      article.remove();
+      location.reload;
     }
 });
 }
