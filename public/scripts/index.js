@@ -313,6 +313,7 @@ const createItemElement = function(data, isOwner) {
 
   //extract item info from data
   const itemTitle = data.title;
+  const itemURL = data.url
   const itemPrice = data.price;
   const itemLocation = data.city;
   const itemCondition = data.condition;
@@ -326,7 +327,7 @@ const createItemElement = function(data, isOwner) {
   if (!isOwner) {
     element = $(`<article class="listing">
     <span class="image">
-      url img goes here
+    <img src=${itemURL} alt="Bike Image">
     </span>
     <span class="listing-overview">
       <header>
