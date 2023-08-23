@@ -3,11 +3,6 @@ $(document).ready(function() {
   //load all items to landing page
   loadItems();
 
-  /*---------- new bike form listeners ----------*/
-  //add Image button listener
-  $('.post-bike').on('click', showBikeForm);
-
-
   /*---------- listing-container listeners ----------*/
   //favouriting button listener
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
@@ -45,8 +40,8 @@ $(document).ready(function() {
 
   /*----------- Post Bike listeners -------------*/
 
-  showBikeForm();
-  postBikeButton();
+  $('.post-bike').on('click', showBikeForm);
+  $('.post-button').on('click', postBikeButton)
 
   //these need to be changed to have the listener in the document.ready, as above
   searchBarButton();
@@ -71,18 +66,17 @@ const loadItems = function() {
 /*-------------------------------- navbar buttons -----------------------------------*/
 
 //shows the post new bike form
-const showBikeForm = function() {
-  const button = document.querySelector(".post-bike");
-  const dropdownForm = document.querySelector(".dropdown-form");
+const showBikeForm = function(e) {
+  e.preventDefault();
+  console.log("showBikeForm is called")
+  const dropdownForm = $(".dropdown-form");
 
-  button.addEventListener("click", function() {
-    if (dropdownForm.style.display === "none") {
-      dropdownForm.style.display = "flex";
+  if (dropdownForm.css("display") === "none") {
+      dropdownForm.css("display", "flex");
     } else {
-      dropdownForm.style.display = "none";
+      dropdownForm.css("display", "none");
     }
-  });
-};
+  };
 
 
 //searchbar listener
