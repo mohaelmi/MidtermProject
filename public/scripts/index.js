@@ -352,7 +352,7 @@ const createItemElement = function(data, isOwner) {
   else {
     element = $(`<article class="listing">
     <span class="image">
-      url img goes here
+      <img src=${itemURL} alt="Bike Image">
     </span>
     <span class="listing-overview">
       <header>
