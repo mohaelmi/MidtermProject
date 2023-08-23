@@ -1,15 +1,10 @@
-
-
 $(document).ready(function() {
+
   //load all items to landing page
   loadItems();
 
-  /*---------- new bike form listeners ----------*/
-  //add Image button listener
-  $('.post-bike').on('click', showBikeForm);
-
-
   /*---------- listing-container listeners ----------*/
+
   //favouriting button listener
   $('.listing-container').on('click', '.item-favourite', toggleFavourite);
 
@@ -31,9 +26,6 @@ $(document).ready(function() {
 
 
 
-  //admin delete bike button listener
-  $('.listing-container').on('click', 'delete-item', deleteItem)
-
   /*---------- toggle-bar listeners ----------*/
   //my favourites button listener
   $('.favourites').on('click', viewFavourites);
@@ -47,20 +39,17 @@ $(document).ready(function() {
   });
 
 
+  /*----------- Post Bike listeners -------------*/
 
-
-  //these need to be changed to have the listener in the document.ready, as above
-  showBikeForm();
+  $('.post-bike').on('click', showBikeForm);
+  // $('.post-button').on('click', postBikeButton);
   postBikeButton();
+  //these need to be changed to have the listener in the document.ready, as above
   searchBarButton();
-  //loadMyListings();
-
-
-
 
 });
 
-/*---------- setup landing page ----------*/
+/*------------------------------ setup landing page -----------------------------*/
 
 /**
  * Load All Items/Bikes onto landing page
@@ -74,24 +63,6 @@ const loadItems = function() {
     .catch(err => console.log(err.message));
 };
 
-
-/*---------- navbar buttons ----------*/
-
-//shows the post new bike form
-const showBikeForm = function() {
-  const button = document.querySelector(".post-bike");
-  const dropdownForm = document.querySelector(".dropdown-form");
-
-  button.addEventListener("click", function() {
-    if (dropdownForm.style.display === "none") {
-      dropdownForm.style.display = "flex";
-    } else {
-      dropdownForm.style.display = "none";
-    }
-  });
-};
-
-
 //searchbar listener
 const searchBarButton = function() {
   $('.search-button').on('click', (e) => {
@@ -103,24 +74,42 @@ const searchBarButton = function() {
       maxPrice
     };
     //console.log(data);
-    $.post("/search", data, (data) => {
+    $.post("/api/search", data)
+    .then(data => {
       $('.listing-container').empty();
       renderItems(data.data);
       console.log(data);
 
     })
-      .catch(err => err.message);
-    // alert('Seach bar clicked!')
+    .catch(err => err.message);
   });
 };
 
+/*-------------------------------- navbar buttons -----------------------------------*/
+
+//shows the post new bike form
+const showBikeForm = function(e) {
+  e.preventDefault();
+  console.log("showBikeForm is called")
+  const dropdownForm = $(".dropdown-form");
+
+  if (dropdownForm.css("display") === "none") {
+      dropdownForm.css("display", "flex");
+    } else {
+      dropdownForm.css("display", "none");
+    }
+  };
+
+
+/*---------------------------------POST NEW BIKE---------------------------------*/
 
 //post new bike button listener
 const postBikeButton = function() {
 
-  const $button = $('.post-button');
+  const button = $('.post-button');
 
-  $button.on('click', function(e) {
+  button.on('click', function(e) {
+    console.log("postBikeButton activated");
     e.preventDefault();
     const title = $('#new-listing_title').val();
     const price = $('#new-listing_price').val();
@@ -146,7 +135,7 @@ const postBikeButton = function() {
       $('.listing-container').empty();
       loadItems();
 
-      //collpase dropdownForm
+      //collapse dropdownForm
       const $dropdownForm = $('.dropdown-form');
       $dropdownForm.css('display', 'none');
 
@@ -167,9 +156,9 @@ const postBikeButton = function() {
 
 };
 
-/*---------- toggle bar buttons ----------*/
+/*------------------------- toggle bar buttons -------------------------*/
 
-//needs new favourites route to return the whole item, not just id
+
 //view all favourite items for certain id:
 const viewFavourites = function() {
   $.get('api/favourites/')
@@ -181,27 +170,6 @@ const viewFavourites = function() {
 };
 
 
-/**
- * Load Favourites
- * (how to add event listeners for things that don't exist yet??)
- */
-const loadFavourites = function(items) {
-  const favouritesButton = document.querySelector(".favourites");
-
-  favouritesButton.addEventListener("click", function() {
-    console.log(items);
-
-    $.get('/api/items')
-      .then(data => {
-
-        renderItems(data.items);
-      });
-
-  });
-
-};
-
-
 //view only your listings
 const viewMyListings = function() {
   $.get('/users/items')
@@ -209,12 +177,29 @@ const viewMyListings = function() {
       $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
     })
-    .catch(err => console.log('error', err));
-};
-/*---------- listing buttons ----------*/
+    .catch(err => console.log('error', err.message));
+  };
 
-// adds/deletes item to favourites if the button is clicked.
-const toggleFavourite = function() {
+
+  /*------------------------ FAVOURITES ---------------------------*/
+
+ //Load Favourites
+  const loadFavourites = function(items) {
+    const favouritesButton = document.querySelector(".favourites");
+
+    favouritesButton.addEventListener("click", function() {
+      console.log(items);
+
+      $.get('/api/items')
+        .then(data => {
+
+          renderItems(data.items);
+        });
+    });
+  };
+
+  // adds/deletes item to favourites if the button is clicked.
+  const toggleFavourite = function() {
   //console.log(this)
   const article = $(this).closest('article.listing');
   const item = article.data('item');
@@ -222,7 +207,7 @@ const toggleFavourite = function() {
 
   //if removing favourite, delete item:
   if (!item.favourite) {
-    $.ajax({
+    $.delete({
       url: `/api/favourites/${item.id}`,
       type: 'DELETE',
       success: () => {
@@ -234,14 +219,17 @@ const toggleFavourite = function() {
   }
 
   //otherwise, add item to favourites!
-  $.post(`/api/favourites/${item.id}`)
+  $.post(`/api/favourites/${item.item_id}`)
     .then(res => {
       console.log('posting!');
       $(this).toggleClass('red', item.favourite);
     });
 };
 
-//brings up form to message seller regarding bike. need to implement twilio api call
+
+/*--------------------------MESSAGE-------------------------*/
+
+//Message PopUp
 const messageSeller = function() {
 
   $('.message-seller').on('click', function() {
@@ -249,6 +237,7 @@ const messageSeller = function() {
   });
 }
 
+//Send Message
 const messageSubmit = function(event) {
   event.preventDefault();
   const data = $(this).serialize()
@@ -271,7 +260,11 @@ const messageSubmit = function(event) {
   })
 }
 
-// mark as sold
+
+
+/*------------------------DELETE/SOLD-----------------------*/
+
+//Mark bike as sold
 const markSold = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
@@ -281,14 +274,12 @@ const markSold = function() {
     const $status = document.querySelector('span.status');
     $status.style.color = 'red'
     $('span.status').text('SOLD')
-     alert(data)
     })
     .catch(err => console.log(err.message));
 }
 
-/**
- * Delete Bike
- */
+
+//Delete a bike item
 const deleteItem = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
@@ -296,12 +287,7 @@ const deleteItem = function() {
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-      //  invoke viewListings function
-      // viewMyListings()
-
-      article.remove();
-      location.reload;
-
+      viewMyListings()
     }
 });
 }
@@ -309,16 +295,13 @@ const deleteItem = function() {
 
 /*---------- html creating/rendering functions ----------*/
 
-//creates a pop up div to message seller. need to create html to render.
-const renderUserMessage = function(data) {
-  return 'hello world!';
-};
 
 //renders a listing for an item for sale
 const createItemElement = function(data, isOwner) {
 
   //extract item info from data
   const itemTitle = data.title;
+  const itemURL = data.url
   const itemPrice = data.price;
   const itemLocation = data.city;
   const itemCondition = data.condition;
@@ -326,14 +309,14 @@ const createItemElement = function(data, isOwner) {
   const itemSize = data.size;
   const postDate = timeago.format(data.created_at);
   const status = data.status;
-  const imagUrl = data.url;
+
 
   let element;
 
   if (!isOwner) {
     element = $(`<article class="listing">
     <span class="image">
-    <img src= ${imagUrl} alt="bike image" width="200" height="200">
+    <img src=${itemURL} alt="Bike Image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>
@@ -358,7 +341,7 @@ const createItemElement = function(data, isOwner) {
   else {
     element = $(`<article class="listing">
     <span class="image">
-    <img src= ${imagUrl} alt="bike image" width="200" height="200">
+      <img src=${itemURL} alt="Bike Image" width="200" height="200">
     </span>
     <span class="listing-overview">
       <header>

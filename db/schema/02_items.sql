@@ -12,4 +12,5 @@ CREATE TABLE items (
     city VARCHAR(255) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (seller_id) REFERENCES users(id)
+   
 );
