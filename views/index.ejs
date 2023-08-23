@@ -11,7 +11,9 @@
   <!-- external js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
+  <!-- TimeAgo -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js" integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
   <!-- stylesheets -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
@@ -130,7 +132,7 @@
 <div id="message-popup" class="modal">
   <h3>Interested? Message the seller:</h3>
   <form id="message-form">
-    <input class="user-cell" type="tel" placeholder="(123) 456-7890" name="user-cell" pattern="/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/" required>
+    <input class="user-cell" type="tel" placeholder="Your Phone Number ex. (123) 456-7890" name="user-cell" pattern="/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/" required>
     <textarea class="user-message" name="user-message" placeholder="Hey! I'm interesed in your sick ride!" required></textarea>
     <button class='send-message' type="submit">Send message!</button>
   </form>

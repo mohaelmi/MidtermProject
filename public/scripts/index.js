@@ -305,7 +305,7 @@ const createItemElement = function(data, isOwner) {
   const itemCondition = data.condition;
   const itemDescription = data.description;
   const itemSize = data.size;
-  const postDate = data.created_at;
+  const postDate = timeago.format(data.created_at);
 
   let element;
 
