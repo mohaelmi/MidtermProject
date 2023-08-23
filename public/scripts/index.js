@@ -20,8 +20,12 @@ $(document).ready(function() {
 
   $(".popup-close").on("click", $.modal.close);
 
-  // delete a listing for user
+  // Delete a listing for user
   $('.listing-container').on('click', '.delete-item', deleteItem);
+
+  // Mark as sold
+  $('.listing-container').on('click', '.sold-button', markSold);
+  
 
 
 
@@ -129,7 +133,7 @@ const postBikeButton = function() {
       type,
       description,
       condition: 'New',
-      status: 'Available'
+      status: 'AVAILABLE'
     };
     $.post("/api/items", item, (data) => {
       //empty container
@@ -263,8 +267,18 @@ const messageSubmit = function(event) {
 }
 
 // mark as sold
-const soldBike = function(item) {
-
+const markSold = function() {
+  const article = $(this).closest('article.listing');
+  const item = article.data('item');
+  
+  $.get(`/api/items/status/${item.id}`)
+  .then(data => {
+    const $status = document.querySelector('span.status');
+    $status.style.color = 'red'
+    $('span.status').text('SOLD')
+     alert(data)
+    })
+    .catch(err => console.log(err.message));
 }
 
 
@@ -274,13 +288,13 @@ const soldBike = function(item) {
 const deleteItem = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
-  console.log(item.id);
   $.ajax({
     url: `/api/items/${item.id}`,
     type: 'DELETE',
     success: function(result) {
-      // empty container and show a message
-      $('.listing-container').empty();
+      // show a message and invoke viewListings function
+      viewMyListings()
+      //$('.listing-container').empty();
       alert(result)
     }
 });
@@ -305,6 +319,8 @@ const createItemElement = function(data, isOwner) {
   const itemDescription = data.description;
   const itemSize = data.size;
   const postDate = data.created_at;
+  const status = data.status;
+
 
   let element;
 
@@ -321,6 +337,7 @@ const createItemElement = function(data, isOwner) {
       <p> ${itemDescription} </p>
 
       <footer>
+        <span class = 'status'>${status}</span>
         <span>${itemLocation} - ${postDate}</span>
 
         <div class='icon-bar'>
@@ -345,6 +362,7 @@ const createItemElement = function(data, isOwner) {
       <p> ${itemDescription} </p>
 
       <footer>
+        <span class = 'status'>${status}</span>
         <span>${itemLocation} - ${postDate}</span>
 
       <div class='owner'>
