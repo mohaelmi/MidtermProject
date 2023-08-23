@@ -22,5 +22,5 @@ const getItemPhotos = (itemId) => {
         });
 };
 
-//getItemPhotos(12)
+//getItemPhotos(23)
 module.exports = {getItemPhotos};
