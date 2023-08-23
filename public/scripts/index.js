@@ -1,6 +1,5 @@
-
-
 $(document).ready(function() {
+
   //load all items to landing page
   loadItems();
 
@@ -30,10 +29,6 @@ $(document).ready(function() {
   $('.listing-container').on('click', '.sold-button', markSold);
 
 
-
-  //admin delete bike button listener
-  $('.listing-container').on('click', 'delete-item', deleteItem)
-
   /*---------- toggle-bar listeners ----------*/
   //my favourites button listener
   $('.favourites').on('click', viewFavourites);
@@ -60,7 +55,7 @@ $(document).ready(function() {
 
 });
 
-/*---------- setup landing page ----------*/
+/*------------------------------ setup landing page -----------------------------*/
 
 /**
  * Load All Items/Bikes onto landing page
@@ -75,7 +70,7 @@ const loadItems = function() {
 };
 
 
-/*---------- navbar buttons ----------*/
+/*-------------------------------- navbar buttons -----------------------------------*/
 
 //shows the post new bike form
 const showBikeForm = function() {
@@ -114,6 +109,8 @@ const searchBarButton = function() {
   });
 };
 
+
+/*---------------------------------POST NEW BIKE---------------------------------*/
 
 //post new bike button listener
 const postBikeButton = function() {
@@ -167,9 +164,9 @@ const postBikeButton = function() {
 
 };
 
-/*---------- toggle bar buttons ----------*/
+/*------------------------- toggle bar buttons -------------------------*/
 
-//needs new favourites route to return the whole item, not just id
+
 //view all favourite items for certain id:
 const viewFavourites = function() {
   $.get('api/favourites/')
@@ -181,27 +178,6 @@ const viewFavourites = function() {
 };
 
 
-/**
- * Load Favourites
- * (how to add event listeners for things that don't exist yet??)
- */
-const loadFavourites = function(items) {
-  const favouritesButton = document.querySelector(".favourites");
-
-  favouritesButton.addEventListener("click", function() {
-    console.log(items);
-
-    $.get('/api/items')
-      .then(data => {
-
-        renderItems(data.items);
-      });
-
-  });
-
-};
-
-
 //view only your listings
 const viewMyListings = function() {
   $.get('/users/items')
@@ -210,11 +186,28 @@ const viewMyListings = function() {
       renderItems(data.items, true);
     })
     .catch(err => console.log('error', err));
-};
-/*---------- listing buttons ----------*/
+  };
 
-// adds/deletes item to favourites if the button is clicked.
-const toggleFavourite = function() {
+
+  /*------------------------ FAVOURITES ---------------------------*/
+
+ //Load Favourites
+  const loadFavourites = function(items) {
+    const favouritesButton = document.querySelector(".favourites");
+
+    favouritesButton.addEventListener("click", function() {
+      console.log(items);
+
+      $.get('/api/items')
+        .then(data => {
+
+          renderItems(data.items);
+        });
+    });
+  };
+
+  // adds/deletes item to favourites if the button is clicked.
+  const toggleFavourite = function() {
   //console.log(this)
   const article = $(this).closest('article.listing');
   const item = article.data('item');
@@ -241,7 +234,10 @@ const toggleFavourite = function() {
     });
 };
 
-//brings up form to message seller regarding bike. need to implement twilio api call
+
+/*--------------------------MESSAGE-------------------------*/
+
+//Message PopUp
 const messageSeller = function() {
 
   $('.message-seller').on('click', function() {
@@ -249,6 +245,7 @@ const messageSeller = function() {
   });
 }
 
+//Send Message
 const messageSubmit = function(event) {
   event.preventDefault();
   const data = $(this).serialize()
@@ -271,7 +268,11 @@ const messageSubmit = function(event) {
   })
 }
 
-// mark as sold
+
+
+/*------------------------DELETE/SOLD-----------------------*/
+
+//Mark bike as sold
 const markSold = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
@@ -285,9 +286,8 @@ const markSold = function() {
     .catch(err => console.log(err.message));
 }
 
-/**
- * Delete Bike
- */
+
+//Delete a bike item
 const deleteItem = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
@@ -303,10 +303,6 @@ const deleteItem = function() {
 
 /*---------- html creating/rendering functions ----------*/
 
-//creates a pop up div to message seller. need to create html to render.
-const renderUserMessage = function(data) {
-  return 'hello world!';
-};
 
 //renders a listing for an item for sale
 const createItemElement = function(data, isOwner) {
@@ -321,6 +317,7 @@ const createItemElement = function(data, isOwner) {
   const itemSize = data.size;
   const postDate = timeago.format(data.created_at);
   const status = data.status;
+
 
   let element;
 
