@@ -29,6 +29,7 @@ $(document).ready(function() {
   $('.listing-container').on('click', '.sold-button', markSold);
 
 
+
   /*---------- toggle-bar listeners ----------*/
   //my favourites button listener
   $('.favourites').on('click', viewFavourites);
@@ -42,16 +43,13 @@ $(document).ready(function() {
   });
 
 
+  /*----------- Post Bike listeners -------------*/
 
-
-  //these need to be changed to have the listener in the document.ready, as above
   showBikeForm();
   postBikeButton();
+
+  //these need to be changed to have the listener in the document.ready, as above
   searchBarButton();
-  //loadMyListings();
-
-
-
 
 });
 
