@@ -7,7 +7,7 @@ const db = require('../connection');
 
 const getUserWishlist = (userId) => {
   return db.query(`
-      SELECT id FROM items
+      SELECT * FROM items
       WHERE id IN
         (SELECT item_id FROM wishlisted_items
         WHERE wishlist_id IN

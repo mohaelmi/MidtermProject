@@ -36,6 +36,7 @@ app.use(
 const itemRoutes = require("./routes/itemRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const favouriteRoutes = require("./routes/favouriteRoutes");
+const smsRoutes = require("./routes/smsRoutes")
 
 // /api/items endpoint
 app.use("/api/items", itemRoutes);
@@ -44,6 +45,8 @@ app.use("/api/items", itemRoutes);
 app.use("/users", adminRoutes);
 
 app.use("/api/favourites", favouriteRoutes);
+
+app.use("/message", smsRoutes);
 
 // Home page
 app.get("/", (req, res) => {

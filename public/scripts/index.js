@@ -20,6 +20,9 @@ $(document).ready(function() {
 
   $(".popup-close").on("click", $.modal.close);
 
+  // delete a listing for user
+  $('.listing-container').on('click', '.delete-item', deleteItem);
+
 
 
   /*---------- toggle-bar listeners ----------*/
@@ -161,6 +164,8 @@ const postBikeButton = function() {
 const viewFavourites = function() {
   $.get('api/favourites/')
     .then(data => {
+      $('.listing-container').empty();
+      renderItems(data.items);
       console.log(data.items);
     });
 };
@@ -258,13 +263,29 @@ const messageSubmit = function(event) {
   })
 }
 
+// mark as sold
+const soldBike = function(item) {
+
+}
+
+
 /**
  * Delete Bike
  */
-
-const deleteBike = function(item) {
-  //if bike item belongs to user cookie delete
-};
+const deleteItem = function() {
+  const article = $(this).closest('article.listing');
+  const item = article.data('item');
+  console.log(item.id);
+  $.ajax({
+    url: `/api/items/${item.id}`,
+    type: 'DELETE',
+    success: function(result) {
+      // Do something with the result
+      $('.listing-container').empty();
+      alert(result)
+    }
+});
+}
 
 
 /*---------- html creating/rendering functions ----------*/
