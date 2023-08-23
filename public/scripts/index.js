@@ -281,7 +281,6 @@ const markSold = function() {
     const $status = document.querySelector('span.status');
     $status.style.color = 'red'
     $('span.status').text('SOLD')
-     alert(data)
     })
     .catch(err => console.log(err.message));
 }
