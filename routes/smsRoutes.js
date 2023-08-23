@@ -40,6 +40,7 @@ router.post("/", (req, res) => {
       res.json({ data });
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).json({ error: err.message });
     });
   
