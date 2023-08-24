@@ -9,7 +9,7 @@ const adminQueries = require("../db/queries/adminListingFunctions");
 router.get("/", (req, res) => {
   const userId = req.session.user_id;
   console.log(userId);
-  
+
   itemsQueries
     .getAllItems()
     .then((items) => {
@@ -91,6 +91,7 @@ router.delete("/:id", (req, res) => {
       console.log("item deleted deleted..");
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).json({ error: err.message });
     });
 });
