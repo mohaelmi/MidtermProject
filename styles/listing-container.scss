@@ -28,10 +28,17 @@ $background-color: #725E54;
 
 
     .image {
+      align-self: flex-start;
       width: 30%;
-
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: $listing-margin;
-      border: 2px solid black;
+
+      img {
+        border: 2px solid black;
+      }
+
     }
 
     .listing-overview {
@@ -79,6 +86,4 @@ $background-color: #725E54;
   }
 }
 
-
-// styling each individual listing
 
