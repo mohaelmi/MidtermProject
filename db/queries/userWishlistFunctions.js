@@ -21,14 +21,14 @@ const getUserWishlist = (userId) => {
   });
 };
 
-//testing
-getUserWishlist(3)
-.then(wishlist => {
-  console.log('wishlist:', wishlist);
-})
-.catch(error => {
-  console.error('Error:', error);
-});
+// //testing
+// getUserWishlist(3)
+// .then(wishlist => {
+//   console.log('wishlist:', wishlist);
+// })
+// .catch(error => {
+//   console.error('Error:', error);
+// });
 
 
 //2// Adding an item to user wishlist
