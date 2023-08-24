@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilio = require('twilio')(accountSid, authToken);
+
 
 
 const sendMessage = function() {
 
-  const sid = 'AC2004a2bdfd44c104fb84d95ae4b69a81';
-  const authToken = '9b765671e709c5c6b70870423733ddfa';
-  const twilio = require('twilio')(sid, authToken);
 
   return twilio.messages
       .create({
