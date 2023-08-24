@@ -240,14 +240,12 @@ const messageSeller = function() {
 
     const article = $(this).closest('article.listing');
     article.addClass('clicked');
-
     const listing = $('.clicked');
-
     const sellerId = listing.attr('class').split(' ')[1];
 
     $("#message-popup").modal();
   });
-}
+};
 
 //Send Message
 const messageSubmit = function(event) {
@@ -260,8 +258,8 @@ const messageSubmit = function(event) {
     $.post("/api/message", {data, sellerId})
     .then(() =>{
     $.modal.close();
-    //show some pop saying message sent
-    console.log("it worked!!");
+    listing.removeClass('clicked');
+    
     $("#message-sent").modal();
     })
     .catch(() => {
