@@ -6,10 +6,12 @@ const db = require('../connection');
 //1// Getting a user wishlist:
 
 
+
 const getUserWishlist = (userId) => {
   return db.query(`
     SELECT * FROM items
-    WHERE id IN (
+    JOIN photos ON items.id = photos.item_id
+    WHERE items.id IN (
       SELECT item_id FROM wishlist
       WHERE user_id = $1
     )
