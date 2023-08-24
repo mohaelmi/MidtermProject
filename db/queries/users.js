@@ -30,12 +30,13 @@ const getMyItems = (sellerId) => {
 
 const addNewUser = (user) => {
   db.query(
-    `INSERT INTO users (name, email) 
+    `INSERT INTO users (name, email)
   VALUES ($1, $2) RETURNING *;`,
     [user.name, user.email]
   ).then((result) => {
     return result.rows[0];
   });
 };
+
 
 module.exports = { getUsers, getUserById, addNewUser, getMyItems };
