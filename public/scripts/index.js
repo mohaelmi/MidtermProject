@@ -272,9 +272,9 @@ const markSold = function() {
 
   $.get(`/api/items/status/${item.item_id}`)
   .then(() => {
-    const $status = document.querySelector('span.status');
-    $status.style.color = 'red'
-    $('span.status').text('SOLD')
+    const $footer = article.children('.listing-overview').children('footer')
+    $footer.children('.status').text('SOLD')
+
     })
     .catch(err => console.log(err.message));
 }
