@@ -130,6 +130,7 @@ const postBikeButton = function() {
       status: 'AVAILABLE'
 
     };
+    console.log('posting this bike: ', item)
     $.post("/api/items", item, (data) => {
       //empty container
       $('.listing-container').empty();
@@ -151,7 +152,7 @@ const postBikeButton = function() {
       //clear description
       $('#new-listing_description').val('');
     })
-      .catch(err => err.message);
+      .catch(err => console.log(err.message));
   });
 
 };
@@ -281,12 +282,15 @@ const markSold = function() {
 
 //Delete a bike item
 const deleteItem = function() {
+
   const article = $(this).closest('article.listing');
   const item = article.data('item');
+  console.log('deleting item:', item, "with item id", item.item_id);
   $.ajax({
-    url: `/api/items/${item.id}`,
+    url: `/api/items/${item.item_id}`,
     type: 'DELETE',
     success: function(result) {
+      console.log()
       viewMyListings()
     }
 });
