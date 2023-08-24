@@ -74,14 +74,14 @@ const searchBarButton = function() {
       maxPrice
     };
     //console.log(data);
-    $.post("/search", data, (data) => {
+    $.post("/api/search", data)
+    .then(data => {
       $('.listing-container').empty();
       renderItems(data.data);
       console.log(data);
 
     })
-      .catch(err => err.message);
-    // alert('Seach bar clicked!')
+    .catch(err => err.message);
   });
 };
 
@@ -177,7 +177,7 @@ const viewMyListings = function() {
       $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
     })
-    .catch(err => console.log('error', err));
+    .catch(err => console.log('error', err.message));
   };
 
 
@@ -207,7 +207,7 @@ const viewMyListings = function() {
 
   //if removing favourite, delete item:
   if (!item.favourite) {
-    $.ajax({
+    $.delete({
       url: `/api/favourites/${item.id}`,
       type: 'DELETE',
       success: () => {
@@ -219,7 +219,7 @@ const viewMyListings = function() {
   }
 
   //otherwise, add item to favourites!
-  $.post(`/api/favourites/${item.id}`)
+  $.post(`/api/favourites/${item.item_id}`)
     .then(res => {
       console.log('posting!');
       $(this).toggleClass('red', item.favourite);

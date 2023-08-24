@@ -66,14 +66,14 @@ app.get("/", (req, res) => {
 });
 
 // search route // will take into appropriate file later
-app.post("/search", (req, res) => {
+app.post("/api/search", (req, res) => {
   const minPrice = req.body.minPrice;
   const maxPrice = req.body.maxPrice;
   console.log(req.body);
   itemsQueries
   .filterByPrice(minPrice, maxPrice)
     .then((data) => {
-      res.send({ data });
+      res.json({ data });
       // res.redirect('/');
     })
     .catch((e) => {
@@ -86,17 +86,17 @@ app.post("/search", (req, res) => {
 app.get("/login/:id", (req, res) => {
   const userId = req.params.id;
   req.session.user_id = userId;
-  console.log(userId);
-  userAdminQueries
-    .getUserById(userId)
-    .then((user) => {
-      
-      console.log('login', user);
-      res.render("index", { user: user});
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+  res.redirect("/");
+  // // console.log(userId);
+  // // userAdminQueries
+  // //   .getUserById(userId)
+  // //   .then((user) => {
+
+  // //     console.log('login', user);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).json({ error: err.message });
+  //   });
 });
 
 app.get("/logout", (req, res) => {
