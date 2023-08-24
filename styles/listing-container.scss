@@ -26,6 +26,10 @@ $background-color: #725E54;
     box-shadow: 4px 4px 2px black ;
     background-color: $base-colour;
 
+    .description {
+      height: 120px;
+    }
+
 
     .image {
       align-self: flex-start;
@@ -37,6 +41,8 @@ $background-color: #725E54;
 
       img {
         border: 2px solid black;
+        height: 250px;
+        width:auto;
       }
 
     }
@@ -58,7 +64,10 @@ $background-color: #725E54;
 
       footer {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
 
         span {
           font-size: 14px;

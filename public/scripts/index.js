@@ -327,7 +327,7 @@ const createItemElement = function(data, toggleOption) {
       $${itemPrice} - ${itemTitle}
     </header>
     <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
-    <p> ${itemDescription} </p>
+    <p class="description"> ${itemDescription} </p>
 
     <footer>
     <span class = 'status'>${status}</span>
