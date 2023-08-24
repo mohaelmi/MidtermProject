@@ -57,7 +57,6 @@ $(document).ready(function() {
 const loadItems = function() {
   $.get('/api/items')
     .then(data => {
-      console.log(data.items[1]);
       renderItems(data.items, 'all-listings');
     })
     .catch(err => console.log(err.message));
@@ -206,6 +205,7 @@ const viewMyListings = function() {
   const toggleFavourite = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
+  console.log('the mysterious item wiht favourite', item)
   item.favourite = !item.favourite;
 
   //if removing favourite, delete item:
@@ -374,6 +374,7 @@ const createItemElement = function(data, toggleOption) {
 
   $element = $(element);
   $element.data('item', data);
+
   return $element;
 };
 
@@ -381,8 +382,9 @@ const createItemElement = function(data, toggleOption) {
 
 const renderItems = function(items, toggleOption) {
   const container = $('.listing-container');
-  console.log('rendering items', toggleOption)
+  // console.log('rendering items', toggleOption)
   items.reverse().forEach((item, i) => {
+
     const element = createItemElement(item, toggleOption);
     container.prepend(element);
   });
