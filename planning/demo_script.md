@@ -47,7 +47,7 @@
 - Less interactive with website
 - Talk about database structure
 
-## Wrap Up
+## Wrap Up - Janay
 
 - Summarize functionality
 - Things we learned
