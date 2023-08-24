@@ -248,8 +248,8 @@ const messageSubmit = function(event) {
 
   console.log("sending", data);
 
-  // $.post("/api/sms", data)
-  Promise.resolve()
+  $.post("/api/sms", data)
+  // Promise.resolve()
   .then(() =>{
     $.modal.close();
     //show some pop saying message sent
