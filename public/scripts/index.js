@@ -270,8 +270,8 @@ const markSold = function() {
   const article = $(this).closest('article.listing');
   const item = article.data('item');
 
-  $.get(`/api/items/status/${item.id}`)
-  .then(data => {
+  $.get(`/api/items/status/${item.item_id}`)
+  .then(() => {
     const $status = document.querySelector('span.status');
     $status.style.color = 'red'
     $('span.status').text('SOLD')
