@@ -5,7 +5,8 @@ $highlight-color-2: rgb(147, 126, 196);
 $background-color: #725E54;
 
 .red {
-  color: red;
+  color: $highlight-color-1;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .listing-container {

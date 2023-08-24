@@ -57,7 +57,7 @@ $(document).ready(function() {
 const loadItems = function() {
   $.get('/api/items')
     .then(data => {
-      //console.log('it worked!')
+      console.log(data.items[1]);
       renderItems(data.items);
     })
     .catch(err => console.log(err.message));
@@ -165,16 +165,18 @@ const viewFavourites = function() {
   $.get('api/favourites/')
     .then(data => {
       $('.listing-container').empty();
+      console.log(items);
       renderItems(data.items);
-      console.log(data.items);
     });
 };
 
 
 //view only your listings
 const viewMyListings = function() {
+
   $.get('/users/items')
     .then(data => {
+
       $('.listing-container').empty();  //get rid of current shown listings
       renderItems(data.items, true);
     })
@@ -184,20 +186,20 @@ const viewMyListings = function() {
 
   /*------------------------ FAVOURITES ---------------------------*/
 
- //Load Favourites
-  const loadFavourites = function(items) {
-    const favouritesButton = document.querySelector(".favourites");
+//  //Load Favourites
+//   const loadFavourites = function(items) {
+//     const favouritesButton = document.querySelector(".favourites");
 
-    favouritesButton.addEventListener("click", function() {
-      console.log(items);
+//     favouritesButton.addEventListener("click", function() {
 
-      $.get('/api/items')
-        .then(data => {
 
-          renderItems(data.items);
-        });
-    });
-  };
+//       $.get('/api/items')
+//         .then(data => {
+//           console.log(items);
+//           renderItems(data.items);
+//         });
+//     });
+//   };
 
   // adds/deletes item to favourites if the button is clicked.
   const toggleFavourite = function() {
@@ -208,7 +210,7 @@ const viewMyListings = function() {
 
   //if removing favourite, delete item:
   if (!item.favourite) {
-    $.delete({
+    $.ajax({
       url: `/api/favourites/${item.id}`,
       type: 'DELETE',
       success: () => {
