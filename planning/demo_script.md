@@ -22,7 +22,7 @@
 - Toggle post bike form
 - Fill out form
   - Title: My Old Mountain Bike
-  - Price: 1000, City: Victoria, Size: XS, Type: Mountain
+  - Price: 800, City: Victoria, Size: XS, Type: Mountain
   - Img URL:
   - Description: Had some good rides on this bike, but I've been injured too many times, so I have to sell it.
 - Post bike. Logout 
@@ -30,8 +30,8 @@
 ### **Browsing For Bike** - Sofia
 
 - Login as new user
-- Browse bike, make initial favourite
-- Search by price, make a second favourite
+- Browse bike, make initial favourite Mountain Majesty bike
+- Search by price 0- 1000, make a second favourite (mohas post)
 - Check favourites tab and choose one bike from there
 - Send message to seller 
 
