@@ -87,8 +87,9 @@ router.delete("/:id", (req, res) => {
     return res.send({ error: "error" });
   }
 
-  itemsQueries
-    .deleteItem(itemId, userId)
+adminQueries
+    //.deleteItem(itemId, userId)
+    .deleteAdminListingItem(itemId)
     .then((data) => {
       res.end(data);
       console.log("item deleted deleted..");
