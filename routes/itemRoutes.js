@@ -43,6 +43,29 @@ router.post("/", (req, res) => {
     });
 });
 
+
+
+// mark as sold
+router.get("/status/:id", (req, res) => {
+  const itemId = req.params.id;
+
+  // const userId = req.session.user_id;
+  // if (!userId) {
+  //   return res.send({ error: "error" });
+  // }
+
+  adminQueries
+  .markedSoldByAdmin(itemId)
+  .then((data) => {
+      console.log('item id', itemId, 'data', data);
+      const message = 'Items Marked as Sold'
+      res.json({ message });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // Get specific item
 router.get("/:id", (req, res) => {
   const itemId = req.params.id;
@@ -55,26 +78,6 @@ router.get("/:id", (req, res) => {
       res.status(500).json({ error: err.message });
     });
 });
-
-// mark as sold
-router.get("/status/:id", (req, res) => {
-  const itemId = req.params.id;
-
-  // const userId = req.session.user_id;
-  // if (!userId) {
-  //   return res.send({ error: "error" });
-  // }
-
-  adminQueries
-    .markedSoldByAdmin(itemId)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
 // delete item
 router.delete("/:id", (req, res) => {
   const itemId = req.params.id;
