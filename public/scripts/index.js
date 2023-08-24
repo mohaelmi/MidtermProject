@@ -57,8 +57,7 @@ $(document).ready(function() {
 const loadItems = function() {
   $.get('/api/items')
     .then(data => {
-      //console.log('it worked!')
-      renderItems(data.items);
+      renderItems(data.items, 'all-listings');
     })
     .catch(err => console.log(err.message));
 };
@@ -165,18 +164,21 @@ const viewFavourites = function() {
   $.get('api/favourites/')
     .then(data => {
       $('.listing-container').empty();
-      renderItems(data.items);
       console.log(data.items);
+      renderItems(data.items);
+
     });
 };
 
 
 //view only your listings
 const viewMyListings = function() {
+
   $.get('/users/items')
     .then(data => {
+
       $('.listing-container').empty();  //get rid of current shown listings
-      renderItems(data.items, true);
+      renderItems(data.items, 'my-listings');
     })
     .catch(err => console.log('error', err.message));
   };
@@ -184,45 +186,46 @@ const viewMyListings = function() {
 
   /*------------------------ FAVOURITES ---------------------------*/
 
- //Load Favourites
-  const loadFavourites = function(items) {
-    const favouritesButton = document.querySelector(".favourites");
+//  //Load Favourites
+//   const loadFavourites = function(items) {
+//     const favouritesButton = document.querySelector(".favourites");
 
-    favouritesButton.addEventListener("click", function() {
-      console.log(items);
+//     favouritesButton.addEventListener("click", function() {
 
-      $.get('/api/items')
-        .then(data => {
 
-          renderItems(data.items);
-        });
-    });
-  };
+//       $.get('/api/items')
+//         .then(data => {
+//           console.log(items);
+//           renderItems(data.items);
+//         });
+//     });
+//   };
 
   // adds/deletes item to favourites if the button is clicked.
   const toggleFavourite = function() {
-  //console.log(this)
   const article = $(this).closest('article.listing');
   const item = article.data('item');
+  console.log('the mysterious item wiht favourite', item)
   item.favourite = !item.favourite;
 
   //if removing favourite, delete item:
   if (!item.favourite) {
-    $.delete({
+    $.ajax({
       url: `/api/favourites/${item.id}`,
       type: 'DELETE',
       success: () => {
-        console.log('deleting item from favourites!');
+        console.log('deleting item from favourites!', item.title);
         $(this).toggleClass('red', item.favourite);
+
       }
     });
     return;
   }
 
   //otherwise, add item to favourites!
-  $.post(`/api/favourites/${item.item_id}`)
+  $.post(`/api/favourites/${item.id}`)
     .then(res => {
-      console.log('posting!');
+      console.log('posting! ', item.title);
       $(this).toggleClass('red', item.favourite);
     });
 };
@@ -245,8 +248,8 @@ const messageSubmit = function(event) {
 
   console.log("sending", data);
 
-  // $.post("/api/sms", data)
-  Promise.resolve()
+  $.post("/api/sms", data)
+  // Promise.resolve()
   .then(() =>{
     $.modal.close();
     //show some pop saying message sent
@@ -301,7 +304,7 @@ const deleteItem = function() {
 
 
 //renders a listing for an item for sale
-const createItemElement = function(data, isOwner) {
+const createItemElement = function(data, toggleOption) {
 
   //extract item info from data
   const itemTitle = data.title;
@@ -315,48 +318,35 @@ const createItemElement = function(data, isOwner) {
   const status = data.status;
 
 
-  let element;
+  let element = `<article class="listing">
+  <span class="image">
+  <img src=${itemURL} alt="Bike Image" width="200" height="200">
+  </span>
+  <span class="listing-overview">
+    <header>
+      $${itemPrice} - ${itemTitle}
+    </header>
+    <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
+    <p class="description"> ${itemDescription} </p>
 
-  if (!isOwner) {
-    element = $(`<article class="listing">
-    <span class="image">
-    <img src=${itemURL} alt="Bike Image" width="200" height="200">
-    </span>
-    <span class="listing-overview">
-      <header>
-        $${itemPrice} - ${itemTitle}
-      </header>
-      <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
-      <p> ${itemDescription} </p>
+    <footer>
+    <span class = 'status'>${status}</span>
+    <span>${itemLocation} - ${postDate}</span>`
 
-      <footer>
-        <span class = 'status'>${status}</span>
-        <span>${itemLocation} - ${postDate}</span>
 
+  if (toggleOption === 'all-listings') {
+    element += `
         <div class='icon-bar'>
           <i class="fa-solid fa-envelope message-seller"></i>
           <i class="fa-solid fa-star item-favourite"></i>
         </div>
       </footer>
     </span>
-  </article>`);
+  </article>`;
   }
   //add owner permissions
-  else {
-    element = $(`<article class="listing">
-    <span class="image">
-      <img src=${itemURL} alt="Bike Image" width="200" height="200">
-    </span>
-    <span class="listing-overview">
-      <header>
-        $${itemPrice} - ${itemTitle}
-      </header>
-      <p> Size: ${itemSize}, Condition: ${itemCondition} </p>
-      <p> ${itemDescription} </p>
-
-      <footer>
-        <span class = 'status'>${status}</span>
-        <span>${itemLocation} - ${postDate}</span>
+  else if (toggleOption === 'my-listings') {
+    element += `
 
       <div class='owner'>
         <button class='mark-sold'>Mark Sold</button>
@@ -366,19 +356,36 @@ const createItemElement = function(data, isOwner) {
       </footer>
 
     </span>
-  </article>`);
+  </article>`;
+
+  //in favourites
+  } else {
+    element +=  `
+
+    <div class='icon-bar'>
+      <i class="fa-solid fa-envelope message-seller"></i>
+    </div>
+
+    </footer>
+
+  </span>
+</article>`
   }
-  element.data('item', data);
-  return element;
+
+  $element = $(element);
+  $element.data('item', data);
+
+  return $element;
 };
 
 //takes in a list of database items and renders each with createItemElement.
 
-const renderItems = function(items, isOwner) {
+const renderItems = function(items, toggleOption) {
   const container = $('.listing-container');
-  // console.log(isOwner)
+  // console.log('rendering items', toggleOption)
   items.reverse().forEach((item, i) => {
-    const element = createItemElement(item, isOwner);
+
+    const element = createItemElement(item, toggleOption);
     container.prepend(element);
   });
 };

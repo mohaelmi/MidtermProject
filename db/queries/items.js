@@ -30,7 +30,7 @@ const deleteItem = (itemId, seller_id) => {
 const filterByPrice = (minPrice, maxPrice) => {
 
   return db
-    .query("SELECT * FROM items WHERE price >= $1 AND price <= $2;", [
+    .query("SELECT * FROM items JOIN photos ON items.id = photos.item_id WHERE items.price >= $1 AND items.price <= $2;", [
       minPrice,
       maxPrice,
     ])
