@@ -23,6 +23,7 @@ $background-color: #725E54;
     display: flex;
     justify-content: left;
     border: 2px solid black;
+    border-radius: 5px;;
     box-shadow: 4px 4px 2px black ;
     background-color: $base-colour;
 
@@ -40,6 +41,7 @@ $background-color: #725E54;
       margin: $listing-margin;
 
       img {
+        border-radius: 5px;
         border: 2px solid black;
         height: 250px;
         width:auto;
@@ -92,6 +94,7 @@ $background-color: #725E54;
 
   article:hover {
     box-shadow: 5px 5px 2px $highlight-color-2;
+    border: 2px solid $highlight-color-2;
   }
 }
 
