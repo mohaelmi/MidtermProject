@@ -48,7 +48,7 @@ app.use("/users", adminRoutes);
 // favourite routes
 app.use("/api/favourites", favouriteRoutes);
 
-app.use("/message", smsRoutes);
+app.use("/api/message", smsRoutes);
 
 // Home page
 app.get("/", (req, res) => {

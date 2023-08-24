@@ -3,7 +3,7 @@ INSERT INTO users (name, email, phone)
 VALUES
   ('Janay', 'grace@example.com','+12508768942'),
   ('Ava', 'henry@example.com','+16046180461'),
-  ('Sofia', 'isabella@example.com',' +16046180461'),
+  ('Sofia', 'isabella@example.com','+16046180461'),
   ('David', 'david@example.com','+14372393070'),
   ('Ella', 'ella@example.com','+16046180461'),
   ('Frank', 'frank@example.com','+12045587038'),

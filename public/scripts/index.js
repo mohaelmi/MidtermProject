@@ -237,31 +237,35 @@ const viewMyListings = function() {
 const messageSeller = function() {
 
   $('.message-seller').on('click', function() {
-      $("#message-popup").modal();
+
+    const article = $(this).closest('article.listing');
+    article.addClass('clicked');
+    const listing = $('.clicked');
+    const sellerId = listing.attr('class').split(' ')[1];
+
+    $("#message-popup").modal();
   });
-}
+};
 
 //Send Message
 const messageSubmit = function(event) {
   event.preventDefault();
-  const data = $(this).serialize()
+  const data = $(this).serialize();
+  const listing = $('.clicked');
+  const sellerId = listing.attr('class').split(' ')[1];
 
-  console.log("sending", data);
 
-  $.post("/api/sms", data)
-  // Promise.resolve()
-  .then(() =>{
+    $.post("/api/message", {data, sellerId})
+    .then(() =>{
     $.modal.close();
-    //show some pop saying message sent
-    console.log("it worked!!");
+    listing.removeClass('clicked');
+    
     $("#message-sent").modal();
-
-
-  })
-  .catch(() => {
+    })
+    .catch(() => {
     //error modal
-    $("#message-error").modal();
-  })
+     $("#message-error").modal();
+    })
 }
 
 
@@ -308,6 +312,7 @@ const createItemElement = function(data, toggleOption) {
 
   //extract item info from data
   const itemTitle = data.title;
+  const itemSeller = data.seller_id;
   const itemURL = data.url
   const itemPrice = data.price;
   const itemLocation = data.city;
@@ -318,7 +323,7 @@ const createItemElement = function(data, toggleOption) {
   const status = data.status;
 
 
-  let element = `<article class="listing">
+  let element = `<article class="listing ${itemSeller}">
   <span class="image">
   <img src=${itemURL} alt="Bike Image" width="200" height="200">
   </span>
