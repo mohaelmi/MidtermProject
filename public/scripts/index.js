@@ -235,7 +235,7 @@ const viewMyListings = function() {
 
 //Message PopUp
 const messageSeller = function() {
-
+  
   $('.message-seller').on('click', function() {
       $("#message-popup").modal();
   });
@@ -248,7 +248,7 @@ const messageSubmit = function(event) {
 
   console.log("sending", data);
 
-  $.post("/api/sms", data)
+  $.post("/message", data)
   // Promise.resolve()
   .then(() =>{
     $.modal.close();
