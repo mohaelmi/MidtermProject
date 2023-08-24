@@ -20,13 +20,13 @@ const getUserWishlist = (userId) => {
 };
 
 //testing
-getUserWishlist(3)
-.then(wishlist => {
-  console.log('wishlist:', wishlist);
-})
-.catch(error => {
-  console.error('Error:', error);
-});
+// getUserWishlist(1)
+// .then(wishlist => {
+//   console.log('wishlist:', wishlist);
+// })
+// .catch(error => {
+//   console.error('Error:', error);
+// });
 
 
 //2// Adding an item to user wishlist
@@ -41,9 +41,9 @@ const addToWishlist = (userId, itemId) => {
 };
 
 //testing
-//addToWishlist(3, 12)
+//addToWishlist(1, 12)
 //  .then(() => {
-//    getUserWishlist(3)
+//    getUserWishlist(1)
 //      .then((wishlist) => {
 //        console.log('wishlist:', wishlist);
 //      })
@@ -69,9 +69,9 @@ const removeFromWishlist = (userId, itemId) => {
 };
 
 //testing
-//removeFromWishlist(3, 10)
+//removeFromWishlist(1, 12)
 //  .then(() => {
-//    getUserWishlist(3)
+//    getUserWishlist(1)
 //      .then(users => {
 //        console.log('Users:', users);
 //      })

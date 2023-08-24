@@ -14,12 +14,12 @@ const getAdminListingItems = (sellerId) => {
 //// testing
 
 //getAdminListingItems(1)
-//.then(items => {
-//  console.log('Admin list:', items);
-//})
-//.catch(error => {
-//  console.error('Error:', error);
-//});
+//  .then(items => {
+//    console.log('Admin list:', items);
+//  })
+//  .catch(error => {
+//    console.error('Error:', error);
+//  });
 
 
 //2.//Adding(listing) a new item.
