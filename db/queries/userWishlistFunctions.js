@@ -9,7 +9,8 @@ const db = require('../connection');
 const getUserWishlist = (userId) => {
   return db.query(`
     SELECT * FROM items
-    WHERE id IN (
+    JOIN photos ON items.id = photos.item_id
+    WHERE items.id IN (
       SELECT item_id FROM wishlist
       WHERE user_id = $1
     )
@@ -20,13 +21,13 @@ const getUserWishlist = (userId) => {
 };
 
 //testing
-getUserWishlist(3)
-.then(wishlist => {
-  console.log('wishlist:', wishlist);
-})
-.catch(error => {
-  console.error('Error:', error);
-});
+//getUserWishlist(3)
+//.then(wishlist => {
+//  console.log('wishlist:', wishlist);
+//})
+//.catch(error => {
+//  console.error('Error:', error);
+//});
 
 
 //2// Adding an item to user wishlist

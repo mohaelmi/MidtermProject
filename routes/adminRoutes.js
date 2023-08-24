@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userAdminQueries = require("../db/queries/users");
-
+const adminQueries = require("../db/queries/adminListingFunctions");
 // Getting all users/sellers
 router.get("/", (req, res) => {
   userAdminQueries
@@ -18,8 +18,8 @@ router.get("/", (req, res) => {
 router.get("/items", (req, res) => {
   const userId = req.session.user_id;
   console.log(userId);
-  userAdminQueries
-    .getMyItems(userId)
+  adminQueries
+    .getAdminListingItems(userId)
     .then((items) => {
       res.json({ items });
     })
