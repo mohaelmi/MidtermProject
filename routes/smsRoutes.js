@@ -9,13 +9,14 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilio = require('twilio')(accountSid, authToken);
 
 
-const sendMessage = function(sellerPhone, message) {
+const sendMessage = function(sellerPhone, buyerPhone, message) {
   
+  console.log('test:', accountSid, authToken);
 
-     twilio.messages
+    return twilio.messages
       .create({
           body: message, // 'Hey this is a test message.',  // req.body.message
-          from: '+18643652977', //buyerPhone, // '+18643652977' //req.body.number // after you sign up you will have a virtual number from twilio
+          from: buyerPhone, // '+18643652977' //req.body.number // after you sign up you will have a virtual number from twilio
           to: sellerPhone // req.body.userNumber  // add your number to test 
       })
       .then((message) => {
@@ -31,17 +32,23 @@ const sendMessage = function(sellerPhone, message) {
 // // Send message route
 router.post("/", (req, res) => {
   console.log("in sms route!");
-  const userId = req.body['user-id'];
-  const buyerPhone = req.body['user-cell']; 
-  const message = req.body['user-message']; 
- 
+  const userId = req.body.sellerId;
+  const buyerPhone = req.body.phoneNumber; 
+  const buyerMessage = req.body.message; 
+  console.log(req.body);
+  // const sellerId = req.body.sellerId;
+  console.log("in sms route!");
 
+  
   userAdminQueries
     .getUserById(userId)
     .then((user) => {
       const sellerPhone = user.phone;
-      console.log('seller phone: ', sellerPhone, 'buyer: ', buyerPhone, 'message: ',  message );
-    sendMessage(sellerPhone, message)
+    sendMessage(sellerPhone, buyerPhone, buyerMessage)
+    .then((data) => {
+      console.log(data);
+      res.send({data})
+    })
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

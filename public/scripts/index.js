@@ -250,12 +250,13 @@ const messageSeller = function() {
 //Send Message
 const messageSubmit = function(event) {
   event.preventDefault();
-  const data = $(this).serialize();
+  const message = $('#text-message').val()
+  const phoneNumber = $('#text-number').val()
+
   const listing = $('.clicked');
   const sellerId = listing.attr('class').split(' ')[1];
 
-
-    $.post("/api/message", {data, sellerId})
+    $.post("/api/message", { phoneNumber, message, sellerId })
     .then(() =>{
     $.modal.close();
     listing.removeClass('clicked');
