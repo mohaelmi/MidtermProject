@@ -7,13 +7,13 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const twilio = require("twilio")(accountSid, authToken);
 
-const sendMessage = function (sellerPhone, buyerPhone, message) {
+const sendMessage = function (sellerPhone, message) {
   console.log("test:", accountSid, authToken);
-
+  console.log(sellerPhone);
   return twilio.messages
     .create({
       body: message, // 'Hey this is a test message.',  // req.body.message
-      from: buyerPhone, // '+18643652977' //req.body.number // after you sign up you will have a virtual number from twilio
+      from: '+18643652977', //req.body.number // after you sign up you will have a virtual number from twilio
       to: sellerPhone, // req.body.userNumber  // add your number to test
     })
     .then((message) => {
@@ -31,12 +31,13 @@ router.post("/", (req, res) => {
   const userId = req.body.sellerId;
   const buyerPhone = req.body.phoneNumber;
   const buyerMessage = req.body.message;
-
+  console.log(buyerMessage);
   userAdminQueries
     .getUserById(userId)
     .then((user) => {
       const sellerPhone = user.phone;
-      sendMessage(sellerPhone, buyerPhone, buyerMessage).then((data) => {
+      console.log(sellerPhone);
+      sendMessage(sellerPhone, buyerMessage).then((data) => {
         console.log(data);
         res.send({ data });
       });
