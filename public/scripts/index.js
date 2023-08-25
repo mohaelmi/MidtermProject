@@ -76,7 +76,7 @@ const searchBarButton = function() {
     $.post("/api/search", data)
     .then(data => {
       $('.listing-container').empty();
-      renderItems(data.data);
+      renderItems(data.data, 'all listings');
       console.log(data);
 
     })
