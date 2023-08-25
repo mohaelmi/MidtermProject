@@ -76,7 +76,7 @@ const searchBarButton = function() {
     $.post("/api/search", data)
     .then(data => {
       $('.listing-container').empty();
-      renderItems(data.data);
+      renderItems(data.data, 'all-listings');
       console.log(data);
 
     })
@@ -388,7 +388,7 @@ const createItemElement = function(data, toggleOption) {
 
 const renderItems = function(items, toggleOption) {
   const container = $('.listing-container');
-  // console.log('rendering items', toggleOption)
+  console.log('rendering items', toggleOption)
   items.reverse().forEach((item, i) => {
 
     const element = createItemElement(item, toggleOption);
