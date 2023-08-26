@@ -31,13 +31,15 @@ router.post("/", (req, res) => {
   const userId = req.body.sellerId;
   const buyerPhone = req.body.phoneNumber;
   const buyerMessage = req.body.message;
+
+  const message =  `phone: ${buyerPhone}, message: ${buyerMessage}`;
   console.log(buyerMessage);
   userAdminQueries
     .getUserById(userId)
     .then((user) => {
       const sellerPhone = user.phone;
       console.log(sellerPhone);
-      sendMessage(sellerPhone, buyerMessage).then((data) => {
+      sendMessage(sellerPhone, message).then((data) => {
         console.log(data);
         res.send({ data });
       });
