@@ -252,7 +252,7 @@ const messageSubmit = function(event) {
   event.preventDefault();
   const message = $('#text-message').val()
   const phoneNumber = $('#text-number').val()
-
+  // const data = $(this).serialize();
   const listing = $('.clicked');
   const sellerId = listing.attr('class').split(' ')[1];
 
