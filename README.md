@@ -1,6 +1,3 @@
-LHL Node Skeleton
-=========
-
 # Bike+Sell - Student Project README
 
 Welcome to Bike+Sell, a student project developed by Janay Ma, Mohamed Elmi, Sam Sadeghi and Sofia Oliveira as a midterm assignment at the Lighthouse Labs Web Development Program.
