@@ -1,6 +1,44 @@
 LHL Node Skeleton
 =========
 
+# Bike+Sell - Student Project README
+
+Welcome to Bike+Sell, a student project developed by Janay Ma, Mohamed Elmi, Sam Sadeghi and Sofia Oliveira as a midterm assignment at the Lighthouse Labs Web Development Program.
+Bike + Sell is a basic online marketplace designed exclusively for buying and selling bikes. Leveraging fundamental web technologies, we've created a simple platform that facilitates bike transactions and communication between buyers and sellers.
+
+## Project Overview
+
+Bike+Sell is a straightforward project that focuses on connecting bike enthusiasts who want to buy or sell bikes.
+
+## Technologies Used
+
+- **ES6 for Server-Side Code (NodeJS):** We've employed modern JavaScript features to develop the server-side code using NodeJS.
+
+- **Express:** The project is built on the Express framework, enabling us to create essential backend APIs for handling bike-related functionalities.
+
+- **RESTful Routes:** To maintain a structured API design, we've implemented RESTful routes to manage various endpoints efficiently.
+
+- **SASS/UI Basics:** The user interface is designed with 'sassy' CSS styles to provide a clean, organized and simple layout for buying and selling bikes.
+
+- **jQuery:** jQuery is used to add minimal interactivity to the user interface, enhancing the user experience.
+
+- **PostgreSQL and pg:** Bike+Sell employs PostgreSQL as the database management system, with the pg library and promises for seamless database interactions.
+
+- **Git:** We've adopted Git for version control, enabling collaborative development and easy tracking of code changes.
+
+- **Twilio for Messaging:** The exclusive method of communication between users is through Twilio, which allows for text-based communication.
+
+## Key Features
+
+- **Bike Listings:** Users can list their bikes for sale, providing essential information like the bike's title, type, size and price.
+
+- **Bike Search:** Buyers can browse through the available bike listings and search for bikes that match their preferences.
+
+- **Text Messaging:** The only communication method is through Twilio's text messaging. Buyers and sellers can negotiate and inquire about bikes via text messages.
+
+- **Simplicity:** The project's main focus is on providing a basic and user-friendly interface for buying and selling bikes, without unnecessary complexities.
+
+
 ## Project Setup
 
 The following steps are only for _one_ of the group members to perform.
