@@ -77,3 +77,7 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+## Screenshots
+
+![midterm-main-page](https://github.com/mohaelmi/MidtermProject/assets/31275085/17430982-995d-458d-8f5a-865800d9d74c)
